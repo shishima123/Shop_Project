@@ -18,7 +18,7 @@
 Route::get('/product', function () {
     return view('frontend.product');
 });
-Route::get('/index', function () {
+Route::get('/', function () {
     return view('frontend.index');
 });
 
