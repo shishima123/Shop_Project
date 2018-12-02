@@ -1,234 +1,142 @@
-<!-- Brands Section Start -->
-<div class="brands-section section mb-90">
-    <div class="container">
-        <div class="row">
-            
-            <!-- Brand Slider Start -->
-            <div class="brand-slider col">
-                <div class="brand-item col"><img src="{{ asset('frontend/images/brands/brand-1.png') }}" alt="Brands"></div>
-                <div class="brand-item col"><img src="{{ asset('frontend/images/brands/brand-2.png') }}" alt="Brands"></div>
-                <div class="brand-item col"><img src="{{ asset('frontend/images/brands/brand-3.png') }}" alt="Brands"></div>
-                <div class="brand-item col"><img src="{{ asset('frontend/images/brands/brand-4.png') }}" alt="Brands"></div>
-                <div class="brand-item col"><img src="{{ asset('frontend/images/brands/brand-5.png') }}" alt="Brands"></div>
-            </div><!-- Brand Slider End -->
-            
-        </div>
-    </div>
-</div><!-- Brands Section End -->
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
 
-<!-- Subscribe Section Start -->
-<div class="subscribe-section section bg-gray pt-55 pb-55">
-    <div class="container">
-        <div class="row align-items-center">
-            
-            <!-- Mailchimp Subscribe Content Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-                <div class="subscribe-content">
-                    <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
-                    <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
-                </div>
-            </div><!-- Mailchimp Subscribe Content End -->
-            
-            
-            <!-- Mailchimp Subscribe Form Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-                
-				<form class="subscribe-form" action="#">
-					<input type="email" autocomplete="off" placeholder="Enter your email here" />
-					<button >subscribe</button>
-				</form>
-				<!-- mailchimp-alerts Start -->
-				<div class="mailchimp-alerts text-centre">
-					<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-					<div class="mailchimp-success"></div><!-- mailchimp-success end -->
-					<div class="mailchimp-error"></div><!-- mailchimp-error end -->
-				</div><!-- mailchimp-alerts end -->
-                
-            </div><!-- Mailchimp Subscribe Form End -->
-            
-        </div>
-    </div>
-</div><!-- Subscribe Section End -->
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+								</ul>
+							</div>
+						</div>
 
-<!-- Footer Section Start -->
-<div class="footer-section section bg-ivory">
-   
-    <!-- Footer Top Section Start -->
-    <div class="footer-top-section section pt-90 pb-50">
-        <div class="container">
-           
-            <!-- Footer Widget Start -->
-            <div class="row">
-                <div class="col mb-90">
-                    <div class="footer-widget text-center">
-                        <div class="footer-logo">
-                            <img src="{{ asset('frontend/images/logo.png') }}" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                            <img class="theme-dark" src="{{ asset('frontend/images/logo-light.png') }}" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                        </div>
-                        <p>Electronics product actual teachings of  he great explorer of the truth, the malder of human happiness. No one rejects</p>
-                    </div>
-                </div>
-            </div><!-- Footer Widget End -->
-            
-            <div class="row">
-                
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-md-6 col-12 mb-40">
-                    <div class="footer-widget">
-                       
-                        <h4 class="widget-title">CONTACT INFO</h4>
-                        
-                        <p class="contact-info">
-                            <span>Address</span>
-                            You address will be here <br>
-                             Lorem Ipsum text                        </p>
-                        
-                        <p class="contact-info">
-                            <span>Phone</span>
-                            <a href="tel:01234567890">01234 567 890</a>
-                            <a href="tel:01234567891">01234 567 891</a>
-                        </p>
-                        
-                        <p class="contact-info">
-                            <span>Web</span>
-                            <a href="mailto:info@example.com">info@example.com</a>
-                            <a href="#">www.example.com</a>
-                        </p>
-                        
-                    </div>
-                </div><!-- Footer Widget End -->
-                
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-md-6 col-12 mb-40">
-                    <div class="footer-widget">
-                       
-                        <h4 class="widget-title">CUSTOMER CARE</h4>
-                        
-                        <ul class="link-widget">
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Cart</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">blog</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                        
-                    </div>
-                </div><!-- Footer Widget End -->
-                
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-md-6 col-12 mb-40">
-                    <div class="footer-widget">
-                       
-                        <h4 class="widget-title">INFORMATION</h4>
-                        
-                        <ul class="link-widget">
-                            <li><a href="#">Track your order</a></li>
-                            <li><a href="#">Locate Store</a></li>
-                            <li><a href="#">Online Support</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Payment</a></li>
-                            <li><a href="#">Shipping & Returns</a></li>
-                            <li><a href="#">Gift coupon</a></li>
-                            <li><a href="#">Special coupon</a></li>
-                        </ul>
-                        
-                    </div>
-                </div><!-- Footer Widget End -->
-                
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-md-6 col-12 mb-40">
-                    <div class="footer-widget">
-                       
-                        <h4 class="widget-title">LATEST TWEET</h4>
-                        
-                        <div class="footer-tweet"></div>
-                        
-                    </div>
-                </div><!-- Footer Widget End -->
-                
-            </div>
-            
-        </div>
-    </div><!-- Footer Bottom Section Start -->
-   
-    <!-- Footer Bottom Section Start -->
-    <div class="footer-bottom-section section">
-        <div class="container">
-            <div class="row">
-                
-                <!-- Footer Copyright -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-copyright"><p>&copy; Copyright, 2018 All Rights Reserved by <a href="https://freethemescloud.com/">Free themes Cloud</a></p></div>
-                </div>
-                
-                <!-- Footer Payment Support -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-payments-image"><img src="{{ asset('frontend/images/payment-support.png') }}" alt="Payment Support Image"></div>
-                </div>
-                
-            </div>
-        </div>
-    </div><!-- Footer Bottom Section Start -->
-    
-</div><!-- Footer Section End -->
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Hot deals</a></li>
+									<li><a href="#">Laptops</a></li>
+									<li><a href="#">Smartphones</a></li>
+									<li><a href="#">Cameras</a></li>
+									<li><a href="#">Accessories</a></li>
+								</ul>
+							</div>
+						</div>
 
-{{-- <!-- Popup Subscribe Section Start -->
-<div class="popup-subscribe-section section bg-gray pt-55 pb-55" data-modal="popup-modal">
-   
-    <!-- Popup Subscribe Wrap Start -->
-    <div class="popup-subscribe-wrap">
-        
-        <button class="close-popup">X</button>
-       
-        <!-- Popup Subscribe Banner -->
-        <div class="popup-subscribe-banner banner">
-            <a href="#"><img src="{{ asset('frontend/images/banner/banner-7.jpg') }}" alt="Banner"></a>
-        </div>
+						<div class="clearfix visible-xs"></div>
 
-        <!-- Popup Subscribe Form Wrap Start -->
-        <div class="popup-subscribe-form-wrap">
-            
-            <h1>SUBSCRIBE <br>OUR NEWSLETTER</h1>
-            <h4>Get latest product update...</h4>
-           
-            <!-- Newsletter Form -->
-            <form action="#" method="post" class="popup-subscribe-form validate" target="_blank" novalidate>
-                <div id="mc_embed_signup_scroll">
-                    <label for="popup_subscribe" class="d-none">Subscribe to our mailing list</label>
-                    <input type="email" value="" name="EMAIL" class="email" id="popup_subscribe" placeholder="Enter your email here" required>
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                    <button type="submit" name="subscribe" id="" class="button">subscribe</button>
-                </div>
-            </form>
-            
-            <p>Be the first in the by getting special deals and offers send directly to your inbox.</p>
-            
-        </div><!-- Popup Subscribe Form Wrap End -->
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Information</h3>
+								<ul class="footer-links">
+									<li><a href="#">About Us</a></li>
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="#">Orders and Returns</a></li>
+									<li><a href="#">Terms & Conditions</a></li>
+								</ul>
+							</div>
+						</div>
 
-    </div><!-- Popup Subscribe Wrap End -->
-    
-</div><!-- Popup Subscribe Section End --> --}}
-    
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="#">My Account</a></li>
+									<li><a href="#">View Cart</a></li>
+									<li><a href="#">Wishlist</a></li>
+									<li><a href="#">Track My Order</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
 
-<!-- JS
-============================================ -->
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<ul class="footer-payments">
+								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							</ul>
+							<span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
 
-<!-- jQuery JS -->
-<script src="{{ asset('frontend/js/vendor/jquery-1.12.4.min.js') }}"></script>
-<!-- Popper JS -->
-<script src="{{ asset('frontend/js/popper.min.js') }}"></script>
-<!-- Bootstrap JS -->
-<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-<!-- Plugins JS -->
-<script src="{{ asset('frontend/js/plugins.js') }}"></script>
+		<!-- jQuery Plugins -->
+		<script src="{{ asset('js/frontend/jquery.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/slick.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/nouislider.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/jquery.zoom.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/main.js') }}"></script>
 
-<!-- Main JS -->
-<script src="{{ asset('frontend/js/main.js') }}"></script>
-
-</body>
-
+	</body>
 </html>

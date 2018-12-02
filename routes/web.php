@@ -15,56 +15,23 @@
 //     $user = App\User::with('products')->get();
 //     return $user;
 // });
-Route::get('/product', function () {
-    return view('frontend.product');
-});
-Route::get('/', function () {
-    return view('frontend.index');
+
+Route::get('/', 'CategoryController@index');
+
+Route::get('/blank', function () {
+    return view('frontend.blank');
 });
 
-Route::get('/about-us', function () {
-    return view('frontend.about-us');
-});
-Route::get('/best-deal', function () {
-    return view('frontend.best-deal');
-});
-Route::get('/cart', function () {
-    return view('frontend.cart');
-});
 Route::get('/checkout', function () {
     return view('frontend.checkout');
 });
 
-Route::get('/contact', function () {
-    return view('frontend.contact');
-});
-Route::get('/login', function () {
-    return view('frontend.login');
-});
-Route::get('/register', function () {
-    return view('frontend.register');
-});
-Route::get('/shop-grid', function () {
-    return view('frontend.shop-grid');
-});
-Route::get('/single-product', function () {
-    return view('frontend.single-product');
-});
-Route::get('/store', function () {
-    return view('frontend.store');
-});
-Route::get('/terms-conditions', function () {
-    return view('frontend.terms-conditions');
-});
-Route::get('/wishlist', function () {
-    return view('frontend.wishlist');
-});
-Route::get('/faq', function () {
-    return view('frontend.faq');
+Route::get('/product', function () {
+    return view('frontend.product');
 });
 
-Route::get('/feature', function () {
-    return view('frontend.feature');
+Route::get('/store', function () {
+    return view('frontend.store');
 });
 
 Auth::routes();

@@ -23,6 +23,7 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->city,
+        'picture' => './frontend/img/shop01.png',
         'parent_id' => 0,
     ];
 });
@@ -32,11 +33,19 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->name,
         'description' => $faker->text,
         'price' => $faker->numberBetween($min = 10, $max = 30),
-        'picture' => $faker->image(),
+        'picture' => './frontend/img/product01.png',
         'unit' => $faker->randomDigit(),
         'unit_in_stock' => $faker->numberBetween($min = 10, $max = 20),
         'unit_on_order' => $faker->numberBetween($min = 30, $max = 50),
-
+        'sale' => $faker->randomElement($array = [
+            '0', '10', '20',
+        ]),
+        'new' => $faker->randomElement($array = [
+            '0', '1',
+        ]),
+        'rating' => $faker->randomElement($array = [
+            '3', '4', '5',
+        ]),
     ];
 });
 $factory->define(User::class, function (Faker $faker) {

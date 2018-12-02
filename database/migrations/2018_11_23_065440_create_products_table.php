@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-
             $table->string('name');
             $table->text('description');
             $table->string('unit');
@@ -25,6 +24,9 @@ class CreateProductsTable extends Migration
             $table->integer('unit_in_stock');
             $table->integer('unit_on_order');
             $table->string('picture');
+            $table->unsignedInteger('sale');
+            $table->enum('new', ['0', '1']);
+            $table->enum('rating', ['1', '2', '3', '4', '5']);
             $table->timestamps();
         });
     }
