@@ -20,13 +20,15 @@ use Faker\Generator as Faker;
 |
  */
 
-$factory->define(Category::class, function (Faker $faker) {
-    return [
-        'name' => $faker->city,
-        'picture' => './frontend/img/shop01.png',
-        'parent_id' => 0,
-    ];
-});
+// $factory->define(Category::class, function (Faker $faker) {
+//     return [
+//         'name' => $faker->city,
+//         'picture' => './frontend/img/shop01.png',
+//         'parent_id' => $faker->randomElement($array = [
+//             '0', '1',
+//         ]),
+//     ];
+// });
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'category_id' => Category::all()->random()->id,
