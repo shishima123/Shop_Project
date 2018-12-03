@@ -58,7 +58,7 @@ $factory->define(User::class, function (Faker $faker) {
             'administrator',
             'user',
         ]),
-        'password' => $faker->password(),
+        'password' => bcrypt('12345'),
         'picture' => $faker->image(),
         'phone' => $faker->phoneNumber(),
         'address' => $faker->address(),

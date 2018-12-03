@@ -3,7 +3,7 @@
 @section('content')
 {{-- {{ count($data[0]->products) }} --}}
 <!-- SECTION Shop picture-->
-<div class="section">
+{{-- <div class="section">
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
@@ -27,7 +27,7 @@
 	</div>
 	<!-- /container -->
 </div>
-<!-- /SECTION -->
+<!-- /SECTION --> --}}
 
 <!-- NEW PRODUCT -->
 <div class="section">

@@ -17,11 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->enum('role', ['administrator', 'user']);
             $table->string('password');
+            $table->enum('role', ['administrator', 'user']);
             $table->string('picture');
             $table->string('phone');
             $table->text('address');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
