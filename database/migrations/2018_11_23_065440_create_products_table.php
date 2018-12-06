@@ -25,8 +25,9 @@ class CreateProductsTable extends Migration
             $table->integer('unit_on_order');
             $table->string('picture');
             $table->unsignedInteger('sale');
-            $table->enum('new', ['0', '1']);
+            $table->boolean('new');
             $table->enum('rating', ['1', '2', '3', '4', '5']);
+            $table->boolean('top_selling');
             $table->timestamps();
         });
     }
