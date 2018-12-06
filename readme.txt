@@ -21,3 +21,8 @@
                     'NO_ENGINE_SUBSTITUTION'
                 ],
         ]
+
+
+    2. Lệnh set giá trị của column trong 1 table = null
+        UPDATE table
+        SET column=null
