@@ -1,0 +1,5 @@
+        6/12/2018
+        - thêm trường top_selling trong product ở Migration
+        - chỉnh sửa lại kiểu boolean trong product ở Migration
+        - query ra $new_product và $top_selling
+        - Thêm chức năng Task Scheduler(app\console\kernel.php và app\console\Commands\GetTopSelling)
