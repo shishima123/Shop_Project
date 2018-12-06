@@ -21,3 +21,16 @@
                     'NO_ENGINE_SUBSTITUTION'
                 ],
         ]
+
+
+    2. Lệnh set giá trị của column trong 1 table = null
+        UPDATE table
+        SET column=0
+        where column=1
+    3. Migration 1 column có thể null
+        $table->string('name')->nullable();
+
+        6/12/2018
+        - thêm trường top_selling trong product ở Migration
+        - chỉnh sửa lại kiểu boolean trong product ở Migration
+        - viết lại 2 câ
