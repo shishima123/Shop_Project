@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 
 class CategoryController extends Controller
@@ -17,4 +18,3 @@ class CategoryController extends Controller
 
     }
 }
-//TODO: Chuyển đống này qua bên task scheulding để tự động update sau 60'
