@@ -42,7 +42,26 @@
 				</ul>
 				<ul class="header-links pull-right">
 					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+					@auth
+					<li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
+							<div class="dropdown-content bg-dark">
+									<a href="#" class="text-dark">Profile</a>
+									<a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+							</div>
+						</li>
+					@else
+					<li><a href="{{ route('login') }}"><i class="fa fa-user-o"></i> Login</a></li>
+					<li><a href="{{ route('register') }}"><i class="fa fa-user-o"></i> Register</a></li>
+					@endauth
+
 				</ul>
 			</div>
 		</div>
@@ -70,12 +89,11 @@
 							<form>
 								<select class="input-select">
 									<option value="0">All Categories</option>
-									@for ($i = 0; $i < count($menus); $i++)
-									@if ($menus[$i]->parent_id===0)
+									@for ($i = 0; $i < count($menus); $i++) @if ($menus[$i]->parent_id===0)
 										<option value="1">{!! $menus[$i]->name !!}</option>
-									@endif						
-									@endfor
-									
+										@endif
+										@endfor
+
 								</select>
 								<input class="input" placeholder="Search here">
 								<button class="search-btn">Search</button>
@@ -87,7 +105,8 @@
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-							{{-- <!-- Wishlist -->
+							{{--
+							<!-- Wishlist -->
 							<div>
 								<a href="#">
 									<i class="fa fa-heart-o"></i>
@@ -167,18 +186,16 @@
 			<!-- responsive-nav -->
 			<div id="responsive-nav">
 				<!-- NAV -->
-				<?php $j=0;?>
 				<ul class="main-nav nav navbar-nav">
 					<li class="active dropdown"><a href="#">Trang chủ</a>
 					</li>
 					@for ($i = 0; $i < count($menus); $i++) @if ($menus[$i]->parent_id === 0)
 						<li class="dropdown"><a href="#">{{ $menus[$i]->name }}</a>
 							<div class="dropdown-content">
-								@for ($j = 0; $j < count($menus); $j++)
-									@if ($menus[$j]->parent_id===$menus[$i]->id)
-										<a href="#">{{ $menus[$j]->name }}</a>
+								@for ($j = 0; $j < count($menus); $j++) @if ($menus[$j]->parent_id===$menus[$i]->id)
+									<a href="#">{{ $menus[$j]->name }}</a>
 									@endif
-								@endfor		
+									@endfor
 							</div>
 						</li>
 						@endif
