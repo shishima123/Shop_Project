@@ -3,3 +3,9 @@
         - chỉnh sửa lại kiểu boolean trong product ở Migration
         - query ra $new_product và $top_selling
         - Thêm chức năng Task Scheduler(app\console\kernel.php và app\console\Commands\GetTopSelling)
+
+        9/12/2018
+        - Thêm chức năng login,logout (chkLoginController)
+        - Thêm middleware checkAdminLogin
+        - Đổi tên file app.blade.php trong thư mục layouts thành master.blade.php và di chuyển vào thư mục auth. Xóa thư mục layouts
+        - Fix lại layout cho trang Admin
