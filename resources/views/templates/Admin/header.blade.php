@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Blank Page</title>
+  <title>@yield('title')</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
 
@@ -73,20 +73,3 @@
     </ul>
 
   </nav>
-
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/Admin/bootstrap.bundle.min.js') }}"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.easing.min.js') }}"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('js/Admin/sb-admin.min.js') }}"></script>
-
-
-</body>
-
-</html>

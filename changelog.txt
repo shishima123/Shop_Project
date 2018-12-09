@@ -9,3 +9,4 @@
         - Thêm middleware checkAdminLogin
         - Đổi tên file app.blade.php trong thư mục layouts thành master.blade.php và di chuyển vào thư mục auth. Xóa thư mục layouts
         - Fix lại layout cho trang Admin
+        - Add chức năng show() của trang admin/user

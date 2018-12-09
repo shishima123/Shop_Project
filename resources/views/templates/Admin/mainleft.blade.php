@@ -9,7 +9,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="admin/user">
+        <a class="nav-link" href="{{ route('user.index') }}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>User</span></a>
       </li>
@@ -29,4 +29,5 @@
           <span>Comment</span></a>
       </li>
     </ul>
+    @yield('content')
   </div>

@@ -44,3 +44,5 @@ Route::post('logout', 'chkLoginController@getLogout')->name('logout');
 Route::get('admin', function () {
     return view('templates.Admin.master');
 })->name('admin')->middleware('checkAdminLogin');
+
+Route::get('admin/user', 'UserController@show')->name('user.index');
