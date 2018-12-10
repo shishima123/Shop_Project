@@ -10,3 +10,11 @@
         - Đổi tên file app.blade.php trong thư mục layouts thành master.blade.php và di chuyển vào thư mục auth. Xóa thư mục layouts
         - Fix lại layout cho trang Admin
         - Add chức năng show() của trang admin/user
+
+        10/12/2018 (Feature_admin_user_resource)
+        - Thêm relationship 1-many cho table Order-Order_items User-comment_ratings
+        - Thêm column total_comment trong user.index
+        - Update query function show()
+        - Add function destroy()
+        - Add function edit()
+        - Add view Admin.user.edit

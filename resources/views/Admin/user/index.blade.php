@@ -5,10 +5,11 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr class="text-center">
-            <th scope="col">STT</th>
+            <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Comment</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -16,17 +17,15 @@
         @foreach ($users as $key=>$user)
         <tr class="text-center">
             <th scope="row">{{ $users->firstItem()+$key }}</th>
-            <td>{{ $user->name }}</td>
+            <td><a href="{{ asset('admin/user\/').$user->id }}">{{ $user->name }}</a></td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
+            <td>{{ $user->total_comment }}</td>
             <td class="d-flex justify-content-around align-items-center">
-                <form action="" method="get"><button class="btn btn-sm btn-primary rounded-0">Show</button>
+                <form action="{{ route('admin.user.destroy',$user->id).'/edit' }}" method="get"><button class="btn btn-sm btn-warning rounded-0">Edit</button>
                 </form>
 
-                <form action="" method="get"><button class="btn btn-sm btn-warning rounded-0">Edit</button>
-                </form>
-
-                <form action="" method="POST">
+                <form action="{{ route('admin.user.destroy',$user->id) }}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button class="btn btn-sm btn-danger rounded-0">Delete</button></form>

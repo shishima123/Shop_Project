@@ -37,7 +37,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="index.html">Admin Page</a>
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
@@ -51,24 +51,16 @@
     </form>
 
     <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
+    <ul class="navbar-nav mx-3 ml-md-0">
       <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
-          <span class="">{{ Auth::user()->name }}</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
-          <div class="dropdown-divider"></div>
-          <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+          <i class="fas fa-user-circle fa-fw text-light ml-2"></i>
+          <span class="text-light mr-2">{{ Auth::user()->name }}</span>
+          <button class="btn border-0 btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             Logout
-          </a>
+          </button>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
           </form>
-        </div>
       </li>
     </ul>
 
