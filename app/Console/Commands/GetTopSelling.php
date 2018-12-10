@@ -12,7 +12,7 @@ class GetTopSelling extends Command
      *
      * @var string
      */
-    protected $signature = 'get:topselling';
+    protected $signature = 'get:topSelling';
 
     /**
      * The console command description.

@@ -16,7 +16,7 @@
 //     return $user;
 // });
 
-Route::get('/', 'CategoryController@index');
+Route::get('/', 'CategoryController@index')->name('index');
 
 Route::get('/blank', function () {
     return view('frontend.blank');
@@ -34,14 +34,13 @@ Route::get('/store', function () {
     return view('frontend.store');
 });
 
-Auth::routes();
+Route::get('register', 'UserController@store')->name('register');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login', 'chkLoginController@getLogin')->name('login');
+Route::post('login', 'chkLoginController@postLogin');
 
-Auth::routes();
+Route::post('logout', 'chkLoginController@getLogout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin', function () {
+    return view('templates.Admin.master');
+})->name('admin')->middleware('checkAdminLogin');

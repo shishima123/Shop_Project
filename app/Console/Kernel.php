@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        /* Khai báo commands */
         'App\Console\Commands\GetTopSelling',
     ];
 
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        /* Đặt lịch */
         $schedule->command('get:topselling')->daily();
     }
 
