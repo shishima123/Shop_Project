@@ -44,3 +44,9 @@ Route::post('logout', 'chkLoginController@getLogout')->name('logout');
 Route::get('admin', function () {
     return view('templates.Admin.master');
 })->name('admin')->middleware('checkAdminLogin');
+
+Route::get('admin/user', 'UserController@show')->name('admin.user.index')->middleware('checkAdminLogin');
+
+Route::get('admin/user/{id}/edit', 'UserController@edit')->name('admin.user.edit')->middleware('checkAdminLogin');
+
+Route::delete('admin/user/{id}', 'UserController@destroy')->name('admin.user.destroy')->middleware('checkAdminLogin');

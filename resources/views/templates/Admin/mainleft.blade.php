@@ -1,7 +1,7 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
+    <ul class="sidebar navbar-nav" style="width:100px">
       <li class="nav-item active">
         <a class="nav-link" href="admin/dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -9,7 +9,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="admin/user">
+        <a class="nav-link" href="{{ route('admin.user.index') }}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>User</span></a>
       </li>
@@ -29,4 +29,5 @@
           <span>Comment</span></a>
       </li>
     </ul>
+    @yield('content')
   </div>
