@@ -1,33 +1,40 @@
-
-  <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav" style="width:100px">
-      <li class="nav-item active">
-        <a class="nav-link" href="admin/dashboard">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 navbar-nav Left-sidebar--Height">
+      <!-- Sidebar -->
+      <div class="nav-item ml-3 my-1">
+        <a id="1" class="nav-link d-flex text-muted {{ Request::is('admin') ? 'active' : '' }}" href="{{ asset('admin') }}">
+          <i class="fas fa-fw fa-tachometer-alt mt-1 mr-2"></i>
           <span>Dashboard</span>
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.user.index') }}">
-          <i class="fas fa-fw fa-chart-area"></i>
+      </div>
+
+      <div class="nav-item ml-3 my-1">
+        <a id="2" class="nav-link d-flex text-muted {{ Request::is('admin/user*') ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
+          <i class="fas fa-users-cog mt-1 mr-2"></i>
           <span>User</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="admin/category">
-          <i class="fas fa-fw fa-table"></i>
+      </div>
+
+      <div class="nav-item ml-3 my-1">
+        <a id="3" class="nav-link d-flex text-muted {{ Request::is('admin/category*') ? 'active' : '' }}" href="{{ asset('admin/category') }}">
+          <i class="fas fa-fw fa-table mt-1 mr-2"></i>
           <span>Category</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="admin/product">
-          <i class="fas fa-fw fa-table"></i>
+      </div>
+
+      <div class="nav-item ml-3 my-1">
+        <a id="4" class="nav-link d-flex text-muted {{ Request::is('admin/product*') ? 'active' : '' }}" href="{{ asset('admin/product') }}">
+          <i class="fas fa-shopping-basket mt-1 mr-2"></i>
           <span>Product</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="admin/comment">
-          <i class="fas fa-fw fa-table"></i>
+      </div>
+
+      <div class="nav-item ml-3 my-1">
+        <a id="5" class="nav-link d-flex text-muted {{ Request::is('admin/comment*') ? 'active' : '' }}" href="{{ asset('admin/coment') }}">
+          <i class="far fa-comment-alt mt-1 mr-2"></i>
           <span>Comment</span></a>
-      </li>
-    </ul>
-    @yield('content')
+      </div>
+    </div>
+    <div class="col-10">
+      @yield('content')
+    </div>
   </div>
+</div>

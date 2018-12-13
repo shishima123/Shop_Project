@@ -1,14 +1,21 @@
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/Admin/bootstrap.bundle.min.js') }}"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('js/Admin/jquery.min.js') }}"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.easing.min.js') }}"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('js/Admin/sb-admin.min.js') }}"></script>
-
-
+<script>
+  $('#btnAdd').click(function () {
+    console.log(this.id)
+    $('#btnAdd').toggleClass('btn-primary btn-danger');
+    $('#iconBtnAdd').toggleClass('fa-plus fa-minus');
+  });
+</script>
+{{-- Neu su dung ajax thi xai --}}
+{{-- <script>
+  $('a').click(function () {
+    // e.preventDefault();
+    $('a').removeClass('active');
+    $(this).addClass('active');
+  })
+</script> --}}
 </body>
 
 </html>

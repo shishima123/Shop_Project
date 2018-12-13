@@ -1,6 +1,9 @@
 @extends('templates.Admin.master')
 @section('title','User')
 @section('content')
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary my-3" id="btnAdd"><i class="fas fa-plus" id="iconBtnAdd"></i></button>
+</div>
 <div class="w-100">
 <table class="table table-bordered table-hover">
     <thead>
@@ -47,4 +50,16 @@
     </ul>
 </div> 
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="bg-dark" style="height:200px;width:200px"></div>
+            <div class="bg-danger" style="height:200px;width:200px"></div>
+        </div>
+        <div class="col-12 d-flex justify-content-center" style="height:200px;width:400px">
+                <div class="bg-primary" style="height:200px;width:200px"></div>
+        </div>
+    </div>
+</div>
 @endsection
+

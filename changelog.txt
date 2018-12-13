@@ -18,3 +18,7 @@
         - Add function destroy()
         - Add function edit()
         - Add view Admin.user.edit
+
+        12/12/2018
+        - Thêm column top_selling ở Product ở Factory
+        - Viết lại giao diện trang Admin bằng Bootstrap 4

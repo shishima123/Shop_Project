@@ -48,6 +48,9 @@ $factory->define(Product::class, function (Faker $faker) {
         'rating' => $faker->randomElement($array = [
             '3', '4', '5',
         ]),
+        'top_selling' => $faker->randomElement($array = [
+            '0', '1',
+        ]),
     ];
 });
 $factory->define(User::class, function (Faker $faker) {
