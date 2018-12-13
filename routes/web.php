@@ -50,3 +50,11 @@ Route::get('admin/user', 'UserController@show')->name('admin.user.index')->middl
 Route::get('admin/user/{id}/edit', 'UserController@edit')->name('admin.user.edit')->middleware('checkAdminLogin');
 
 Route::delete('admin/user/{id}', 'UserController@destroy')->name('admin.user.destroy')->middleware('checkAdminLogin');
+
+Route::get('test', function () {
+    return view('templates.Admin.admin');
+})->name('test');
+
+Route::get('admin/product/s', function () {
+    return view('templates.Admin.admin');
+})->name('test');
