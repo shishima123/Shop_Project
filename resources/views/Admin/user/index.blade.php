@@ -7,12 +7,12 @@
 </div>
 <div class="w-100">
     <div class="mb-4">
-        <div id="layoutCreate" style="display:none;" class="border">
-            <div class="d-flex justify-content-between mt-2 px-2">
+        <div id="layoutCreate" style="display:none;" class="border border-secondary rounded">
+            <div class="d-flex justify-content-between mt-3 px-2">
                 <h3 class="text-uppercase text-primary">create user</h3>
-                <button class="btn btn-warning text-uppercase">Reset</button>
+                <button id="btnReset" class="btn btn-warning text-uppercase">Reset</button>
             </div>
-
+            <hr width="96%">
             <form action="#" method="post" class="p-2">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
