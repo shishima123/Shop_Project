@@ -6,7 +6,9 @@
     console.log(this.id)
     $('#btnAdd').toggleClass('btn-primary btn-danger');
     $('#iconBtnAdd').toggleClass('fa-plus fa-minus');
+    $('#layoutCreate').toggle(500);
   });
+
 </script>
 {{-- Neu su dung ajax thi xai --}}
 {{-- <script>
