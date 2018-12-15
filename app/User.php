@@ -21,4 +21,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(CommentRating::class);
     }
+    // public function getNameAttribute($value)
+    // {
+    //     return $this->strtoupper($value);
+    // }
 }

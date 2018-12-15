@@ -45,7 +45,7 @@ Route::get('admin', function () {
     return view('Admin.dashboard');
 })->name('admin')->middleware('checkAdminLogin');
 
-Route::get('admin/user', 'UserController@show')->name('user.index')->middleware('checkAdminLogin');
+Route::get('admin/user', 'UserController@index')->name('user.index')->middleware('checkAdminLogin');
 
 Route::get('admin/user/{id}/edit', 'UserController@edit')->name('user.edit')->middleware('checkAdminLogin');
 Route::put('admin/user/{id}/edit', 'UserController@update')->name('user.update')->middleware('checkAdminLogin');

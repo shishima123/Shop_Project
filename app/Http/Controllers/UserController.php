@@ -8,13 +8,15 @@ use App\OrderItem;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function show()
+    public function index()
     {
         $users = User::leftJoin('comment_ratings',
             'users.id', '=', 'comment_ratings.user_id')->selectRaw('users.*,count(comment_ratings.user_id) as total_comment')->groupBy('users.id')->orderBy('role')->paginate(10);
+        // return $users;
         return view('Admin.user.index', compact('users'));
     }
 
@@ -56,6 +58,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        DB::beginTransaction();
         try {
             $user = User::findorfail($id);
             CommentRating::where('user_id', $id)->delete();
@@ -66,8 +69,10 @@ class UserController extends Controller
             }
             Order::where('user_id', $id)->delete();
             User::findorfail($id)->delete();
+            DB::commit();
             return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Success!!! Complete Delete User.']);
         } catch (Exception $e) {
+            DB::rollback();
             return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
         }
     }
