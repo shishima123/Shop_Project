@@ -5,12 +5,16 @@
 <div class="row">
     <div class="col-4 text-center">
         <div><img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-4">Upload a different photo</h6>
-            <button class="btn btn-sm btn-secondary">Choose file</button>
+            <div id='changeImage' class="NoDisp">
+                <h6 class="mt-4">Upload a different photo</h6>
+                <button class="btn btn-sm btn-secondary">Choose file</button>
+            </div>
+            {{-- <input type="text" form="myform" /> --}}
         </div>
 
         <div>
-            <a href="{{ route('user.index') }}" class="btn btn-lg btn-success text-uppercase mt-5 text-light">Back to home</a>
+            <a href="{{ route('user.index') }}" class="btn btn-lg btn-success text-uppercase mt-5 text-light">Back to
+                home</a>
         </div>
 
     </div>
@@ -19,10 +23,10 @@
     <div class="col-8">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                <a href="" id="tabProfile" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
             </li>
             <li class="nav-item">
-                <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                <a href="" id="tabEdit" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
             </li>
         </ul>
         <div class="tab-content py-4">
@@ -112,7 +116,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Bạn có muốn lưu thay đổi?
+                                            Do you want to change?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>

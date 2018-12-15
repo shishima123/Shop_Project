@@ -1,13 +1,18 @@
 @extends('templates.Admin.master')
 @section('title','Admin Page - Management User')
 @section('content')
+    @if (session('flash_message'))
+    <div id ="alertMessage" class="alert alert-{{ session('flash_type') }}" role="alert">
+        {{ session('flash_message') }}
+    </div>
+    @endif
 <div class="d-flex justify-content-between">
     <h1 class="text-uppercase">users management</h1>
     <button class="btn btn-primary my-3" id="btnAdd"><i class="fas fa-plus" id="iconBtnAdd"></i></button>
 </div>
 <div class="w-100">
     <div class="mb-4">
-        <div id="layoutCreate" style="display:none;" class="border border-secondary rounded">
+        <div id="layoutCreate" class="border border-secondary rounded NoDisp">
             <div class="d-flex justify-content-between mt-3 px-2">
                 <h3 class="text-uppercase text-primary">create user</h3>
                 <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
@@ -53,7 +58,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Bạn có muốn thêm User này?
+                                    Do you want to add user?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
@@ -95,15 +100,17 @@
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         @if ($user->role==='user')
-                            <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $user->id }}">
+                        <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal"
+                            data-target="#delConfirm{{ $user->id }}">
                             Delete
                         </button>
                         @else
-                            <button type="button" class="btn btn-sm btn-sencondary text-uppercase" disabled data-toggle="modal" data-target="#delConfirm{{ $user->id }}">
+                        <button type="button" class="btn btn-sm btn-sencondary text-uppercase" disabled data-toggle="modal"
+                            data-target="#delConfirm{{ $user->id }}">
                             Delete
                         </button>
                         @endif
-                        
+
                         <!-- Button trigger modal -->
 
                         <!-- Modal -->
@@ -117,7 +124,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Bạn có muốn <span class="text-danger">xóa {{ $user->name }}</span>?
+                                        Do you want to <span class="text-danger">delete {{ $user->name }}</span>?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>

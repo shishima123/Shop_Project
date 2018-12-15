@@ -27,7 +27,16 @@
       $('#txtPassword').attr('type', 'password');
       $('#btnShowPw').text('Show Password');
     }
+  });
 
+  $('#alertMessage').delay(3000).slideUp(1000);
+
+  $('#tabProfile').click(function(){
+$('#changeImage').slideUp(400);
+  });
+
+  $('#tabEdit').click(function(){
+$('#changeImage').slideDown(400);
   });
 </script>
 {{-- Neu su dung ajax thi xai --}}
