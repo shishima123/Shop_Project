@@ -6,6 +6,7 @@ use App\CommentRating;
 use App\Order;
 use App\OrderItem;
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -19,13 +20,31 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::where('id', $id)->with('products')->first();
+        // return $user;
         return view('Admin.user.edit', compact('user'));
     }
 
-    public function store()
+    public function update(Request $request, $id)
     {
-        return view('auth.register');
+        // return $request;
+        $user = User::findorfail($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+        return redirect()->route('user.index');
+    }
+
+    public function store(Request $request)
+    {
+        // return $request;
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        return redirect()->route('user.index');
     }
 
     public function destroy($id)
@@ -41,6 +60,6 @@ class UserController extends Controller
         }
         Order::where('user_id', $id)->delete();
         User::findorfail($id)->delete();
-        return redirect()->route('admin.user.index');
+        return redirect()->route('user.index');
     }
 }

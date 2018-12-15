@@ -41,8 +41,8 @@
 					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
 					@auth
+					<li><a href="{{ route('admin') }}"><i class="fa fa-user-o"></i>Admin Page</a></li>
 					<li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
 							<div class="dropdown-content bg-dark">
 									<a href="#" class="text-dark">Profile</a>

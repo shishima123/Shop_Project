@@ -10,36 +10,60 @@
         <div id="layoutCreate" style="display:none;" class="border border-secondary rounded">
             <div class="d-flex justify-content-between mt-3 px-2">
                 <h3 class="text-uppercase text-primary">create user</h3>
-                <button id="btnReset" class="btn btn-warning text-uppercase">Reset</button>
+                <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
             </div>
             <hr width="96%">
-            <form action="#" method="post" class="p-2">
+            <form action="{{ route('user.store') }}" id="txtFormCreate" method="post" class="p-2">
+                {{ csrf_field() }}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <input class="form-control" type="text" id="txtName" name="name" value="" placeholder="Insert Name Please">
+                    <input class="form-control" type="text" id="txtName" name="name" value="" placeholder="Nguyen Van A">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;Email:&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <input class="form-control" type="email" id="txtEmail" name="email" value="" placeholder="Insert Email Please">
+                    <input class="form-control" type="email" id="txtEmail" name="email" value="" placeholder="example@mail.com">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Password:</span>
                     </div>
-                    <input class="form-control" type="password" id="txtPassword" name="password" value="" placeholder="Insert Password Please">
+                    <input class="form-control" type="password" id="txtPassword" name="password" value="" placeholder="**********">
                     <div class="input-group-append">
-                        <button class="input-group-text btn btn-secondary">Show password</button>
+                        <button id="btnShowPw" class="input-group-text btn btn-sm btn-secondary">Show password</button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="text-uppercase btn btn-success mr-2">Create</button>
-                    <button id="btnCancel" class="text-uppercase btn btn-danger mx-2">Cancel</button>
-                </div>
+                    <button type="button" class="btn btn-sm btn-success text-uppercase" data-toggle="modal" data-target="#createConfirm">
+                        Create
+                    </button>
+                    <!-- Button trigger modal -->
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="createConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Alert!!!</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có muốn thêm User này?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal -->
+                </div>
             </form>
 
         </div>
@@ -59,18 +83,50 @@
             @foreach ($users as $key=>$user)
             <tr class="text-center">
                 <th scope="row">{{ $users->firstItem()+$key }}</th>
-                <td><a href="{{ asset('admin/user\/').$user->id }}">{{ $user->name }}</a></td>
+                <td><a href="{{ asset('admin/user\/').$user->id.'/edit' }}">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->total_comment }}</td>
                 <td class="d-flex justify-content-around align-items-center">
-                    <form action="{{ route('admin.user.destroy',$user->id).'/edit' }}" method="get"><button class="btn btn-sm btn-warning rounded-0">Edit</button>
+                    <form action="{{ route('user.edit',$user->id) }}" method="get"><button class="btn btn-sm btn-warning text-uppercase">Edit</button>
                     </form>
 
-                    <form action="{{ route('admin.user.destroy',$user->id) }}" method="POST">
+                    <form action="{{ route('user.destroy',$user->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button class="btn btn-sm btn-danger rounded-0">Delete</button></form>
+                        @if ($user->role==='user')
+                            <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $user->id }}">
+                            Delete
+                        </button>
+                        @else
+                            <button type="button" class="btn btn-sm btn-sencondary text-uppercase" disabled data-toggle="modal" data-target="#delConfirm{{ $user->id }}">
+                            Delete
+                        </button>
+                        @endif
+                        
+                        <!-- Button trigger modal -->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="delConfirm{{ $user->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Alert!!!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có muốn <span class="text-danger">xóa {{ $user->name }}</span>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </td>
             </tr>
             @endforeach

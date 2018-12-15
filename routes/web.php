@@ -45,16 +45,11 @@ Route::get('admin', function () {
     return view('templates.Admin.master');
 })->name('admin')->middleware('checkAdminLogin');
 
-Route::get('admin/user', 'UserController@show')->name('admin.user.index')->middleware('checkAdminLogin');
+Route::get('admin/user', 'UserController@show')->name('user.index')->middleware('checkAdminLogin');
 
-Route::get('admin/user/{id}/edit', 'UserController@edit')->name('admin.user.edit')->middleware('checkAdminLogin');
+Route::get('admin/user/{id}/edit', 'UserController@edit')->name('user.edit')->middleware('checkAdminLogin');
+Route::put('admin/user/{id}/edit', 'UserController@update')->name('user.update')->middleware('checkAdminLogin');
 
-Route::delete('admin/user/{id}', 'UserController@destroy')->name('admin.user.destroy')->middleware('checkAdminLogin');
+Route::delete('admin/user/{id}', 'UserController@destroy')->name('user.destroy')->middleware('checkAdminLogin');
 
-Route::get('test', function () {
-    return view('templates.Admin.admin');
-})->name('test');
-
-Route::get('admin/product/s', function () {
-    return view('templates.Admin.admin');
-})->name('test');
+Route::post('admin/user', 'UserController@store')->name('user.store')->middleware('checkAdminLogin');

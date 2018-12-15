@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         /* Đặt lịch */
-        $schedule->command('get:topselling')->daily();
+        $schedule->command('get:topselling')->everyMinute();
     }
 
     /**

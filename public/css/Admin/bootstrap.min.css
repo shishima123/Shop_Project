@@ -10005,7 +10005,9 @@ a.text-dark:hover {
     background: #212529;
 }
 
-.nav-link:hover {
+.Effect--Hover {}
+
+.Effect--Hover:hover {
     font-style: italic;
     font-weight: bold;
     color: white !important;

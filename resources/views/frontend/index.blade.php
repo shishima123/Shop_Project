@@ -14,6 +14,12 @@
 		<div class="row">
 			<!-- Products tab & slick -->
 			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">NEW PRODUCTS</h3>
+				</div>
+			</div>
+
+			<div class="col-md-12">
 				<div class="row">
 					<div class="products-tabs">
 						<!-- tab -->
@@ -40,13 +46,13 @@
 										@if ($new_product->sale)
 										<del class="product-old-price">{{ $new_product->price }}</del>
 										@else
-										<br/>
+										<br />
 										@endif
 
 										<div class="product-rating">
 											@for ($i = 0; $i < $new_product->rating; $i++)
 												<i class="fa fa-star"></i>
-											@endfor
+												@endfor
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -84,7 +90,11 @@
 	<div class="container">
 		<!-- row -->
 		<div class="row">
-
+			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">TOP SELLING</h3>
+				</div>
+			</div>
 			<!-- Products tab & slick -->
 			<div class="col-md-12">
 				<div class="row">
@@ -113,13 +123,13 @@
 										@if ($top_selling->sale)
 										<del class="product-old-price">{{ $top_selling->price }}</del>
 										@else
-										<br/>
+										<br />
 										@endif
 
 										<div class="product-rating">
 											@for ($i = 0; $i < $top_selling->rating; $i++)
 												<i class="fa fa-star"></i>
-											@endfor
+												@endfor
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>

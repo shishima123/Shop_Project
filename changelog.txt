@@ -22,3 +22,7 @@
         12/12/2018
         - Thêm column top_selling ở Product ở Factory
         - Viết lại giao diện trang Admin bằng Bootstrap 4
+
+        14/12/2018
+        - Update layout Admin/user.
+        - Complete feature add/edit/destroy user.
