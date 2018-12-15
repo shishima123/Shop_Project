@@ -86,8 +86,33 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">
-                            <button type="reset" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
+                                                <button type="button" class="btn btn-sm btn-primary text-uppercase" data-toggle="modal" data-target="#updateConfirm">
+                        Save Changes
+                    </button>
+                    <!-- Button trigger modal -->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Alert!!!</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có muốn lưu thay đổi?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal -->
                         </div>
                     </div>
                 </form>
