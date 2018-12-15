@@ -1,5 +1,5 @@
 @extends('templates.Admin.master')
-@section('title','User')
+@section('title','Admin Page - Management User')
 @section('content')
 <div class="d-flex justify-content-between">
     <h1 class="text-uppercase">users management</h1>

@@ -1,5 +1,5 @@
 @extends('templates.Admin.master')
-@section('title','User')
+@section('title','Admin Page - Edit User')
 @section('content')
 
 <div class="row">

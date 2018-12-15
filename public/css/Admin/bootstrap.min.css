@@ -10000,20 +10000,21 @@ a.text-dark:hover {
     }
 }
 
+/* Custome css */
 .Left-sidebar--Height {
     height: 100vh;
     background: #212529;
 }
 
-.Effect--Hover {}
+.Admin--LeftBar--Effect--Hover {}
 
-.Effect--Hover:hover {
+.Admin--LeftBar--Effect--Hover:hover {
     font-style: italic;
     font-weight: bold;
     color: white !important;
 }
 
-.Admin--LeftBar--Active {
+.Admin--LeftBar--Item--Active {
     font-style: italic;
     font-weight: bold;
     color: white !important;
