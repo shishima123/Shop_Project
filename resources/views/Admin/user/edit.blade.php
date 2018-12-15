@@ -4,10 +4,17 @@
 
 <div class="row">
     <div class="col-4 text-center">
-        <img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-        <h6 class="mt-4">Upload a different photo</h6>
-        <button class="btn btn-secondary">Choose file</button>
+        <div><img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-4">Upload a different photo</h6>
+            <button class="btn btn-sm btn-secondary">Choose file</button>
+        </div>
+
+        <div>
+            <a href="{{ route('user.index') }}" class="btn btn-lg btn-success text-uppercase mt-5 text-light">Back to home</a>
+        </div>
+
     </div>
+
 
     <div class="col-8">
         <ul class="nav nav-tabs">
@@ -80,39 +87,41 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Address</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="address" value="{{ $user->address }}" placeholder="Address">
+                            <input class="form-control" type="text" name="address" value="{{ $user->address }}"
+                                placeholder="Address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">
-                            <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
-                                                <button type="button" class="btn btn-sm btn-primary text-uppercase" data-toggle="modal" data-target="#updateConfirm">
-                        Save Changes
-                    </button>
-                    <!-- Button trigger modal -->
+                            <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+                            <button type="button" class="btn btn-sm btn-primary text-uppercase" data-toggle="modal"
+                                data-target="#updateConfirm">
+                                Save Changes
+                            </button>
+                            <!-- Button trigger modal -->
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Alert!!!</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Bạn có muốn lưu thay đổi?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Alert!!!</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có muốn lưu thay đổi?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- End Modal -->
+                            <!-- End Modal -->
                         </div>
                     </div>
                 </form>
