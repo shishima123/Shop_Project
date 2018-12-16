@@ -20,9 +20,18 @@
         - Add view Admin.user.edit
 
         12/12/2018
-        - Thêm column top_selling ở Product ở Factory
-        - Viết lại giao diện trang Admin bằng Bootstrap 4
+        - Add column top_selling to Product on Factory Model
+        - Rewrite template Admin by Bootstrap 4
 
         14/12/2018
         - Update layout Admin/user.
         - Complete feature add/edit/destroy user.
+        15/12/2018
+        - Update layout Admin/user
+        - Add flash message on Admin/User
+        - Add validation form on Admin/User and Register template
+
+        16/12/2018
+        - Update layout Admin/user
+        - Add Order to LeftBar template admin
+        - Add feature DashBoard

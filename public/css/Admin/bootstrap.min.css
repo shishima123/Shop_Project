@@ -10010,8 +10010,11 @@ a.text-dark:hover {
 
 .Admin--LeftBar--Effect--Hover:hover {
     font-style: italic;
+    text-decoration: none;
     font-weight: bold;
     color: white !important;
+    font-size: 1.3rem;
+
 }
 
 .Admin--LeftBar--Item--Active {
@@ -10022,6 +10025,11 @@ a.text-dark:hover {
 
 .NoDisp {
     display: none;
+}
+
+.Radio--Button--Size {
+    width: 20px;
+    height: 20px;
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */

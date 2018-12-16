@@ -21,11 +21,31 @@
           <div class="navbar-nav mx-3">
             <i class="fas fa-user-circle fa-fw text-light mt-2 mr-1"></i>
             <span class="text-light mr-2 mt-1">{{ Auth::user()->name }}</span>
-            <button class="btn border-0 btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-              Logout
-            </button>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
               {{ csrf_field() }}
+              <button type="button" class="btn border-0 btn-primary text-capitalize" data-toggle="modal" data-target="#logoutConfirm">Logout</button>
+              <!-- Button trigger modal -->
+
+              <!-- Modal -->
+              <div class="modal fade" id="logoutConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Alert!!!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Do you want to Logout?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </nav>

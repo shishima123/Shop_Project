@@ -23,7 +23,7 @@ class checkAdminLogin
                 return redirect('/');
             }
         } else {
-            return redirect()->route('login');
+            return redirect()->route('getLogin');
         }
 
     }

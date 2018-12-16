@@ -1,6 +1,11 @@
 @extends('auth.master')
 
 @section('content')
+@if (session('flash_message'))
+    <div id ="alertMessage" class="text-center alert alert-{{ session('flash_type') }}" role="alert">
+        {{ session('flash_message') }}
+    </div>
+    @endif
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -8,7 +13,7 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('getRegister') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

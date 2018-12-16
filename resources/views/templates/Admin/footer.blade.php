@@ -22,9 +22,11 @@
     var chkAttr = $('#txtPassword').attr('type');
     if (chkAttr === 'password') {
       $('#txtPassword').attr('type', 'text');
+      $('#txtPasswordConfirm').attr('type', 'text');
       $('#btnShowPw').text('Hide Password');
     } else {
       $('#txtPassword').attr('type', 'password');
+      $('#txtPasswordConfirm').attr('type', 'password');
       $('#btnShowPw').text('Show Password');
     }
   });

@@ -1,18 +1,26 @@
 @extends('templates.Admin.master')
 @section('title','Admin Page - Management User')
 @section('content')
-    @if (session('flash_message'))
-    <div id ="alertMessage" class="alert alert-{{ session('flash_type') }}" role="alert">
-        {{ session('flash_message') }}
-    </div>
-    @endif
+@include('error.error')
+{{-- Flash Message --}}
+@if (session('flash_message'))
+<div id="alertMessage" class="text-center alert alert-{{ session('flash_type') }}" role="alert">
+    {{ session('flash_message') }}
+</div>
+@endif
+{{-- End Flash Message --}}
+
+{{-- Button Show Create --}}
 <div class="d-flex justify-content-between">
     <h1 class="text-uppercase">users management</h1>
     <button class="btn btn-primary my-3" id="btnAdd"><i class="fas fa-plus" id="iconBtnAdd"></i></button>
 </div>
+{{-- End Button Show Create --}}
+
 <div class="w-100">
-    <div class="mb-4">
-        <div id="layoutCreate" class="border border-secondary rounded NoDisp">
+    {{-- Create User --}}
+    <div class="mb-4 NoDisp" id="layoutCreate">
+        <div class="border border-secondary rounded ">
             <div class="d-flex justify-content-between mt-3 px-2">
                 <h3 class="text-uppercase text-primary">create user</h3>
                 <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
@@ -24,23 +32,40 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;Name:&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <input class="form-control" type="text" id="txtName" name="name" value="" placeholder="Nguyen Van A">
+                    <input class="form-control" type="text" id="txtName" name="name" value="{{ old('name') }}"
+                        placeholder="Nguyen Van A">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;Email:&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <input class="form-control" type="email" id="txtEmail" name="email" value="" placeholder="example@mail.com">
+                    <input class="form-control" type="email" id="txtEmail" name="email" value="{{ old('email') }}"
+                        placeholder="example@mail.com">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Password:</span>
                     </div>
                     <input class="form-control" type="password" id="txtPassword" name="password" value="" placeholder="**********">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Password Confirm:</span>
+                    </div>
+                    <input class="form-control" type="password" id="txtPasswordConfirm" name="password_confirmation"
+                        value="" placeholder="**********">
                     <div class="input-group-append">
-                        <button id="btnShowPw" class="input-group-text btn btn-sm btn-secondary">Show password</button>
+                        <button type="button" id="btnShowPw" class="input-group-text btn btn-sm btn-secondary">Show
+                            password</button>
                     </div>
                 </div>
+                <div>
+                    <input type="radio" class="mx-2 Radio--Button--Size" name="role" value="administrator">
+                    <label for="administrator" class="mb-0">Administrator</label>
+                    <input type="radio" class="ml-4 mr-2 Radio--Button--Size" name="role" value="user">
+                    <label for="user" class="mb-0">User</label>
+                </div>
+                <hr width="96%">
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-sm btn-success text-uppercase" data-toggle="modal" data-target="#createConfirm">
                         Create
@@ -73,6 +98,9 @@
 
         </div>
     </div>
+    {{-- End Create User --}}
+
+    {{-- Table User --}}
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="text-center">
@@ -99,7 +127,7 @@
                     <form action="{{ route('user.destroy',$user->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        @if ($user->role==='user')
+                        @if ($user->name!==Auth::user()->name)
                         <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal"
                             data-target="#delConfirm{{ $user->id }}">
                             Delete
@@ -110,7 +138,6 @@
                             Delete
                         </button>
                         @endif
-
                         <!-- Button trigger modal -->
 
                         <!-- Modal -->
@@ -133,12 +160,17 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- End Modal --}}
+
                     </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    {{-- End Table User --}}
+
+    {{-- Pagination --}}
     <div class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="{{ $users->url(1) }}" rel="prev">«</a></li>
@@ -151,5 +183,6 @@
                 <li class="page-item"><a class="page-link" href="{{ $users->url($users->lastPage()) }}" rel="next">»</a></li>
         </ul>
     </div>
+    {{-- End Pagination --}}
 </div>
 @endsection

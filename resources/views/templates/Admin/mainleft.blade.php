@@ -4,7 +4,7 @@
       <!-- Sidebar -->
       <div class="nav-item ml-3 my-1">
         <a id="1" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin') }}">
-          <i class="fas fa-fw fa-tachometer-alt mt-1 mr-2"></i>
+          <i class="fas fa-tachometer-alt mt-1 mr-2"></i>
           <span>Dashboard</span>
         </a>
       </div>
@@ -17,8 +17,14 @@
 
       <div class="nav-item ml-3 my-1">
         <a id="3" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/category*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/category') }}">
-          <i class="fas fa-fw fa-table mt-1 mr-2"></i>
+          <i class="fas fa-table mt-1 mr-2"></i>
           <span>Category</span></a>
+      </div>
+
+      <div class="nav-item ml-3 my-1">
+        <a id="3" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/order*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/order') }}">
+          <i class="fas fa-cart-plus mt-1 mr-2"></i>
+          <span>Order</span></a>
       </div>
 
       <div class="nav-item ml-3 my-1">

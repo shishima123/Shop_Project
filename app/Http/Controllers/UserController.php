@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CommentRating;
+use App\Http\Requests\UserRegisterRequest;
 use App\Order;
 use App\OrderItem;
 use App\User;
@@ -40,20 +41,19 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(UserRegisterRequest $request)
     {
         try {
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = $request->password;
-            $user->role = 'user';
+            $user->password = bcrypt($request->password);
+            $user->role = $request->role;
             $user->save();
             return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Add User.']);
         } catch (Exception $e) {
             return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
         }
-
     }
 
     public function destroy($id)
@@ -70,7 +70,7 @@ class UserController extends Controller
             Order::where('user_id', $id)->delete();
             User::findorfail($id)->delete();
             DB::commit();
-            return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Success!!! Complete Delete User.']);
+            return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete User.']);
         } catch (Exception $e) {
             DB::rollback();
             return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);

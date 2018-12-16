@@ -34,16 +34,15 @@ Route::get('/store', function () {
     return view('frontend.store');
 });
 
-Route::get('register', 'UserController@store')->name('register');
+Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
+Route::post('register', 'chkLoginController@postRegister')->name('postRegister');
 
-Route::get('login', 'chkLoginController@getLogin')->name('login');
-Route::post('login', 'chkLoginController@postLogin');
+Route::get('login', 'chkLoginController@getLogin')->name('getLogin');
+Route::post('login', 'chkLoginController@postLogin')->name('postLogin');
 
 Route::post('logout', 'chkLoginController@getLogout')->name('logout');
 
-Route::get('admin', function () {
-    return view('Admin.dashboard');
-})->name('admin')->middleware('checkAdminLogin');
+Route::get('admin', 'DashBoardController@index')->name('admin')->middleware('checkAdminLogin');
 
 Route::get('admin/user', 'UserController@index')->name('user.index')->middleware('checkAdminLogin');
 

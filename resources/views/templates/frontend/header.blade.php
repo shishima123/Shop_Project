@@ -58,8 +58,8 @@
 							</div>
 						</li>
 					@else
-					<li><a href="{{ route('login') }}"><i class="fa fa-user-o"></i> Login</a></li>
-					<li><a href="{{ route('register') }}"><i class="fa fa-user-o"></i> Register</a></li>
+					<li><a href="{{ route('getLogin') }}"><i class="fa fa-user-o"></i> Login</a></li>
+					<li><a href="{{ route('getRegister') }}"><i class="fa fa-user-o"></i> Register</a></li>
 					@endauth
 
 				</ul>
