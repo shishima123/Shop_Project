@@ -52,3 +52,7 @@ Route::put('admin/user/{id}/edit', 'UserController@update')->name('user.update')
 Route::delete('admin/user/{id}', 'UserController@destroy')->name('user.destroy')->middleware('checkAdminLogin');
 
 Route::post('admin/user', 'UserController@store')->name('user.store')->middleware('checkAdminLogin');
+
+Route::get('admin/order', 'OrderController@index')->name('order.index')->middleware('checkAdminLogin');
+
+Route::get('admin/order/{id}', 'OrderController@show')->name('order.show')->middleware('checkAdminLogin');
