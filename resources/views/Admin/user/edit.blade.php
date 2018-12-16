@@ -4,7 +4,13 @@
 
 <div class="row">
     <div class="col-4 text-center">
-        <div><img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        <div>
+            <p>Avatar</p>
+            @if ($user->picture)
+            <img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height" alt="avatar">
+            @else
+<img src="{{ asset('frontend/img/avatar default.jpg') }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height" alt="avatar">
+            @endif
             <div id='changeImage' class="NoDisp">
                 <h6 class="mt-4">Upload a different photo</h6>
                 <button class="btn btn-sm btn-secondary">Choose file</button>
@@ -34,7 +40,7 @@
                 <h1 class="mb-3 text-success text-center">{{ $user->name }} Profile</h1>
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>About</h3>
+                        <h3><span class="fas fa-info-circle mr-2"></span>About</h3>
                         <p>Name: {{ $user->name }}</p>
                         <p>Email: {{ $user->email }}</p>
                         <p>Role: {{ $user->role }}</p>
@@ -42,7 +48,7 @@
                         <p>Address: {{ $user->address }}</p>
                     </div>
                     <div class="col-md-12">
-                        <h3 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Comment</h3>
+                        <h3 class="mt-2"><span class="far fa-comment-dots mr-2"></span>Activity</h3>
                         <table class="table table-sm table-hover table-striped">
                             <tbody>
                                 @if (count($user->products))

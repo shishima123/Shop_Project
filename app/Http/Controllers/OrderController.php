@@ -9,7 +9,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('user:id,name')->orderBy('updated_at', 'DESC')->paginate(10);
-        // return $orders;
+        return $orders;
         return view('Admin.order.index', compact('orders'));
     }
 
