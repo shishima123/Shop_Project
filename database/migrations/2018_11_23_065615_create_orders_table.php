@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->decimal('total');
-            $table->enum('status', ['stocking', 'out of stock']);
+            $table->boolean('status');
             $table->string('order_name');
             $table->string('order_address');
             $table->string('order_phone');
