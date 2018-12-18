@@ -35,3 +35,7 @@
         - Update layout Admin/user
         - Add Order to LeftBar template admin
         - Add feature DashBoard
+
+        17/12/2018
+        - Add template Admin/Order
+        - Add feature show-list/approve/cancel/sortBy order

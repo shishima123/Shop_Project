@@ -31,15 +31,18 @@
     }
   });
 
-  $('#alertMessage').delay(3000).slideUp(1000);
+/* Hide flash message*/
+  $('#alertMessage').delay(5000).slideUp(1000);
 
+/* Show/Hide button choose image in admin/user/eidt*/
   $('#tabProfile').click(function(){
 $('#changeImage').slideUp(400);
   });
-
   $('#tabEdit').click(function(){
 $('#changeImage').slideDown(400);
   });
+
+  $('')
 </script>
 {{-- Neu su dung ajax thi xai --}}
 {{-- <script>
