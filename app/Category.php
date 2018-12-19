@@ -12,13 +12,13 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-    public function parent()
+    public function parentCategories()
     {
         return $this->belongsTo('App\Category', 'parent_id'); //get parent category
     }
 
-    public function children()
+    public function subCategories()
     {
-        return $this->hasMany('App\Category', 'parent_id'); //get all subs. NOT RECURSIVE
+        return $this->hasMany('App\Category', 'parent_id', 'id'); //get all subs. NOT RECURSIVE
     }
 }
