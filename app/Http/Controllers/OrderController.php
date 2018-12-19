@@ -15,7 +15,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::where('id', $id)->with('user')->first();
+        $order = Order::where('id', $id)->with('user')->with('products')->first();
         // return $order;
         return view('Admin.order.show', compact('order'));
     }
