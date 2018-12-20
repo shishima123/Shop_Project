@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('products')->get();
+        $categories = Category::withCount('products')->withCount('subcategories')->get();
 
         // $categories = Category::with([
         //     'products',
@@ -46,6 +50,20 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        return $id;
+        DB::beginTransaction();
+        try {
+            $products= Product::where('category_id',$id)->get();
+       foreach ($products as $product) {
+        $product->orders()->detach();
+        $product->users()->detach();
+        $product->delete();
+       }   
+       Category::where('id',$id)->delete();
+            DB::commit();
+            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete User.']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
+        }    
     }
 }

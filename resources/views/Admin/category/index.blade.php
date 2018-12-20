@@ -81,8 +81,16 @@
 {{-- Table Category --}}
 @foreach ($categories as $category)
 @if (empty($category->parent_id))
+@if (empty($category->subcategories_count))
 <h5 class="font-weight-bold">Category: <span class="text-capitalize text-success font-weight-normal">{{ $category->name
-        }}</span></h5>
+}}</span></h5>
+a
+@else
+<h5 class="font-weight-bold">Category: <span class="text-capitalize text-success font-weight-normal">{{ $category->name
+}}</span></h5>
+b
+@endif
+
 <table class="table table-sm table-bordered table-hover table-striped">
     <thead>
         <tr class="text-center">
@@ -96,22 +104,22 @@
         @if ($subcategory->parent_id==$category->id)
         <tr class="text-center">
             {{-- <th scope="row">{{ $subcategory->firstItem()+$key }}</th> --}}
-            <td><a href="{{ asset('admin/category\/').$category->id }}" class="No--UdLine">{{ $subcategory->name }}</a></td>
+            <td><a href="{{ asset('admin/category\/').$subcategory->id }}" class="No--UdLine">{{ $subcategory->name }}</a></td>
             <td>{{ $subcategory->products_count }}</td>
             <td class="d-flex justify-content-around align-items-center">
-                <form action="{{ route('category.show',$category->id) }}" method="get"><button class="btn btn-sm btn-warning text-uppercase">Edit</button>
+                <form action="{{ route('category.show',$subcategory->id) }}" method="get"><button class="btn btn-sm btn-warning text-uppercase">Edit</button>
                 </form>
 
-                <form action="{{ route('category.destroy',$category->id) }}" method="POST">
+                <form action="{{ route('category.destroy',$subcategory->id) }}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $category->id }}">
+                    <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $subcategory->id }}">
                         Delete
                     </button>
                     <!-- Button trigger modal -->
 
                     <!-- Modal -->
-                    <div class="modal fade" id="delConfirm{{ $category->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="delConfirm{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
