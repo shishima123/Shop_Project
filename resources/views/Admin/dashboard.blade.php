@@ -1,5 +1,6 @@
 @extends('templates.Admin.master')
 @section('title','Admin Page - Dashboard')
+@section('header','Dashboard')
 @section('content')
 <div class="card-group">
     @foreach ($data as $item)

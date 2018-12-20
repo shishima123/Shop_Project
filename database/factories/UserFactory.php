@@ -70,10 +70,10 @@ $factory->define(User::class, function (Faker $faker) {
 });
 $factory->define(Order::class, function (Faker $faker) {
     return [
-        'token' => str_random(10),
         'user_id' => User::all()->random()->id,
+        'code_order' => $faker->creditCardNumber,
         'total' => $faker->numberBetween($min = 1000, $max = 2000),
-        'status' => $faker->randomElement($array = [0,1]),
+        'status' => $faker->randomElement($array = [0, 1]),
         'order_name' => $faker->name,
         'order_address' => $faker->secondaryAddress,
         'order_phone' => $faker->phoneNumber,

@@ -1,5 +1,6 @@
 @extends('templates.Admin.master')
 @section('title','Admin Page - Edit User')
+@section('header','users management')
 @section('content')
 
 <div class="row">
@@ -122,7 +123,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Do you want to change?
+                                            Do you want to <span class="text-warning text-uppercase">save </span>change?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>

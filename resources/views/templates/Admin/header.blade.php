@@ -18,6 +18,7 @@
       <div class="col-12 px-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
           <a class="navbar-brand" href="{{ route('admin') }}">Admin Page</a>
+          <h3 class="text-light text-uppercase">@yield('header')</h3>
           <div class="navbar-nav mx-3">
             <i class="fas fa-user-circle fa-fw text-light mt-2 mr-1"></i>
             <span class="text-light mr-2 mt-1">{{ Auth::user()->name }}</span>

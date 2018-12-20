@@ -10037,4 +10037,17 @@ a.text-dark:hover {
     height: 220px;
 }
 
+.text-pink {
+    color: var(--pink) !important
+}
+
+a.text-pink:focus,
+a.text-pink:hover {
+    color: #AD1457 !important
+}
+
+.No--UdLine {
+    text-decoration: none !important;
+}
+
 /*# sourceMappingURL=bootstrap.min.css.map */

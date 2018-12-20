@@ -1,6 +1,7 @@
 @extends('templates.Admin.master')
 @section('title','Admin Page - Management User')
 @section('content')
+@section('header','users management')
 @include('error.error')
 {{-- Flash Message --}}
 @if (session('flash_message'))
@@ -11,12 +12,12 @@
 {{-- End Flash Message --}}
 
 {{-- Button Show Create --}}
-<div class="d-flex justify-content-between">
-    <h1 class="text-uppercase">users management</h1>
+<div class="d-flex justify-content-end">
     <button class="btn btn-primary my-3" id="btnAdd"><i class="fas fa-plus" id="iconBtnAdd"></i></button>
 </div>
 {{-- End Button Show Create --}}
 
+{{-- table user --}}
 <div class="w-100">
     {{-- Create User --}}
     <div class="mb-4 NoDisp" id="layoutCreate">
@@ -83,7 +84,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Do you want to add user?
+                                    Do you want to <span class="text-success text-uppercase">add</span> new user?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
@@ -101,7 +102,7 @@
     {{-- End Create User --}}
 
     {{-- Table User --}}
-    <table class="table table-bordered table-hover">
+    <table class="table table-sm table-bordered table-hover table-striped">
         <thead>
             <tr class="text-center">
                 <th scope="col">#</th>
@@ -116,7 +117,7 @@
             @foreach ($users as $key=>$user)
             <tr class="text-center">
                 <th scope="row">{{ $users->firstItem()+$key }}</th>
-                <td><a href="{{ asset('admin/user\/').$user->id.'/edit' }}">{{ $user->name }}</a></td>
+                <td><a href="{{ asset('admin/user\/').$user->id.'/edit' }}" class="No--UdLine">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->total_comment }}</td>
@@ -151,7 +152,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Do you want to <span class="text-danger">delete {{ $user->name }}</span>?
+                                        Do you want to <span class="text-danger text-uppercase">delete</span> this user?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
@@ -185,4 +186,5 @@
     </div>
     {{-- End Pagination --}}
 </div>
+{{-- end table user --}}
 @endsection

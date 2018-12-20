@@ -16,7 +16,7 @@
 //     return $user;
 // });
 
-Route::get('/', 'CategoryController@index')->name('index');
+Route::get('/', 'FrontendController@index')->name('index');
 
 Route::get('/blank', function () {
     return view('frontend.blank');
@@ -44,15 +44,19 @@ Route::post('logout', 'chkLoginController@getLogout')->name('logout');
 
 Route::get('admin', 'DashBoardController@index')->name('admin')->middleware('checkAdminLogin');
 
+// route admin/user
 Route::get('admin/user', 'UserController@index')->name('user.index')->middleware('checkAdminLogin');
-
 Route::get('admin/user/{id}/edit', 'UserController@edit')->name('user.edit')->middleware('checkAdminLogin');
 Route::put('admin/user/{id}/edit', 'UserController@update')->name('user.update')->middleware('checkAdminLogin');
-
 Route::delete('admin/user/{id}', 'UserController@destroy')->name('user.destroy')->middleware('checkAdminLogin');
-
 Route::post('admin/user', 'UserController@store')->name('user.store')->middleware('checkAdminLogin');
 
+// route admin/order
 Route::get('admin/order', 'OrderController@index')->name('order.index')->middleware('checkAdminLogin');
+Route::get('admin/order/{id}', 'OrderController@show')->where('id', '[0-9]+')->name('order.show')->middleware('checkAdminLogin');
+Route::put('admin/order/{id}', 'OrderController@edit')->where('id', '[0-9]+')->name('order.edit')->middleware('checkAdminLogin');
+Route::delete('admin/order/{id}', 'OrderController@destroy')->where('id', '[0-9]+')->name('order.destroy')->middleware('checkAdminLogin');
+Route::get('admin/order/sort_by={sort_by}', 'OrderController@sortBy')->name('order.sortBy')->middleware('checkAdminLogin');
 
-Route::get('admin/order/{id}', 'OrderController@show')->name('order.show')->middleware('checkAdminLogin');
+// route admin/category
+Route::get('admin/category', 'CategoryController@index')->name('category.index')->middleware('checkAdminLogin');
