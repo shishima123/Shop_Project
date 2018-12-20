@@ -3,13 +3,7 @@
 @section('content')
 @section('header','users management')
 @include('error.error')
-{{-- Flash Message --}}
-@if (session('flash_message'))
-<div id="alertMessage" class="text-center alert alert-{{ session('flash_type') }}" role="alert">
-    {{ session('flash_message') }}
-</div>
-@endif
-{{-- End Flash Message --}}
+@include('error.flash_message')
 
 {{-- Button Show Create --}}
 <div class="d-flex justify-content-end">

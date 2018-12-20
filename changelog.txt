@@ -43,3 +43,8 @@
         18/12/2018
         - Complete feature Admin/Order
         - Add view Admin/Category
+
+        19/12/2018
+        - Move flash_message to folder error
+        - Up date layout admin/Category
+        - Add function store to categoryController

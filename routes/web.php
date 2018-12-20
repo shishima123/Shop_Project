@@ -60,3 +60,6 @@ Route::get('admin/order/sort_by={sort_by}', 'OrderController@sortBy')->name('ord
 
 // route admin/category
 Route::get('admin/category', 'CategoryController@index')->name('category.index')->middleware('checkAdminLogin');
+Route::get('admin/category/{id}', 'CategoryController@show')->name('category.show')->middleware('checkAdminLogin');
+Route::post('admin/category', 'CategoryController@store')->name('category.store')->middleware('checkAdminLogin');
+Route::delete('admin/category/{id}', 'CategoryController@destroy')->name('category.destroy')->middleware('checkAdminLogin');

@@ -2,14 +2,7 @@
 @section('title','Admin Page - Management Order')
 @section('header','orders management')
 @section('content')
-
-{{-- Flash Message --}}
-@if (session('flash_message'))
-<div id="alertMessage" class="text-center alert alert-{{ session('flash_type') }}" role="alert">
-    {{ session('flash_message') }}
-</div>
-@endif
-{{-- End Flash Message --}}
+@include('error.flash_message')
 
 {{-- Status Order --}}
 <p class="text-uppercase font-weight-bold">{{ $type or 'all' }} order</p>
