@@ -42,7 +42,6 @@ $('#changeImage').slideUp(400);
 $('#changeImage').slideDown(400);
   });
 
-  $('')
 </script>
 {{-- Neu su dung ajax thi xai --}}
 {{-- <script>

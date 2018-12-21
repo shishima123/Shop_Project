@@ -25,7 +25,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text">Category</label>
                 </div>
-                
+
                 <select class="custom-select" name="parent_id">
                     <option value="0">New Parent Category</option>
                     @foreach ($categories as $category)
@@ -82,17 +82,53 @@
 @foreach ($categories as $category)
 @if (empty($category->parent_id))
 @if (empty($category->subcategories_count))
-<h5 class="font-weight-bold">Category: <span class="text-capitalize text-success font-weight-normal">{{ $category->name
-}}</span></h5>
-a
+
+<div class="d-flex">
+<h5 class="font-weight-bold mr-5">Category: <span class="text-capitalize text-success font-weight-normal">{{ $category->name
+        }}</span></h5>
+<form action="{{ route('category.destroy',$category->id) }}" method="POST">
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $category->id }}">
+        Delete
+    </button>
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="delConfirm{{ $category->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alert!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to <span class="text-danger text-uppercase">delete</span> this
+                    category?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary text-uppercase">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- End Modal --}}
+</form>
+</div>
+
 @else
 <h5 class="font-weight-bold">Category: <span class="text-capitalize text-success font-weight-normal">{{ $category->name
-}}</span></h5>
-b
+        }}</span></h5>
+
 @endif
 
-<table class="table table-sm table-bordered table-hover table-striped">
-    <thead>
+
+@if ($category->subcategories_count)
+   <table class="table table-sm table-bordered table-hover table-striped">
+    <thead> 
         <tr class="text-center">
             <th scope="col">Category Name</th>
             <th scope="col">Total Products</th>
@@ -119,7 +155,8 @@ b
                     <!-- Button trigger modal -->
 
                     <!-- Modal -->
-                    <div class="modal fade" id="delConfirm{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="delConfirm{{ $subcategory->id }}" tabindex="-1" role="dialog"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -129,7 +166,8 @@ b
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Do you want to <span class="text-danger text-uppercase">delete</span> this category?
+                                    Do you want to <span class="text-danger text-uppercase">delete</span> this
+                                    category?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
@@ -145,7 +183,10 @@ b
     </tbody>
     @endif
     @endforeach
-</table>
+</table>         
+            
+        @endif
+
 @endif
 @endforeach
 {{-- End Table category --}}

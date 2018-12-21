@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -45,25 +45,29 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        return $id;
+        $category = Category::find($id);
+        $categories = Category::where('parent_id', 0)->get();
+
+        // return $category;
+        return view('Admin.category.edit', compact('category', 'categories'));
     }
 
     public function destroy($id)
     {
         DB::beginTransaction();
         try {
-            $products= Product::where('category_id',$id)->get();
-       foreach ($products as $product) {
-        $product->orders()->detach();
-        $product->users()->detach();
-        $product->delete();
-       }   
-       Category::where('id',$id)->delete();
+            $products = Product::where('category_id', $id)->get();
+            foreach ($products as $product) {
+                $product->orders()->detach();
+                $product->users()->detach();
+                $product->delete();
+            }
+            Category::where('id', $id)->delete();
             DB::commit();
-            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete User.']);
+            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Category.']);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
-        }    
+            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add Category.']);
+        }
     }
 }
