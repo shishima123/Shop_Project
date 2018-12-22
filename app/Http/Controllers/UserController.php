@@ -4,19 +4,23 @@ namespace App\Http\Controllers;
 
 use App\CommentRating;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Order;
 use App\OrderItem;
 use App\User;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::leftJoin('comment_ratings',
-            'users.id', '=', 'comment_ratings.user_id')->selectRaw('users.*,count(comment_ratings.user_id) as total_comment')->groupBy('users.id')->orderBy('role')->paginate(10);
+        $users = User::leftJoin(
+            'comment_ratings',
+            'users.id',
+            '=',
+            'comment_ratings.user_id'
+        )->selectRaw('users.*,count(comment_ratings.user_id) as total_comment')->groupBy('users.id')->orderBy('role')->paginate(10);
         // return $users;
         return view('Admin.user.index', compact('users'));
     }
@@ -27,7 +31,7 @@ class UserController extends Controller
         return view('Admin.user.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
             $user = User::findorfail($id);

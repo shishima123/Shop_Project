@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 use App\Product;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
 
         try {
@@ -50,6 +50,24 @@ class CategoryController extends Controller
 
         // return $category;
         return view('Admin.category.edit', compact('category', 'categories'));
+    }
+
+    public function update(CategoryRequest $request, $id)
+    {
+
+        try {
+            $category = Category::findorfail($id);
+            $category->name = $request->name;
+            $category->parent_id = $request->parent_id;
+            $category->save();
+            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update Category.']);
+
+        } catch (Exception $e) {
+            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Update Category.']);
+        }
+
+        // return $request;
+
     }
 
     public function destroy($id)

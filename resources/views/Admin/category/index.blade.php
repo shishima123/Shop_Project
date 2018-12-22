@@ -2,8 +2,8 @@
 @section('title','Admin Page - Management Category')
 @section('header','Categories management')
 @section('content')
-@include('error.error')
-@include('error.flash_message')
+@include('templates.Admin.error')
+@include('templates.Admin.flash_message')
 
 {{-- Button Show Create --}}
 <div class="d-flex justify-content-end">
@@ -39,7 +39,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;Name:&nbsp;&nbsp;</span>
                 </div>
-                <input class="form-control" type="text" id="txtName" name="name" value="{{ old('name') }}" placeholder="Insert Name Category Please"
+                <input class="form-control" type="text" id="txtName" name="name" value="{{ old('name') }}" placeholder="Insert Name Category Here"
                     required>
             </div>
 

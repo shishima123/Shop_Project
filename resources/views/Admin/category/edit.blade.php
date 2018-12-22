@@ -2,6 +2,7 @@
 @section('title','Admin Page - Management Category')
 @section('header','Categories management')
 @section('content')
+@include('templates.Admin.error')
 
 {{-- Create Category --}}
 <div class="mb-4" id="layoutCreate">
@@ -11,7 +12,7 @@
             <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
         </div>
         <hr width="96%">
-        <form action="{{ route('category.store') }}" id="txtFormCreate" method="post" class="p-2">
+        <form action="{{ route('category.update',$category->id) }}" id="txtFormCreate" method="post" class="p-2">
             {{ csrf_field() }}
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

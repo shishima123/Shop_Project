@@ -2,6 +2,7 @@
 @section('title','Admin Page - Edit User')
 @section('header','users management')
 @section('content')
+@include('templates.Admin.error')
 
 <div class="row">
     <div class="col-4 text-center">

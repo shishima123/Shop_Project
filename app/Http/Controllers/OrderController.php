@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use Exception;
 
 class OrderController extends Controller
 {

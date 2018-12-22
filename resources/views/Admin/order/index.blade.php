@@ -2,7 +2,7 @@
 @section('title','Admin Page - Management Order')
 @section('header','orders management')
 @section('content')
-@include('error.flash_message')
+@include('templates.Admin.flash_message')
 
 {{-- Status Order --}}
 <p class="text-uppercase font-weight-bold">{{ $type or 'all' }} order</p>
@@ -24,7 +24,7 @@
             <th scope="col">User Order</th>
             <th scope="col">Price</th>
             <th scope="col">Status</th>
-            <th scope="col">Display</th>
+            <th scope="col">Detail</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
