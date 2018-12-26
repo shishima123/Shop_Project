@@ -18,11 +18,35 @@ class ProductController extends Controller
         return view('Admin.product.index', compact('products', 'categories'));
     }
 
-    // public function edit($id)
-    // {
-    //     $user = User::where('id', $id)->with('products')->first();
-    //     return view('Admin.user.edit', compact('user'));
-    // }
+    public function sortBy($sort_by)
+    {
+        switch ($sort_by) {
+            case "all":
+                $products = Product::orderBy('updated_at', 'DESC')->paginate(10);
+                $type = 'all';
+                break;
+            case "new":
+                $products = Product::where('new', '1')->orderBy('updated_at', 'DESC')->paginate(10);
+                $type = 'pending';
+                break;
+            case "top_selling":
+                $products = Product::where('top_selling', '1')->orderBy('updated_at', 'DESC')->paginate(10);
+                $type = 'complete';
+                break;
+            case "sale":
+                $products = Product::where('sale', '1')->orderBy('updated_at', 'DESC')->paginate(10);
+                $type = 'complete';
+                break;   
+        }
+        $categories = Category::all();
+        // return $orders;
+        return view('Admin.product.index', compact('products', 'type', 'categories'));
+    }
+
+    public function edit($id)
+    {      
+return 'a';
+    }
 
     // public function update(Request $request, $id)
     // {
