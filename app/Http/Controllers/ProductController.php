@@ -50,9 +50,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->new = $request->chkbNews;
         $product->top_selling = $request->chkTopSelling;
-        // if ($request->txtSaleOff !== 0) {
         $product->sale = $request->txtSaleOff;
-        // }
         $product->description = $request->txtDescription;
         $product->content = $request->txtContent;
         $product->picture = $file_name;
