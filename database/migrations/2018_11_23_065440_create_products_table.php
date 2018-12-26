@@ -19,15 +19,14 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->text('description');
-            $table->string('unit');
+            $table->text('content');
             $table->decimal('price');
-            $table->integer('unit_in_stock');
-            $table->integer('unit_on_order');
             $table->string('picture');
-            $table->unsignedInteger('sale');
-            $table->boolean('new');
-            $table->enum('rating', ['1', '2', '3', '4', '5']);
-            $table->boolean('top_selling');
+            $table->unsignedInteger('sale')->default('0')->nullable();
+            $table->boolean('new')->default('0')->nullable();
+            $table->boolean('top_selling')->default('0')->nullable();
+            $table->enum('rating', ['1', '2', '3', '4', '5'])->nullable();
+            $table->string('unit');
             $table->timestamps();
         });
     }

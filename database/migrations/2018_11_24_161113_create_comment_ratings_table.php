@@ -20,7 +20,6 @@ class CreateCommentRatingsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->text('content');
-            $table->integer('parent_id');
             $table->enum('rating', ['1', '2', '3', '4', '5']);
             $table->timestamps();
         });

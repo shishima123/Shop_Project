@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\ProductRequest;
 use App\Product;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderBy('updated_at', 'DESC')->paginate(10);
         $categories = Category::all();
         // return $products;
         return view('Admin.product.index', compact('products', 'categories'));
@@ -36,20 +38,31 @@ class ProductController extends Controller
     //     }
     // }
 
-    // public function store(UserRegisterRequest $request)
-    // {
-    //     try {
-    //         $user = new User;
-    //         $user->name = $request->name;
-    //         $user->email = $request->email;
-    //         $user->password = bcrypt($request->password);
-    //         $user->role = $request->role;
-    //         $user->save();
-    //         return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Add User.']);
-    //     } catch (Exception $e) {
-    //         return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
-    //     }
-    // }
+    public function store(ProductRequest $request)
+    {
+        // return $request;
+        // try {
+        $file = $request->file('productImage');
+        $file_name = $file->getClientOriginalName();
+        $product = new Product;
+        $product->name = $request->name;
+        $product->category_id = $request->parent_id;
+        $product->price = $request->price;
+        $product->new = $request->chkbNews;
+        $product->top_selling = $request->chkTopSelling;
+        // if ($request->txtSaleOff !== 0) {
+        $product->sale = $request->txtSaleOff;
+        // }
+        $product->description = $request->txtDescription;
+        $product->content = $request->txtContent;
+        $product->picture = $file_name;
+        $file->move('upload/', $file_name);
+        $product->save();
+        return redirect()->route('product.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Add Product.']);
+        // } catch (Exception $e) {
+        //     return redirect()->route('product.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add Product.']);
+        // }
+    }
 
     public function destroy($id)
     {

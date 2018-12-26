@@ -1,5 +1,5 @@
 @extends('auth.master')
-@include('error.error')
+@include('templates.Admin.error')
 @section('content')
 @if (session('flash_message_title'))
 <div id="alertMessage" class="alert alert-danger text-center" role="alert">

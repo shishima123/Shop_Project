@@ -31,26 +31,24 @@
     }
   });
 
-/* Hide flash message*/
+  /* Hide flash message*/
   $('#alertMessage').delay(5000).slideUp(1000);
 
-/* Show/Hide button choose image in admin/user/eidt*/
-  $('#tabProfile').click(function(){
-$('#changeImage').slideUp(400);
+  /* Show/Hide button choose image in admin/user/eidt*/
+  $('#tabProfile').click(function () {
+    $('#changeImage').slideUp(400);
   });
-  $('#tabEdit').click(function(){
-$('#changeImage').slideDown(400);
+  $('#tabEdit').click(function () {
+    $('#changeImage').slideDown(400);
   });
+  $('#chkbSaleOff').change(function() {
+    $('#txtSaleOff').prop('disabled', !this.checked);
+});
+
+     CKEDITOR.replace('txtContent');
+   CKEDITOR.replace('txtDescription');
 
 </script>
-{{-- Neu su dung ajax thi xai --}}
-{{-- <script>
-  $('a').click(function () {
-    // e.preventDefault();
-    $('a').removeClass('active');
-    $(this).addClass('active');
-  })
-</script> --}}
 </body>
 
 </html>
