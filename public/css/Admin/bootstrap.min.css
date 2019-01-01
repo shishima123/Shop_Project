@@ -10032,7 +10032,8 @@ a.text-dark:hover {
     height: 20px;
 }
 
-.Avatar--Height {
+.Avatar--Height,
+.img--Product_Height {
     width: 200px;
     height: 220px;
 }

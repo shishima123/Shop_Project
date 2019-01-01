@@ -43,11 +43,14 @@
                             </div>
 
                             <select class="custom-select" name="parent_id">
-                                @foreach ($categories as $category)
-                                @if (empty($category->parent_id))
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endif
-                                @endforeach
+                                @for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id===0)
+                                    <option value="{{ $categories[$i]->id }}" disabled class="text-success">{{ $categories[$i]->name }}</option>
+                                    @for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
+                                        <option value="{{ $categories[$j]->id }}">{{ $categories[$j]->name }}</option>
+                                        @endif
+                                        @endfor
+                                        @endif
+                                        @endfor
                             </select>
                         </div>
                         <div class="input-group mb-3">
@@ -72,7 +75,8 @@
                                 <label class="form-check-label" for="chkbSaleOff">
                                     Sale
                                 </label>
-                                <input class type="text" id="txtSaleOff" name="txtSaleOff" value="{{ old('txtSaleOff') }}" disabled></div>
+                                <input class type="text" id="txtSaleOff" name="txtSaleOff" value="{{ old('txtSaleOff') }}"
+                                    disabled></div>
                         </div>
 
                         <div class="mb-3">
@@ -83,7 +87,6 @@
                             <script type="text/javascript">
                                 ckeditor('txtDescription')
                             </script>
-
                         </div>
 
                         <div class="mb-3">
@@ -92,12 +95,11 @@
                             <script type="text/javascript">
                                 ckeditor('txtContent')
                             </script>
-
                         </div>
 
                         <div class="form-group">
                             <p>Avatar Product</p>
-                            <input type="file" value="{{ old('productImage') }}" name="productImage" id='productImage'/>
+                            <input type="file" value="{{ old('productImage') }}" name="productImage" id='productImage' />
                         </div>
                     </div>
 
@@ -105,10 +107,7 @@
                     <div class="col-4">
                         @for ($i = 1; $i < 5; $i++) <div class="form-group">
                             <label>Image Product Detail {{ $i }}</label>
-                            <input type="file" name="picture[]" id='picture{{ $i }}' />
-                            <script type="text/javascript">
-                                ckeditor('txtContent' + $i)
-                            </script>
+                            <input type="file" name="picProductDetail[]" id='picture{{ $i }}' />
                     </div>
                     {{-- end multi image --}}
                     @endfor
@@ -157,7 +156,7 @@
 <div class="d-flex">
     <h5 class="m-0 pt-1 text-uppercase">filter:</h5>
     <a href="{{ route('product.sortBy','all') }}"><button class="btn btn-sm btn-dark mx-2">All</button></a>
-    <a href="{{ route('product.sortBy','new') }}"><button class="btn btn-sm btn-primary mx-2">News</button></a>
+    <a href="{{ route('product.sortBy','new') }}"><button class="btn btn-sm btn-success mx-2">News</button></a>
     <a href="{{ route('product.sortBy','top_selling') }}"><button class="btn btn-sm btn-warning mx-2">Top Selling</button></a>
     <a href="{{ route('product.sortBy','sale') }}"><button class="btn btn-sm btn-danger mx-2">Sale Off</button></a>
 </div>
@@ -182,14 +181,13 @@
                     {{ $product->name }}
                     @if ($product->new)
                     <span class="badge badge-success">NEW</span>
-                    @endif                 
+                    @endif
                     @if ($product->top_selling)
                     <span class="badge badge-warning">TOP</span>
                     @endif
                     @if ($product->sale)
                     <span class="badge badge-danger">-{{$product->sale }}%</span>
                     @endif
-
                 </a>
             </td>
 
@@ -206,7 +204,6 @@
                     <button type="button" class="btn btn-sm btn-danger text-uppercase" data-toggle="modal" data-target="#delConfirm{{ $product->id }}">
                         Delete
                     </button>
-
                     <!-- Button trigger modal -->
 
                     <!-- Modal -->
@@ -231,7 +228,6 @@
                         </div>
                     </div>
                     {{-- End Modal --}}
-
                 </form>
             </td>
         </tr>
@@ -244,12 +240,10 @@
 <div class="d-flex justify-content-center">
     <ul class="pagination">
         <li class="page-item"><a class="page-link" href="{{ $products->url(1) }}" rel="prev">«</a></li>
-
         @for ($i=1;$i<=$products->lastPage();$i++)
             <li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif)">
                 <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a></li>
             @endfor
-
             <li class="page-item"><a class="page-link" href="{{ $products->url($products->lastPage()) }}" rel="next">»</a></li>
     </ul>
 </div>

@@ -20,7 +20,6 @@
             <th scope="col">Price</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
-
         </tr>
     </thead>
     <tbody>
@@ -108,7 +107,6 @@
                     {{-- End Modal --}}
                 </form>
                 @endif
-
             </td>
         </tr>
     </tbody>

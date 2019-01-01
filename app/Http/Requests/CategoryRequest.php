@@ -26,6 +26,5 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'bail|required|unique:categories',
         ];
-
     }
 }

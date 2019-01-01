@@ -12,8 +12,9 @@
             <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
         </div>
         <hr width="96%">
-        <form action="{{ route('category.update',$category->id) }}" id="txtFormCreate" method="post" class="p-2">
+        <form action="{{ route('category.update',$category->id) }}" id="txtFormCreate" method="post" class="p-2" enctype="multipart/form-data">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text">Category</label>
@@ -22,25 +23,25 @@
                 <select class="custom-select" name="parent_id">
                     @foreach ($categories as $item)
                     @if ($category->parent_id===$item->id)
-                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                     @else
-                         <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endif
                     @endforeach
                 </select>
             </div>
+
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;Name:&nbsp;&nbsp;</span>
                 </div>
-            <input class="form-control" type="text" id="txtName" name="name" value="{{$category->name}}" required>
+                <input class="form-control" type="text" id="txtName" name="name" value="{{$category->name}}" required>
             </div>
 
             <div class="mb-3 text-center">
-<img src="{{ asset($category->picture) }}" alt="category picture" class="mx-auto border border-info shadow Avatar--Height">
-
+                <img src="{{ asset($category->picture) }}" alt="category picture" class="mx-auto border border-info shadow Avatar--Height">
                 <h6 class="mt-4">Upload a different photo</h6>
-                <button class="btn btn-sm btn-secondary">Choose file</button>
+                <input type="file" value="{{ old('categoryImage') }}" name="categoryImage" id='categoryImage' />
             </div>
 
             <hr width="96%">
@@ -73,7 +74,6 @@
                 <!-- End Modal -->
             </div>
         </form>
-
     </div>
 </div>
 {{-- End Create Category --}}

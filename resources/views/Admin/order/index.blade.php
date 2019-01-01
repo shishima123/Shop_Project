@@ -6,7 +6,6 @@
 
 {{-- Status Order --}}
 <p class="text-uppercase font-weight-bold">{{ $type or 'all' }} order</p>
-
 <hr>
 <div class="d-flex">
     <h5 class="m-0 pt-1 text-uppercase">filter:</h5>
@@ -51,8 +50,7 @@
                 <button type="button" class="btn btn-secondary text-uppercase mx-2" disabled>
                     Approve
                 </button>
-                <button type="button" class="btn btn-secondary
-                         text-uppercase mx-2" disabled>
+                <button type="button" class="btn btn-secondary text-uppercase mx-2" disabled>
                     Cancel
                 </button>
                 @else
@@ -138,5 +136,4 @@
     </ul>
 </div>
 {{-- End Pagination --}}
-
 @endsection

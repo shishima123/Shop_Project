@@ -20,19 +20,15 @@ class chkLoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        // dd($request);
         $login = [
             'email' => $request->email,
             'password' => $request->password,
         ];
-        // return $login;
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('admin');
         } else {
             return redirect()->route('getLogin')->with(['flash_message_title' => 'Login Fail', 'flash_message_content' => 'Email or Password not correct. Please try again!']);
         }
-
     }
 
     public function getRegister()

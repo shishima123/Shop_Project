@@ -15,14 +15,10 @@ class User extends Authenticatable
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'parent_id', 'rating']);
+        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating']);
     }
     public function comment_ratings()
     {
         return $this->hasMany(CommentRating::class);
     }
-    // public function getNameAttribute($value)
-    // {
-    //     return $this->strtoupper($value);
-    // }
 }

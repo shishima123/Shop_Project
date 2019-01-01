@@ -41,13 +41,30 @@
   $('#tabEdit').click(function () {
     $('#changeImage').slideDown(400);
   });
-  $('#chkbSaleOff').change(function() {
+  $('#chkbSaleOff').change(function () {
     $('#txtSaleOff').prop('disabled', !this.checked);
-});
+  });
 
-     CKEDITOR.replace('txtContent');
-   CKEDITOR.replace('txtDescription');
+  $('#addImage').click(function () {
+    $('#insertImage').append('<input class="my-2" type="file" name="picProductDetail[]"/>')
+  });
 
+  $('.delImg').click(function () {
+    var url = "{{ asset('admin/product/delimg') }}" + "/" + this.id;
+    var idDivImg=this.id;
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      data: {
+        "_token": $('#token').val()
+      },
+      success: function (data) {
+        if (data == 'true') {
+          $('#img-' + idDivImg).remove();
+        }
+      },
+    });
+  });
 </script>
 </body>
 

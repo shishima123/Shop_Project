@@ -21,7 +21,6 @@ class UserController extends Controller
             '=',
             'comment_ratings.user_id'
         )->selectRaw('users.*,count(comment_ratings.user_id) as total_comment')->groupBy('users.id')->orderBy('role')->paginate(10);
-        // return $users;
         return view('Admin.user.index', compact('users'));
     }
 
@@ -38,6 +37,10 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->address = $request->address;
+            $file = $request->file('userPic');
+            $file_name = $file->getClientOriginalName();
+            $user->picture = '/upload/userPic/' . $file_name;
+            $file->move('upload/userPic/', $file_name);
             $user->save();
             return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update User.']);
         } catch (Exception $e) {
@@ -66,7 +69,6 @@ class UserController extends Controller
         try {
             $user = User::findorfail($id);
             CommentRating::where('user_id', $id)->delete();
-
             $getOrders = $user->orders()->get();
             foreach ($getOrders as $getOrder) {
                 OrderItem::where('order_id', $getOrder->id)->delete();

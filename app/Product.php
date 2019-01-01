@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Category;
+use App\ImageProduct;
 use App\Order;
 use App\Product;
 use App\User;
@@ -23,5 +24,9 @@ class Product extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'comment_ratings')->withPivot(['content', 'parent_id', 'rating']);
+    }
+    public function image_products()
+    {
+        return $this->hasMany(ImageProduct::class);
     }
 }

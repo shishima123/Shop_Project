@@ -9,24 +9,23 @@
         <div>
             <p>Avatar</p>
             @if ($user->picture)
-            <img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height" alt="avatar">
+            <img src="{{ asset($user->picture) }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height"
+                alt="avatar">
             @else
-<img src="{{ asset('frontend/img/avatar default.jpg') }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height" alt="avatar">
+            <img src="{{ asset('frontend/img/avatar default.jpg') }}" class="mx-auto img-fluid img-circle d-block border border-info shadow Avatar--Height"
+                alt="avatar">
             @endif
             <div id='changeImage' class="NoDisp">
                 <h6 class="mt-4">Upload a different photo</h6>
-                <button class="btn btn-sm btn-secondary">Choose file</button>
+                <input type="file" name="userPic" id='userPic' form="formUser" />
             </div>
-            {{-- <input type="text" form="myform" /> --}}
         </div>
 
         <div>
             <a href="{{ route('user.index') }}" class="btn btn-lg btn-success text-uppercase mt-5 text-light">Back to
                 home</a>
         </div>
-
     </div>
-
 
     <div class="col-8">
         <ul class="nav nav-tabs">
@@ -37,6 +36,7 @@
                 <a href="" id="tabEdit" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
             </li>
         </ul>
+
         <div class="tab-content py-4">
             <div class="tab-pane active show fade" id="profile">
                 <h1 class="mb-3 text-success text-center">{{ $user->name }} Profile</h1>
@@ -49,6 +49,7 @@
                         <p>Phone: {{ $user->phone }}</p>
                         <p>Address: {{ $user->address }}</p>
                     </div>
+
                     <div class="col-md-12">
                         <h3 class="mt-2"><span class="far fa-comment-dots mr-2"></span>Activity</h3>
                         <table class="table table-sm table-hover table-striped">
@@ -67,15 +68,15 @@
                                     User no comment.
                                 </tr>
                                 @endif
-
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!--/row-->
             </div>
+
             <div class="tab-pane fade" id="edit">
-                <form action="{{ route('user.update',$user->id) }}" method="POST">
+                <form action="{{ route('user.update',$user->id) }}" method="POST" id="formUser" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="form-group row">
@@ -141,5 +142,4 @@
         </div>
     </div>
 </div>
-
 @endsection

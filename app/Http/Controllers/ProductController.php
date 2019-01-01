@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\ProductRequest;
+use App\ImageProduct;
 use App\Product;
-use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,6 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('updated_at', 'DESC')->paginate(10);
         $categories = Category::all();
-        // return $products;
         return view('Admin.product.index', compact('products', 'categories'));
     }
 
@@ -34,18 +35,34 @@ class ProductController extends Controller
                 $type = 'complete';
                 break;
             case "sale":
-                $products = Product::where('sale', '1')->orderBy('updated_at', 'DESC')->paginate(10);
+                $products = Product::where('sale', '>', '0')->orderBy('updated_at', 'DESC')->paginate(10);
                 $type = 'complete';
-                break;   
+                break;
         }
         $categories = Category::all();
-        // return $orders;
         return view('Admin.product.index', compact('products', 'type', 'categories'));
     }
 
     public function edit($id)
-    {      
-return 'a';
+    {
+        $product = Product::where('id', $id)->with('image_products')->first();
+        $categories = Category::all();
+        // return $product;
+        return view('Admin.product.edit', compact('product', 'categories'));
+    }
+
+    public function delImage($id)
+    {
+        $image = ImageProduct::find($id);
+        if (!empty($image)) {
+            $img = $image->path;
+            if (File::exists($img)) {
+                File::delete($img);
+            }
+            $image->delete();
+            return 'true';
+        }
+        return 'false';
     }
 
     // public function update(Request $request, $id)
@@ -64,36 +81,46 @@ return 'a';
 
     public function store(ProductRequest $request)
     {
-        // return $request;
-        // try {
-        $file = $request->file('productImage');
-        $file_name = $file->getClientOriginalName();
-        $product = new Product;
-        $product->name = $request->name;
-        $product->category_id = $request->parent_id;
-        $product->price = $request->price;
-        $product->new = $request->chkbNews;
-        $product->top_selling = $request->chkTopSelling;
-        $product->sale = $request->txtSaleOff;
-        $product->description = $request->txtDescription;
-        $product->content = $request->txtContent;
-        $product->picture = $file_name;
-        $file->move('upload/', $file_name);
-        $product->save();
-        return redirect()->route('product.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Add Product.']);
-        // } catch (Exception $e) {
-        //     return redirect()->route('product.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add Product.']);
-        // }
+        try {
+            $file = $request->file('productImage');
+            $file_name = $file->getClientOriginalName();
+            $product = new Product;
+            $product->name = $request->name;
+            $product->category_id = $request->parent_id;
+            $product->price = $request->price;
+            $product->new = $request->chkbNews;
+            $product->top_selling = $request->chkTopSelling;
+            $product->sale = $request->txtSaleOff;
+            $product->description = $request->txtDescription;
+            $product->content = $request->txtContent;
+            $product->picture = '/upload/avatarProduct/' . $file_name;
+            $file->move('upload/avatarProduct/', $file_name);
+            $product->save();
+            if (Input::hasFile('picProductDetail')) {
+                foreach (Input::file('picProductDetail') as $file) {
+                    $product_img = new ImageProduct();
+                    if (isset($file)) {
+                        $product_img->path = '/upload/imgDetailProduct/' . $file->getClientOriginalName();
+                        $product_img->product_id = $product->id;
+                        $file->move('upload/imgDetailProduct/', $file->getClientOriginalName());
+                        $product_img->save();
+                    }
+                }
+            }
+            return redirect()->route('product.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Add Product.']);
+        } catch (Exception $e) {
+            return redirect()->route('product.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add Product.']);
+        }
     }
 
     public function destroy($id)
     {
-
         DB::beginTransaction();
         try {
             $product = Product::findorfail($id);
             $product->orders()->detach();
             $product->users()->detach();
+            $product->image_products()->delete();
             $product->delete();
             DB::commit();
             return redirect()->route('product.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Product.']);

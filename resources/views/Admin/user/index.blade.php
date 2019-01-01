@@ -90,7 +90,6 @@
                     <!-- End Modal -->
                 </div>
             </form>
-
         </div>
     </div>
     {{-- End Create User --}}
@@ -146,7 +145,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Do you want to <span class="text-danger text-uppercase">delete</span> this user?
+                                        Do you want to <span class="text-danger text-uppercase">delete</span> this
+                                        user?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>
@@ -156,7 +156,6 @@
                             </div>
                         </div>
                         {{-- End Modal --}}
-
                     </form>
                 </td>
             </tr>
@@ -169,12 +168,10 @@
     <div class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="{{ $users->url(1) }}" rel="prev">«</a></li>
-
             @for ($i=1;$i<=$users->lastPage();$i++)
                 <li class="page-item @if ($users->currentPage()===$i) {{ 'active' }} @endif)">
                     <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a></li>
                 @endfor
-
                 <li class="page-item"><a class="page-link" href="{{ $users->url($users->lastPage()) }}" rel="next">»</a></li>
         </ul>
     </div>
