@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\CategoryRequest;
+use App\ImageProduct;
 use App\Product;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
@@ -45,10 +46,13 @@ class CategoryController extends Controller
             $category = Category::findorfail($id);
             $category->name = $request->name;
             $category->parent_id = $request->parent_id;
-            $file = $request->file('categoryImage');
-            $file_name = $file->getClientOriginalName();
-            $category->picture = '/upload/imgCategory/' . $file_name;
-            $file->move('upload/imgCategory/', $file_name);
+            if (Input::hasFile('categoryImage')) {
+                $file = $request->file('categoryImage');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = uniqid('img_') . '.' . $file_extension;
+                $category->picture = '/upload/imgCategory/' . $file_name;
+                $file->move('upload/imgCategory/', $file_name);
+            }
             $category->save();
             return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update Category.']);
         } catch (Exception $e) {
@@ -64,14 +68,25 @@ class CategoryController extends Controller
             foreach ($products as $product) {
                 $product->orders()->detach();
                 $product->users()->detach();
+                $images = ImageProduct::where('product_id', $id)->get();
+                if (!empty($images)) {
+                    foreach ($images as $img) {
+                        unlink(public_path($img->path));
+                    }
+                }
+                $product->image_products()->delete();
                 $product->delete();
             }
-            Category::where('id', $id)->delete();
+            $category = Category::findorfail($id);
+            if ($category->picture) {
+                unlink(public_path($category->picture));
+            }
+            $category->delete();
             DB::commit();
             return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Category.']);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add Category.']);
+            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Delete Category.']);
         }
     }
 }

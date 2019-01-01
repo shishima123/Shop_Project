@@ -65,7 +65,7 @@ Route::post('admin/category', 'CategoryController@store')->name('category.store'
 Route::delete('admin/category/{id}', 'CategoryController@destroy')->name('category.destroy')->middleware('checkAdminLogin');
 Route::put('admin/category/{id}', 'CategoryController@update')->name('category.update')->middleware('checkAdminLogin');
 
-// route admin/category
+// route admin/product
 Route::get('admin/product', 'ProductController@index')->name('product.index')->middleware('checkAdminLogin');
 Route::get('admin/product/sort_by={sort_by}', 'ProductController@sortBy')->name('product.sortBy')->middleware('checkAdminLogin');
 Route::get('admin/product/{id}', 'ProductController@edit')->name('product.edit')->middleware('checkAdminLogin');

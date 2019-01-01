@@ -23,7 +23,7 @@
             <button id="btnReset" class="btn btn-sm btn-warning text-uppercase">Reset</button>
         </div>
         <hr width="96%">
-        <form action="{{ route('product.store') }}" id="txtFormCreate" method="post" class="p-2" enctype="multipart/form-data">
+        <form action="{{ route('product.update',$product->id) }}" id="txtFormCreate" method="post" class="p-2" enctype="multipart/form-data">
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="PUT">
             <div class="row">
@@ -148,13 +148,13 @@
 
     <hr width="96%">
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-sm btn-success text-uppercase" data-toggle="modal" data-target="#createConfirm">
+        <button type="button" class="btn btn-sm btn-success text-uppercase mb-3" data-toggle="modal" data-target="#updateConfirm">
             Update
         </button>
         <!-- Button trigger modal -->
 
         <!-- Modal -->
-        <div class="modal fade" id="createConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -164,7 +164,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Do you want to <span class="text-success text-uppercase">add</span> new product?
+                        Do you want to <span class="text-success text-uppercase">changes</span> this product?
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-danger text-uppercase" data-dismiss="modal">Cancel</button>

@@ -15,7 +15,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->name,
         'description' => $faker->text,
         'price' => $faker->numberBetween($min = 10, $max = 30),
-        'picture' => './frontend/img/product01.png',
+        'picture' => '/upload/avatarProduct/product01.png',
         'unit' => $faker->randomDigit(),
         'sale' => $faker->randomElement($array = [
             '0', '10', '20',
@@ -83,6 +83,6 @@ $factory->define(CommentRating::class, function (Faker $faker) {
 $factory->define(ImageProduct::class, function (Faker $faker) {
     return [
         'product_id' => Product::all()->random()->id,
-        'path' => './frontend/img/product01.png',
+        'path' => '/upload/imgDetailProduct/product02.png',
     ];
 });

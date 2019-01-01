@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\CommentRating;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Order;
 use App\OrderItem;
 use App\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -37,10 +36,16 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->address = $request->address;
-            $file = $request->file('userPic');
-            $file_name = $file->getClientOriginalName();
-            $user->picture = '/upload/userPic/' . $file_name;
-            $file->move('upload/userPic/', $file_name);
+            if (Input::hasFile('userPic')) {
+                if ($user->picture) {
+                    unlink(public_path($user->picture));
+                }
+                $file = $request->file('userPic');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = uniqid('img_') . '.' . $file_extension;
+                $user->picture = '/upload/userPic/' . $file_name;
+                $file->move('upload/userPic/', $file_name);
+            }
             $user->save();
             return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update User.']);
         } catch (Exception $e) {
@@ -68,18 +73,21 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = User::findorfail($id);
-            CommentRating::where('user_id', $id)->delete();
+            if ($user->picture) {
+                unlink(public_path($user->picture));
+            }
+            $user->products()->detach();
             $getOrders = $user->orders()->get();
             foreach ($getOrders as $getOrder) {
                 OrderItem::where('order_id', $getOrder->id)->delete();
             }
-            Order::where('user_id', $id)->delete();
-            User::findorfail($id)->delete();
+            $user->orders()->delete();
+            $user->delete();
             DB::commit();
             return redirect()->route('user.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete User.']);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Add User.']);
+            return redirect()->route('user.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Delete User.']);
         }
     }
 }
