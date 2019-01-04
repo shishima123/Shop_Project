@@ -5,7 +5,7 @@
 @include('templates.Admin.flash_message')
 
 {{-- Status Order --}}
-<p class="text-uppercase font-weight-bold">{{ $type or 'all' }} order</p>
+<p class="text-uppercase font-weight-bold">{{ $type or 'all' }} orders</p>
 <hr>
 <div class="d-flex">
     <h5 class="m-0 pt-1 text-uppercase">filter:</h5>

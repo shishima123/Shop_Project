@@ -57,7 +57,7 @@
                 <div>
                     <input type="radio" class="mx-2 Radio--Button--Size" name="role" value="administrator">
                     <label for="administrator" class="mb-0">Administrator</label>
-                    <input type="radio" class="ml-4 mr-2 Radio--Button--Size" name="role" value="user">
+                    <input type="radio" class="ml-4 mr-2 Radio--Button--Size" name="role" value="user" checked>
                     <label for="user" class="mb-0">User</label>
                 </div>
                 <hr width="96%">

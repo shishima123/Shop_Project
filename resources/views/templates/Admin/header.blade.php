@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('css/Admin/bootstrap.min.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
-    @yield('ckeditor')
+  @yield('ckeditor')
 </head>
 
 <body>
@@ -23,6 +23,7 @@
           <div class="navbar-nav mx-3">
             <i class="fas fa-user-circle fa-fw text-light mt-2 mr-1"></i>
             <span class="text-light mr-2 mt-1">{{ Auth::user()->name }}</span>
+            <a href="{{asset(route('index'))  }}"><button class="btn btn-success mr-2">Home Site</button></a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
               {{ csrf_field() }}
               <button type="button" class="btn border-0 btn-primary text-capitalize" data-toggle="modal" data-target="#logoutConfirm">Logout</button>

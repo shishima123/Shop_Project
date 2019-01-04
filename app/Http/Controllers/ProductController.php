@@ -48,7 +48,6 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->with('image_products')->first();
         $categories = Category::all();
-        // return $product;
         return view('Admin.product.edit', compact('product', 'categories'));
     }
 

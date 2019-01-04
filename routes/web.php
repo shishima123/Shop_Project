@@ -73,3 +73,8 @@ Route::post('admin/product', 'ProductController@store')->name('product.store')->
 Route::delete('admin/product/{id}', 'ProductController@destroy')->name('product.destroy')->middleware('checkAdminLogin');
 Route::put('admin/product/{id}', 'ProductController@update')->name('product.update')->middleware('checkAdminLogin');
 Route::put('admin/product/delimg/{id}', 'ProductController@delImage')->name('product.delImage')->middleware('checkAdminLogin');
+
+//route admin/comment
+Route::get('admin/comment', 'CommentRatingController@index')->name('comment.index')->middleware('checkAdminLogin');
+Route::get('admin/comment/{id}', 'CommentRatingController@show')->name('comment.show')->middleware('checkAdminLogin');
+Route::put('admin/comment/{id}', 'CommentRatingController@update')->name('comment.update')->middleware('checkAdminLogin');

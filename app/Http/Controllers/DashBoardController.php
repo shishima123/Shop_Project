@@ -16,7 +16,7 @@ class DashBoardController extends Controller
         $users = User::count('id');
         $products = Product::count('id');
         $orders = Order::count('id');
-        $comments = CommentRating::count('id');
+        $comments = CommentRating::where('content', '<>', '')->count('id');
         return view('Admin.dashboard')->with('data', [[$categories, 'category'], [$users, 'user'], [$products, 'product'], [$orders, 'order'], [$comments, 'comment']]);
     }
 }

@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('sale')->default('0')->nullable();
             $table->boolean('new')->default('0')->nullable();
             $table->boolean('top_selling')->default('0')->nullable();
-            $table->enum('rating', ['1', '2', '3', '4', '5'])->nullable();
+            $table->string('rating')->nullable();
             $table->string('unit');
             $table->timestamps();
         });

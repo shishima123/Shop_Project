@@ -34,7 +34,7 @@
       </div>
 
       <div class="nav-item ml-3 my-1">
-        <a id="5" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/comment*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/coment') }}">
+        <a id="5" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/comment*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/comment') }}">
           <i class="far fa-comment-alt mt-1 mr-2"></i>
           <span>Comment</span></a>
       </div>

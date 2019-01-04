@@ -150,8 +150,8 @@
 {{-- End Create Product --}}
 
 {{-- Table Product --}}
-{{-- Status Order --}}
-<p class="text-uppercase font-weight-bold">{{ $type or 'all' }} order</p>
+{{-- Status Product --}}
+<p class="text-uppercase font-weight-bold">{{ $type or 'all' }} Products</p>
 <hr>
 <div class="d-flex">
     <h5 class="m-0 pt-1 text-uppercase">filter:</h5>
@@ -160,7 +160,7 @@
     <a href="{{ route('product.sortBy','top_selling') }}"><button class="btn btn-sm btn-warning mx-2">Top Selling</button></a>
     <a href="{{ route('product.sortBy','sale') }}"><button class="btn btn-sm btn-danger mx-2">Sale Off</button></a>
 </div>
-{{-- End Status Order --}}
+{{-- End Status Product --}}
 <table class="table table-sm table-bordered table-hover table-striped mt-3">
     <thead>
         <tr class="text-center">
