@@ -41,10 +41,10 @@ class GetTopSelling extends Command
         /*set top_selling value in column Products = 0 */
         Product::where('top_selling', 1)->update(['top_selling' => 0]);
 
-        /*Đếm các sản phẩm đã được Order */
+        /*Count all product ordered */
         $get_top_selling = Product::join('order_items', 'products.id', '=', 'order_items.product_id')->groupBy('order_items.product_id')->selectRaw('count(order_items.product_id) as total_items, products.id as product_id')->orderBy('total_items', 'DESC')->take(10)->get();
 
-        /*update sản phẩm top_selling vào cột top_selling*/
+        /*Update all product best seller to column top_selling*/
         foreach ($get_top_selling as $item) {
             Product::find($item->product_id)->update(['top_selling' => 1]);
         }

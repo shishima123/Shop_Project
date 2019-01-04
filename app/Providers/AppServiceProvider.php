@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /* Share multi-menu variable view to all frontend template */
         view()->composer('templates.frontend.header', function ($view) {
             $menus = Category::all();
             $view->with('menus', $menus);
