@@ -11,7 +11,7 @@
 						<h3 class="breadcrumb-header">Regular Page</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li class="active">Blank</li>
+							<li class="active">Error</li>
 						</ul>
 					</div>
 				</div>
@@ -27,7 +27,7 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
+Sorry! Website Url Not Exists.
 				</div>
 				<!-- /row -->
 			</div>

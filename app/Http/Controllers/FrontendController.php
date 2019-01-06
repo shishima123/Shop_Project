@@ -16,14 +16,23 @@ class FrontendController extends Controller
 
     public function store($cate = 'all-products')
     {
+
         if ($cate === 'all-products') {
             $category = '';
             $products = Product::orderBy('created_at')->paginate(9);
         } else {
             $category = Category::where('keyword', '=', $cate)->with('parentCategories')->first();
-            $products = Product::where('category_id', '=', $category->id)->paginate(9);
+            if ($category) { //check if url exists
+                if ($category->parent_id === 0) {
+                    $getIdSubCategory = $category->subCategories()->pluck('id');
+                    $products = Product::whereIn('category_id', $getIdSubCategory)->paginate(9);
+                } else {
+                    $products = Product::where('category_id', '=', $category->id)->paginate(9);
+                }
+                return view('frontend.store', compact('category', 'products'));
+            } else {
+                return view('frontend.error');
+            }
         }
-        // return $products;
-        return view('frontend.store', compact('category', 'products', 'top_selling'));
     }
 }

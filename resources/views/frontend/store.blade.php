@@ -1,15 +1,39 @@
 @extends('templates.frontend.master')
 @section('title')
-@if ($category->parentCategories)
+@if ($category === '')
+All Products - Electro Website
+@elseif ($category->parentCategories)
 {{ $category->parentCategories->name }} - Electro Website
 @else
 {{ $category->name }} - Electro Website
 @endif
-
 @endsection
 @section('content')
 <!-- BREADCRUMB -->
-@include('templates/frontend/breadcrumb')
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a href="{{ asset(route('index')) }}">Home</a></li>
+					<li><a href="{{ asset(route('store','all-products')) }}">All Categories</a></li>
+					@if (!empty($category))
+					@if ($category->parentCategories)
+					<li><a href="{{ asset(route('store',$category->parentCategories->keyword)) }}">{{
+							$category->parentCategories->name }}</a></li>
+					@endif
+					<li class="active">{{ $category->name }} ({{ $products->total() }} Results)</li>
+					@endif
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
 
 <!-- SECTION -->
 <div class="section">

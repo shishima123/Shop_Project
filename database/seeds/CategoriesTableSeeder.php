@@ -59,19 +59,19 @@ class CategoriesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Smart Phone IPHONE',
-                'keyword' => 'iphone',
+                'keyword' => 'smart-phone-iphone',
                 'picture' => '/upload/imgCategory/smartphone-iphone.png',
                 'parent_id' => 2,
             ],
             [
                 'name' => 'Smart Phone SAMSUNG',
-                'keyword' => 'samsung',
+                'keyword' => 'smart-phone-samsung',
                 'picture' => '/upload/imgCategory/smartphone-samsung.png',
                 'parent_id' => 2,
             ],
             [
                 'name' => 'Smart Phone ASUS',
-                'keyword' => 'asus',
+                'keyword' => 'smart-phone-asus',
                 'picture' => '/upload/imgCategory/smartphone-asus.jpg',
                 'parent_id' => 2,
             ],
