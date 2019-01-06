@@ -30,9 +30,7 @@ Route::get('/product', function () {
     return view('frontend.product');
 });
 
-Route::get('/store', function () {
-    return view('frontend.store');
-});
+Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
 Route::post('register', 'chkLoginController@postRegister')->name('postRegister');

@@ -44,7 +44,8 @@
 
                             <select class="custom-select" name="parent_id">
                                 @for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id===0)
-                                    <option value="{{ $categories[$i]->id }}" disabled class="text-success">{{ $categories[$i]->name }}</option>
+                                    <option value="{{ $categories[$i]->id }}" disabled class="text-success">{{
+                                        $categories[$i]->name }}</option>
                                     @for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
                                         <option value="{{ $categories[$j]->id }}">{{ $categories[$j]->name }}</option>
                                         @endif

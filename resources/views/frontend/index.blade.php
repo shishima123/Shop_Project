@@ -38,7 +38,8 @@
                                     <div class="product-body">
                                         <p class="product-category">{{ $new_product->category->name }}</p>
                                         <h3 class="product-name"><a href="#">{{ $new_product->name }}</a></h3>
-                                        <h4 class="product-price">{{ $new_product->price-$new_product->price*$new_product->sale/100 }} </h4>
+                                        <h4 class="product-price">{{
+                                            $new_product->price-$new_product->price*$new_product->sale/100 }} </h4>
                                         @if ($new_product->sale)
                                         <del class="product-old-price">{{ $new_product->price }}</del>
                                         @else
@@ -50,9 +51,12 @@
                                                 @endfor
                                         </div>
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
+                                                    to wishlist</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
+                                                    to compare</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                                                    view</span></button>
                                         </div>
                                     </div>
 
@@ -113,7 +117,8 @@
                                     <div class="product-body">
                                         <p class="product-category">{{ $top_selling->category->name }}</p>
                                         <h3 class="product-name"><a href="#">{{ $top_selling->name }}</a></h3>
-                                        <h4 class="product-price">{{ $top_selling->price-$top_selling->price*$top_selling->sale/100 }} </h4>
+                                        <h4 class="product-price">{{
+                                            $top_selling->price-$top_selling->price*$top_selling->sale/100 }} </h4>
                                         @if ($top_selling->sale)
                                         <del class="product-old-price">{{ $top_selling->price }}</del>
                                         @else
@@ -125,9 +130,12 @@
                                                 @endfor
                                         </div>
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
+                                                    to wishlist</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
+                                                    to compare</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                                                    view</span></button>
                                         </div>
                                     </div>
                                     <div class="add-to-cart">

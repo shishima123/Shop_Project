@@ -30,6 +30,7 @@
 </head>
 
 <body>
+	{{-- {{ dd($categories) }} --}}
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -44,19 +45,18 @@
 					@auth
 					<li><a href="{{ route('admin') }}"><i class="fa fa-user-o"></i>Admin Page</a></li>
 					<li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
-							<div class="dropdown-content bg-dark">
-									<a href="#" class="text-dark">Profile</a>
-									<a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+						<div class="dropdown-content bg-dark">
+							<a href="#" class="text-dark">Profile</a>
+							<a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+								Logout
+							</a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-							</div>
-						</li>
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
+						</div>
+					</li>
 					@else
 					<li><a href="{{ route('getLogin') }}"><i class="fa fa-user-o"></i> Login</a></li>
 					<li><a href="{{ route('getRegister') }}"><i class="fa fa-user-o"></i> Register</a></li>
@@ -89,8 +89,8 @@
 							<form>
 								<select class="input-select">
 									<option value="0">All Categories</option>
-									@for ($i = 0; $i < count($menus); $i++) @if ($menus[$i]->parent_id===0)
-										<option value="1">{!! $menus[$i]->name !!}</option>
+									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
+										<option value="{!! $categories[$i]->id !!}">{!! $categories[$i]->name !!}</option>
 										@endif
 										@endfor
 
@@ -105,17 +105,6 @@
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-							{{--
-							<!-- Wishlist -->
-							<div>
-								<a href="#">
-									<i class="fa fa-heart-o"></i>
-									<span>Your Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist --> --}}
-
 							<!-- Cart -->
 							<div class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -178,7 +167,7 @@
 		<!-- /MAIN HEADER -->
 	</header>
 	<!-- /HEADER -->
-	{{-- {{ dd($menus) }} --}}
+	{{-- {{ dd($categories) }} --}}
 	<!-- NAVIGATION -->
 	<nav id="navigation">
 		<!-- container -->
@@ -187,13 +176,13 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active dropdown"><a href="#">Trang chủ</a>
+					<li class="active dropdown"><a href="{{ route('index') }}">Trang chủ</a>
 					</li>
-					@for ($i = 0; $i < count($menus); $i++) @if ($menus[$i]->parent_id === 0)
-						<li class="dropdown"><a href="#">{{ $menus[$i]->name }}</a>
+					@for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id === 0)
+						<li class="dropdown"><a href="{{ asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>
 							<div class="dropdown-content">
-								@for ($j = 0; $j < count($menus); $j++) @if ($menus[$j]->parent_id===$menus[$i]->id)
-									<a href="#">{{ $menus[$j]->name }}</a>
+								@for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
+									<a href="{{ route('store',$categories[$j]->keyword) }}">{{ $categories[$j]->name }}</a>
 									@endif
 									@endfor
 							</div>
