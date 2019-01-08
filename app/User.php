@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\CommentRating;
 use App\Order;
 use App\Product;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     public function orders()
     {
@@ -14,6 +15,10 @@ class User extends Model
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'parent_id', 'rating']);
+        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating']);
+    }
+    public function comment_ratings()
+    {
+        return $this->hasMany(CommentRating::class);
     }
 }

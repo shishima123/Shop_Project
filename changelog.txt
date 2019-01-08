@@ -1,0 +1,50 @@
+        6/12/2018
+        - thêm trường top_selling trong product ở Migration
+        - chỉnh sửa lại kiểu boolean trong product ở Migration
+        - query ra $new_product và $top_selling
+        - Thêm chức năng Task Scheduler(app\console\kernel.php và app\console\Commands\GetTopSelling)
+
+        9/12/2018
+        - Thêm chức năng login,logout (chkLoginController)
+        - Thêm middleware checkAdminLogin
+        - Đổi tên file app.blade.php trong thư mục layouts thành master.blade.php và di chuyển vào thư mục auth. Xóa thư mục layouts
+        - Fix lại layout cho trang Admin
+        - Add chức năng show() của trang admin/user
+
+        10/12/2018 (Feature_admin_user_resource)
+        - Thêm relationship 1-many cho table Order-Order_items User-comment_ratings
+        - Thêm column total_comment trong user.index
+        - Update query function show()
+        - Add function destroy()
+        - Add function edit()
+        - Add view Admin.user.edit
+
+        12/12/2018
+        - Add column top_selling to Product on Factory Model
+        - Rewrite template Admin by Bootstrap 4
+
+        14/12/2018
+        - Update layout Admin/user.
+        - Complete feature add/edit/destroy user.
+        15/12/2018
+        - Update layout Admin/user
+        - Add flash message on Admin/User
+        - Add validation form on Admin/User and Register template
+
+        16/12/2018
+        - Update layout Admin/user
+        - Add Order to LeftBar template admin
+        - Add feature DashBoard
+
+        17/12/2018
+        - Add template Admin/Order
+        - Add feature show-list/approve/cancel/sortBy order
+
+        18/12/2018
+        - Complete feature Admin/Order
+        - Add view Admin/Category
+
+        19/12/2018
+        - Move flash_message to folder error
+        - Up date layout admin/Category
+        - Add function store to categoryController

@@ -1,141 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>SB Admin - Blank Page</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
-
-  <!-- Bootstrap core CSS-->
-  		<link type="text/css" rel="stylesheet" href="{{ asset('css/Admin/bootstrap.min.css') }}"/>
-
-
-  <!-- Custom fonts for this template-->
-    		<link type="text/css" rel="stylesheet" href="{{ asset('css/Admin/all.min.css') }}"/>
-
-
-  <!-- Page level plugin CSS-->
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/Admin/dataTables.bootstrap4.css') }}"/>
-
-
-  <!-- Custom styles for this template-->
-  
-      <link type="text/css" rel="stylesheet" href="{{ asset('css/Admin/sb-admin.css') }}"/>
-  
-
-</head>
-
-<body id="page-top">
-
-
-
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 navbar-nav Left-sidebar--Height">
+      <!-- Sidebar -->
+      <div class="nav-item ml-3 my-1">
+        <a id="1" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin') }}">
+          <i class="fas fa-tachometer-alt mt-1 mr-2"></i>
           <span>Dashboard</span>
         </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item active" href="blank.html">Blank Page</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-    </ul>
-
-    <div id="content-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="index.html">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Blank Page</li>
-        </ol>
-
-        <!-- Page Content -->
-
       </div>
-      <!-- /.container-fluid -->
 
-      <!-- Sticky Footer -->
+      <div class="nav-item ml-3 my-1">
+        <a id="2" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/user*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ route('user.index') }}">
+          <i class="fas fa-users-cog mt-1 mr-2"></i>
+          <span>User</span></a>
+      </div>
 
+      <div class="nav-item ml-3 my-1">
+        <a id="3" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/category*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/category') }}">
+          <i class="fas fa-table mt-1 mr-2"></i>
+          <span>Category</span></a>
+      </div>
 
-    </div>
-    <!-- /.content-wrapper -->
+      <div class="nav-item ml-3 my-1">
+        <a id="3" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/order*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/order') }}">
+          <i class="fas fa-cart-plus mt-1 mr-2"></i>
+          <span>Order</span></a>
+      </div>
 
-  </div>
-  <!-- /#wrapper -->
+      <div class="nav-item ml-3 my-1">
+        <a id="4" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/product*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/product') }}">
+          <i class="fas fa-shopping-basket mt-1 mr-2"></i>
+          <span>Product</span></a>
+      </div>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
+      <div class="nav-item ml-3 my-1">
+        <a id="5" class="nav-link d-flex text-muted Admin--LeftBar--Effect--Hover {{ Request::is('admin/comment*') ? 'Admin--LeftBar--Item--Active' : '' }}" href="{{ asset('admin/comment') }}">
+          <i class="far fa-comment-alt mt-1 mr-2"></i>
+          <span>Comment</span></a>
       </div>
     </div>
+    <div class="col-10 pt-3">
+      @yield('content')
+    </div>
   </div>
-
-   <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/Admin/bootstrap.bundle.min.js') }}"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('js/Admin/jquery.easing.min.js') }}"></script>
-
-  <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/Admin/sb-admin.min.js') }}"></script>
-
-
-</body>
-
-</html>
+</div>
