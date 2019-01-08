@@ -20,6 +20,10 @@ class UserController extends Controller
             '=',
             'comment_ratings.user_id'
         )->selectRaw('users.*,count(comment_ratings.user_id) as total_comment')->groupBy('users.id')->orderBy('role')->paginate(10);
+<<<<<<< Updated upstream
+=======
+        // return $users;
+>>>>>>> Stashed changes
         return view('Admin.user.index', compact('users'));
     }
 

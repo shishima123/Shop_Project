@@ -18,19 +18,18 @@
 
 Route::get('/', 'FrontendController@index')->name('index');
 
-Route::get('/blank', function () {
-    return view('frontend.blank');
-});
+
 
 Route::get('/checkout', function () {
     return view('frontend.checkout');
 });
 
-Route::get('/product', function () {
-    return view('frontend.product');
-});
 
-Route::get('category/{cate?}', 'FrontendController@store')->name('store');
+Route::get('/product/{id}', 'FrontendController@show')->name('product');
+//Route search
+Route::get('search', 'FrontendController@getSearch')->name('search');
+// Route store
+Route::get('store', 'FrontendController@store')->name('store');
 
 Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
 Route::post('register', 'chkLoginController@postRegister')->name('postRegister');

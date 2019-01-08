@@ -1,12 +1,12 @@
 @extends('templates.frontend.master')
 @section('title')
-@if ($category === '')
+{{-- @if ($category === '')
 All Products - Electro Website
 @elseif ($category->parentCategories)
 {{ $category->parentCategories->name }} - Electro Website
 @else
 {{ $category->name }} - Electro Website
-@endif
+@endif --}}
 @endsection
 @section('content')
 <!-- BREADCRUMB -->

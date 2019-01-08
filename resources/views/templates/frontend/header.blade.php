@@ -77,7 +77,7 @@
 					<div class="col-md-3">
 						<div class="header-logo">
 							<a href="#" class="logo">
-								<img src="{{ asset('frontend/img/logo.png') }}" alt="">
+								<img src="{{ asset('upload/img_demo/logo.png') }}" alt="">
 							</a>
 						</div>
 					</div>
@@ -86,7 +86,8 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form role="search" method="get" id="searchform" action="{{route('search')}}">
+								<input type="hidden" name="_token" value="{{csrf_token()}}";>
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
@@ -95,7 +96,8 @@
 										@endfor
 
 								</select>
-								<input class="input" placeholder="Search here">
+								<input class="input" type="text" value="" name="search" id="search" placeholder="Search here">
+								
 								<button class="search-btn">Search</button>
 							</form>
 						</div>
@@ -183,6 +185,7 @@
 							<div class="dropdown-content">
 								@for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
 									<a href="{{ route('store',$categories[$j]->keyword) }}">{{ $categories[$j]->name }}</a>
+				
 									@endif
 									@endfor
 							</div>
