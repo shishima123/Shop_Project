@@ -53,6 +53,7 @@
 								<i class="fa fa-star"></i>
 								@endfor
 						</div>
+						
 						<a class="review-link" href="#">10 Review(s) | Add your review</a>
 					</div>
 					<div>
