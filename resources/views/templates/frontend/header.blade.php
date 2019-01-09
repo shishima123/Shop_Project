@@ -86,7 +86,7 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form role="search" method="get" id="searchform" action="{{route('search')}}">
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
@@ -95,7 +95,7 @@
 										@endfor
 
 								</select>
-								<input class="input" placeholder="Search here">
+								<input class="input" type="text" value="" name="search" id="search" placeholder="Search here">
 								<button class="search-btn">Search</button>
 							</form>
 						</div>

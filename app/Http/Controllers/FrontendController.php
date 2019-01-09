@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -34,5 +35,17 @@ class FrontendController extends Controller
                 return view('frontend.error');
             }
         }
+    }
+    public function getSearch(Request $request)
+    {
+        $search = Product::where('name', 'like', '%' . $request->search . '%')->orWhere('price', $request->search)->get();
+        // return $search;
+        return view('frontend.search', compact('search'));
+    }
+    public function show($id)
+    {
+        $all_products = Product::where('id', $id)->get();
+        //return $products;
+        return view('frontend.product', compact('all_products'));
     }
 }

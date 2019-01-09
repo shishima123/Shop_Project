@@ -18,17 +18,20 @@
 
 Route::get('/', 'FrontendController@index')->name('index');
 
-Route::get('/blank', function () {
-    return view('frontend.blank');
-});
+// Route::get('/blank', function () {
+//     return view('frontend.blank');
+// });
 
-Route::get('/checkout', function () {
-    return view('frontend.checkout');
-});
+// Route::get('/checkout', function () {
+//     return view('frontend.checkout');
+// });
 
-Route::get('/product', function () {
-    return view('frontend.product');
-});
+// Route::get('/product', function () {
+//     return view('frontend.product');
+// });
+Route::get('/product/{id}', 'FrontendController@show')->name('product');
+
+Route::get('search', 'FrontendController@getSearch')->name('search');
 
 Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
