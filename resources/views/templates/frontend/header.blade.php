@@ -86,7 +86,7 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form role="search" method="get" id="searchform" action="{{route('search')}}">
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
@@ -95,7 +95,7 @@
 										@endfor
 
 								</select>
-								<input class="input" placeholder="Search here">
+								<input class="input" type="text" value="" name="search" id="search" placeholder="Search here">
 								<button class="search-btn">Search</button>
 							</form>
 						</div>
@@ -107,12 +107,11 @@
 						<div class="header-ctn">
 							<!-- Cart -->
 							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<a href="{{route('shopcart')}}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
-									<span>Your Cart</span>
-									<div class="qty">3</div>
+									<span class="badge"> {{Session::has('cart') ? Session::get('cart')->totaLQty: ''}} Your Cart</span>
 								</a>
-								<div class="cart-dropdown">
+								{{--  <div class="cart-dropdown">
 									<div class="cart-list">
 										<div class="product-widget">
 											<div class="product-img">
@@ -144,7 +143,7 @@
 										<a href="#">View Cart</a>
 										<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
-								</div>
+								</div>  --}}
 							</div>
 							<!-- /Cart -->
 

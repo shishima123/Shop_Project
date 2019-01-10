@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Http\Request;
+use Session;
+use App\Cart;
 
 class FrontendController extends Controller
 {
@@ -34,5 +37,37 @@ class FrontendController extends Controller
                 return view('frontend.error');
             }
         }
+    }
+    public function getSearch(Request $request)
+    {
+        $search = Product::where('name', 'like', '%' . $request->search . '%')->orWhere('price', $request->search)->get();
+        // return $search;
+        return view('frontend.search', compact('search'));
+    }
+    public function show($id)
+    {
+        $all_products = Product::where('id', $id)->get();
+        //return $products;
+        return view('frontend.product', compact('all_products'));
+    }
+    public function getAddToCart(Request $request, $id)
+    {
+        $addtocart = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($addtocart, $addtocart->id);
+        $request->session()->put('cart', $cart);
+        // dd($request->session()->get('cart'));
+        return redirect()->route('index');
+    }
+    public function getCart()
+    {
+        if (!Session::has('cart')) {
+            return view('frontend.shopcart', ['all_products' => null]);
+
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('frontend.shopcart', ['all_products' => $cart->items, 'totaLPrice' => $cart->totaLPrice]);
     }
 }

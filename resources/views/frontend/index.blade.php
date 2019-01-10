@@ -24,7 +24,7 @@
                                 @foreach ($new_products as $new_product)
                                 <div class="product">
                                     <div class="product-img">
-                                        <img src="{{ $new_product->picture }}" alt="">
+                                        <img src="{{ asset($new_product->picture) }}" alt="">
                                         <div class="product-label">
                                             @if ($new_product->sale)
                                             <span class="sale">-{{ $new_product->sale }}%</span>
@@ -55,13 +55,13 @@
                                                     to wishlist</span></button>
                                             <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
                                                     to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
-                                                    view</span></button>
+                                            <button class="quick-view"><a href="{{route('product',$new_product->id)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                                                    view</span></a></button>
                                         </div>
                                     </div>
 
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <button class="add-to-cart-btn"><a href="{{route('cart',[$new_product->id,$new_product->name])}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -103,7 +103,7 @@
                                 @foreach ($top_selling as $top_selling)
                                 <div class="product">
                                     <div class="product-img">
-                                        <img src="{{ $top_selling->picture }}" alt="">
+                                        <img src="{{ asset($top_selling->picture) }}" alt="">
                                         <div class="product-label">
                                             @if ($top_selling->sale)
                                             <span class="sale">-{{ $top_selling->sale }}%</span>
@@ -134,12 +134,12 @@
                                                     to wishlist</span></button>
                                             <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
                                                     to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
-                                                    view</span></button>
+                                            <button class="quick-view"><a href="{{route('product',$top_selling->id)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                                                    view</span></a></button>
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <button class="add-to-cart-btn"><a href="{{route('cart',[$top_selling->id,$top_selling->name])}}"><i class="fa fa-shopping-cart"></i> add to cart </a></button>
                                     </div>
                                 </div>
                                 <!-- /product -->
