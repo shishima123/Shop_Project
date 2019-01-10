@@ -10,12 +10,51 @@ use Faker\Generator as Faker;
 
 //use Illuminate\Foundation\Auth\User;
 $factory->define(Product::class, function (Faker $faker) {
+    $category = Category::where('id', '>', 3)->get()->random()->id;
+    switch ($category) {
+        case "4":
+            $name = $faker->numerify('Asus VIVOBOOK ###');
+            $picture = '/upload/avatarProduct/laptop-asus.jpg';
+            break;
+        case "5":
+            $name = $faker->numerify('‎Dell Inspiron ###');
+            $picture = '/upload/avatarProduct/laptop-dell.jpg';
+            break;
+        case "6":
+            $name = $faker->numerify('HP Probook ###');
+            $picture = '/upload/avatarProduct/laptop-hp.jpg';
+            break;
+        case "7":
+            $name = $faker->numerify('Lenovo Thinkpad ###');
+            $picture = '/upload/avatarProduct/laptop-lenovo.jpg';
+            break;
+        case "8":
+            $name = $faker->numerify('Iphone #');
+            $picture = '/upload/avatarProduct/smartphone-iphone.jpg';
+            break;
+        case "9":
+            $name = $faker->numerify('Galaxy #');
+            $picture = '/upload/avatarProduct/smartphone-samsung.jpg';
+            break;
+        case "10":
+            $name = $faker->numerify('Zenphone #');
+            $picture = '/upload/avatarProduct/smartphone-asus.jpg';
+            break;
+        case "11":
+            $name = $faker->numerify('Nikon ###');
+            $picture = '/upload/avatarProduct/camera.jpg';
+            break;
+        case "12":
+            $name = $faker->numerify('Beats ###');
+            $picture = '/upload/avatarProduct/headphone.jpg';
+            break;
+    }
     return [
-        'category_id' => Category::all()->random()->id,
-        'name' => $faker->name,
+        'category_id' => $category,
+        'name' => $name,
         'description' => $faker->text,
         'price' => $faker->numberBetween($min = 10, $max = 30),
-        'picture' => '/upload/avatarProduct/product01.png',
+        'picture' => $picture,
         'unit' => $faker->randomDigit(),
         'sale' => $faker->randomElement($array = [
             '0', '10', '20',

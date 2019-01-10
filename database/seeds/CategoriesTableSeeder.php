@@ -76,9 +76,9 @@ class CategoriesTableSeeder extends Seeder
                 'parent_id' => 2,
             ],
             [
-                'name' => 'SPEAKER',
-                'keyword' => 'speaker',
-                'picture' => '/upload/imgCategory/speaker.jpeg',
+                'name' => 'CAMERA',
+                'keyword' => 'camera',
+                'picture' => '/upload/imgCategory/camera.png',
                 'parent_id' => 3,
             ],
             [

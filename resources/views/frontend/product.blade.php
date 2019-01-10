@@ -1,5 +1,7 @@
 @extends('templates.frontend.master')
-@section('title','Product')
+@section('title')
+{!! $product->name !!} - Electro Website
+@endsection
 @section('content')
 
 <div class="section">
@@ -8,64 +10,49 @@
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
 					<div class="product-preview">
-						<img src="upload/avatarProduct/product01.png" alt="">
+						<img src="{{ asset($product->picture) }}" alt="">
 					</div>
-
+					@foreach ($product->image_products as $image_product)
 					<div class="product-preview">
-						<img src="upload/img_demo/product03.png" alt="">
+						<img src="{{ asset($image_product->path) }}" alt="">
 					</div>
-
-					<div class="product-preview">
-						<img src="upload/img_demo/product06.png" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="./upload/img_demo/product08.png" alt="">
-					</div>
+					@endforeach
 				</div>
 			</div>
 			<div class="col-md-2  col-md-pull-5">
 				<div id="product-imgs">
 					<div class="product-preview">
-						<img src="upload/avatarProduct/product01.png" alt="">
+						<img src="{{ asset($product->picture) }}" alt="">
 					</div>
-
+					@foreach ($product->image_products as $image_product)
 					<div class="product-preview">
-						<img src="upload/img_demo/product03.png" alt="">
+						<img src="{{ asset($image_product->path) }}" alt="">
 					</div>
-
-					<div class="product-preview">
-						<img src="upload/img_demo/product06.png" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="upload/img_demo/product08.png" alt="">
-					</div>
+					@endforeach
 				</div>
 			</div>
 			<div class="col-md-5">
-				@foreach ($all_products as $all_products)
 				<div class="product-details">
-					<h2 class="product-name">{{$all_products->name}}</h2>
+					<h2 class="product-name">{{$product->name}}</h2>
 					<div>
 						<div class="product-rating">
-							@for ($i = 0; $i < $all_products->rating; $i++)
+							@for ($i = 0; $i < $product->rating; $i++)
 								<i class="fa fa-star"></i>
 								@endfor
 						</div>
-						
+
 						<a class="review-link" href="#">10 Review(s) | Add your review</a>
 					</div>
 					<div>
-						<h4 class="product-price">{{ $all_products->price-$all_products->price*$all_products->sale/100 }} </h4>
-						@if ($all_products->sale)
-						<del class="product-old-price">{{ $all_products->price }}</del>
+						<h4 class="product-price">{{ $product->price - $product->price * $product->sale/100 }} </h4>
+						@if ($product->sale)
+						<del class="product-old-price">{{ $product->price }}</del>
 						@else
 						<br />
 						@endif
 						<span class="product-available">In Stock</span>
 					</div>
-					<p>{{$all_products->description}}</p>
+					<p>{{$product->description}}</p>
 
 					<div class="product-options">
 						<label>
@@ -114,7 +101,6 @@
 					</ul>
 
 				</div>
-				@endforeach
 			</div>
 			<!-- /Product details -->
 

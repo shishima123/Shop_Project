@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Session;
-use App\Cart;
 
 class FrontendController extends Controller
 {
@@ -40,15 +40,15 @@ class FrontendController extends Controller
     }
     public function getSearch(Request $request)
     {
-        $search = Product::where('name', 'like', '%' . $request->search . '%')->orWhere('price', $request->search)->get();
-        // return $search;
+        $search = Product::where('name', 'like', '%' . $request->search . '%')->orWhere('price', $request->search)->paginate(9);
+        return $search;
         return view('frontend.search', compact('search'));
     }
     public function show($id)
     {
-        $all_products = Product::where('id', $id)->get();
-        //return $products;
-        return view('frontend.product', compact('all_products'));
+        $product = Product::where('id', $id)->with('image_products')->first();
+        // return $product;
+        return view('frontend.product', compact('product'));
     }
     public function getAddToCart(Request $request, $id)
     {
