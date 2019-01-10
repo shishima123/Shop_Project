@@ -32,6 +32,10 @@ Route::get('/', 'FrontendController@index')->name('index');
 Route::get('/product/{id}', 'FrontendController@show')->name('product');
 
 Route::get('search', 'FrontendController@getSearch')->name('search');
+//Shopping cart
+Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
+Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
+
 
 Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
