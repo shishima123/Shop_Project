@@ -131,12 +131,12 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="{{ secure_asset('js/frontend/jquery.min.js') }}"></script>
-		<script src="{{ secure_asset('js/frontend/bootstrap.min.js') }}"></script>
-		<script src="{{ secure_asset('js/frontend/slick.min.js') }}"></script>
-		<script src="{{ secure_asset('js/frontend/nouislider.min.js') }}"></script>
-		<script src="{{ secure_asset('js/frontend/jquery.zoom.min.js') }}"></script>
-		<script src="{{ secure_asset('js/frontend/main.js') }}"></script>
+		<script src="{{ asset('js/frontend/jquery.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/slick.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/nouislider.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/jquery.zoom.min.js') }}"></script>
+		<script src="{{ asset('js/frontend/main.js') }}"></script>
 
 	</body>
 </html>
