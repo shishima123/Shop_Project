@@ -175,7 +175,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active dropdown"><a href="{{ route('index') }}">Trang chủ</a>
+					<li class="active dropdown"><a href="{{ route('index') }}">Home</a>
 					</li>
 					@for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id === 0)
 						<li class="dropdown"><a href="{{ asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>

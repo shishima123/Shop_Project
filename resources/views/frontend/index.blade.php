@@ -1,5 +1,5 @@
 @extends('templates.frontend.master')
-@section('title','Trang chủ')
+@section('title','Electro - Home Page')
 @section('content')
 
 <!-- NEW PRODUCT -->
