@@ -77,7 +77,7 @@
 					<div class="col-md-3">
 						<div class="header-logo">
 							<a href="#" class="logo">
-								<img src="{{ asset('upload/logo/logo.png') }}" alt="">
+								<img src="{{ secure_asset('upload/logo/logo.png') }}" alt="">
 							</a>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 									<div class="cart-list">
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="{{ asset('frontend/img/product01.png') }}" alt="">
+												<img src="{{ secure_asset('frontend/img/product01.png') }}" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -126,7 +126,7 @@
 
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="{{ asset('frontend/img/product02.png') }}" alt="">
+												<img src="{{ secure_asset('frontend/img/product02.png') }}" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -178,7 +178,7 @@
 					<li class="active dropdown"><a href="{{ route('index') }}">Home</a>
 					</li>
 					@for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id === 0)
-						<li class="dropdown"><a href="{{ asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>
+						<li class="dropdown"><a href="{{ secure_asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>
 							<div class="dropdown-content">
 								@for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
 									<a href="{{ route('store',$categories[$j]->keyword) }}">{{ $categories[$j]->name }}</a>
