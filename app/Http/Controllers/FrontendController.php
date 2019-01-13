@@ -13,7 +13,7 @@ class FrontendController extends Controller
     public function index()
     {
         $new_products = Product::where('new', 1)->with('category')->take(10)->get();
-        $top_selling = Product::where('top_selling', 1)->with('category')->get();
+        $top_selling = Product::where('top_selling', 1)->with('category')->take(10)->get();
         return view('frontend.index', compact('new_products', 'top_selling'));
     }
 
@@ -38,18 +38,24 @@ class FrontendController extends Controller
             }
         }
     }
+
     public function getSearch(Request $request)
     {
         $search = Product::where('name', 'like', '%' . $request->search . '%')->orWhere('price', $request->search)->paginate(9);
-        return $search;
+        // return $search;
         return view('frontend.search', compact('search'));
     }
+
     public function show($id)
     {
         $product = Product::where('id', $id)->with('image_products')->first();
-        // return $product;
-        return view('frontend.product', compact('product'));
+        $category = $product->category()->first()->parentCategories()->first();
+        $comment_ratings = $product->users()->paginate(5);
+        $related_products = Product::inRandomOrder()->with('category')->take(4)->get();
+        // return $related_products;
+        return view('frontend.product', compact('product', 'category', 'comment_ratings', 'related_products'));
     }
+
     public function getAddToCart(Request $request, $id)
     {
         $addtocart = Product::find($id);
@@ -60,11 +66,11 @@ class FrontendController extends Controller
         // dd($request->session()->get('cart'));
         return redirect()->route('index');
     }
+
     public function getCart()
     {
         if (!Session::has('cart')) {
             return view('frontend.shopcart', ['all_products' => null]);
-
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);

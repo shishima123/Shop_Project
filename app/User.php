@@ -23,7 +23,7 @@ class User extends Authenticatable
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating']);
+        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating', 'created_at']);
     }
     public function comment_ratings()
     {

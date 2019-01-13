@@ -27,6 +27,7 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" />
+	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 </head>
 
 <body>
@@ -37,9 +38,9 @@
 		<div id="top-header">
 			<div class="container">
 				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-					<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+					<li><a href="#"><i class="fa fa-phone"></i> 0236.3.779.779</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i> tuyensinh@softech.vn</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i>38 Yen Bai, Hai Chau District, Da Nang City</a></li>
 				</ul>
 				<ul class="header-links pull-right">
 					@auth
@@ -76,7 +77,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
+							<a href="{{ route('index') }}" class="logo">
 								<img src="{{ asset('upload/logo/logo.png') }}" alt="">
 							</a>
 						</div>

@@ -23,25 +23,25 @@
                             <div class="products-slick" data-nav="#slick-nav-1">
                                 @foreach ($new_products as $new_product)
                                 <div class="product">
-                                    <div class="product-img">
+                                    <a href="{{ route('product',$new_product->id) }}"><div class="product-img">
                                         <img src="{{ asset($new_product->picture) }}" alt="">
                                         <div class="product-label">
                                             @if ($new_product->sale)
                                             <span class="sale">-{{ $new_product->sale }}%</span>
                                             @endif
-                                            @if ($new_product->sale)
+                                            @if ($new_product->new)
                                             <span class="new">NEW</span>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div></a>
 
                                     <div class="product-body">
                                         <p class="product-category">{{ $new_product->category->name }}</p>
                                         <h3 class="product-name"><a href="#">{{ $new_product->name }}</a></h3>
                                         <h4 class="product-price">{{
-                                            $new_product->price-$new_product->price*$new_product->sale/100 }} </h4>
+                                            $new_product->price-$new_product->price*$new_product->sale/100 }}$ </h4>
                                         @if ($new_product->sale)
-                                        <del class="product-old-price">{{ $new_product->price }}</del>
+                                        <del class="product-old-price">{{ $new_product->price }}$</del>
                                         @else
                                         <br />
                                         @endif
@@ -102,25 +102,25 @@
                             <div class="products-slick" data-nav="#slick-nav-2">
                                 @foreach ($top_selling as $top_selling)
                                 <div class="product">
-                                    <div class="product-img">
+                                    <a href="{{ route('product',$new_product->id) }}"><div class="product-img">
                                         <img src="{{ asset($top_selling->picture) }}" alt="">
                                         <div class="product-label">
                                             @if ($top_selling->sale)
                                             <span class="sale">-{{ $top_selling->sale }}%</span>
                                             @endif
-                                            @if ($top_selling->sale)
+                                            @if ($top_selling->new)
                                             <span class="new">NEW</span>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div></a>
 
                                     <div class="product-body">
                                         <p class="product-category">{{ $top_selling->category->name }}</p>
                                         <h3 class="product-name"><a href="#">{{ $top_selling->name }}</a></h3>
                                         <h4 class="product-price">{{
-                                            $top_selling->price-$top_selling->price*$top_selling->sale/100 }} </h4>
+                                            $top_selling->price-$top_selling->price*$top_selling->sale/100 }}$ </h4>
                                         @if ($top_selling->sale)
-                                        <del class="product-old-price">{{ $top_selling->price }}</del>
+                                        <del class="product-old-price">{{ $top_selling->price }}$</del>
                                         @else
                                         <br />
                                         @endif
