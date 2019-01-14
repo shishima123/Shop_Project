@@ -132,7 +132,7 @@ All Products - Electro Website
 					</ul>
 				</div>
 				<!-- /store top filter -->
-
+ 
 				<!-- store products -->
 				<div class="row">
 					@foreach ($products as $key=>$product)
