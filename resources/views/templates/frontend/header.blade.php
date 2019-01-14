@@ -27,7 +27,9 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" />
+
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
 </head>
 
 <body>
@@ -88,16 +90,16 @@
 					<div class="col-md-6">
 						<div class="header-search">
 							<form role="search" method="get" id="searchform" action="{{route('search')}}">
-								<select class="input-select">
-									<option value="0">All Categories</option>
+								<select class="input-select" name="category">
+									<option value="all-categories">All Categories</option>
 									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
-										<option value="{!! $categories[$i]->id !!}">{!! $categories[$i]->name !!}</option>
+										<option value="{!! $categories[$i]->keyword !!}">{!! $categories[$i]->name !!}</option>
 										@endif
 										@endfor
 
 								</select>
-								<input class="input" type="text" value="" name="search" id="search" placeholder="Search here">
-								<button class="search-btn">Search</button>
+								<input class="input" type="text" value="" name="search" id="txtSearch" placeholder="Search here">
+								<button class="search-btn" id="btnSearch">Search</button>
 							</form>
 						</div>
 					</div>

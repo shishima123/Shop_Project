@@ -30,14 +30,12 @@ Route::get('/', 'FrontendController@index')->name('index');
 //     return view('frontend.product');
 // });
 Route::get('/product/{id}', 'FrontendController@show')->name('product');
+Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('search', 'FrontendController@getSearch')->name('search');
 //Shopping cart
 Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
 Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
-
-
-Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
 Route::post('register', 'chkLoginController@postRegister')->name('postRegister');
@@ -83,3 +81,7 @@ Route::put('admin/product/delimg/{id}', 'ProductController@delImage')->name('pro
 Route::get('admin/comment', 'CommentRatingController@index')->name('comment.index')->middleware('checkAdminLogin');
 Route::get('admin/comment/{id}', 'CommentRatingController@show')->name('comment.show')->middleware('checkAdminLogin');
 Route::put('admin/comment/{id}', 'CommentRatingController@update')->name('comment.update')->middleware('checkAdminLogin');
+
+//If url do not exists then redirect to error template
+Route::fallback('FrontendController@notFound');
+Route::get('error', 'FrontendController@getError')->name('notFound');

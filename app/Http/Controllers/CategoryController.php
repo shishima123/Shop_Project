@@ -15,7 +15,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('products')->withCount('subcategories')->get();
+        $categories = Category::withCount('products')
+            ->withCount('subcategories')
+            ->get();
+
         return view('Admin.category.index', compact('categories'));
     }
 
@@ -26,17 +29,23 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->parent_id = $request->parent_id;
             $category->save();
-            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Add Category success.']);
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Add Category success.']);
         } catch (Exception $e) {
-            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail to Add Category. Please try again.']);
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail to Add Category. Please try again.']);
         }
 
     }
 
     public function show($id)
     {
-        $category = Category::find($id);
-        $categories = Category::where('parent_id', 0)->get();
+        $category = Category::findorfail($id);
+        $categories = Category::where('parent_id', 0)
+            ->get();
+
         return view('Admin.category.edit', compact('category', 'categories'));
     }
 
@@ -54,9 +63,13 @@ class CategoryController extends Controller
                 $file->move('upload/imgCategory/', $file_name);
             }
             $category->save();
-            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update Category.']);
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Update Category.']);
         } catch (Exception $e) {
-            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Update Category.']);
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Update Category.']);
         }
     }
 
@@ -68,7 +81,9 @@ class CategoryController extends Controller
             foreach ($products as $product) {
                 $product->orders()->detach();
                 $product->users()->detach();
-                $images = ImageProduct::where('product_id', $id)->get();
+                $images = ImageProduct::where('product_id', $id)
+                    ->get();
+
                 if (!empty($images)) {
                     foreach ($images as $img) {
                         unlink(public_path($img->path));
@@ -83,10 +98,16 @@ class CategoryController extends Controller
             }
             $category->delete();
             DB::commit();
-            return redirect()->route('category.index')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Category.']);
+
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Category.']);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->route('category.index')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Delete Category.']);
+
+            return redirect()
+                ->route('category.index')
+                ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Delete Category.']);
         }
     }
 }
