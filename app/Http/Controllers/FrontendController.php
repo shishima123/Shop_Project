@@ -81,9 +81,9 @@ class FrontendController extends Controller
     public function show($id)
     {
         try {
-            $product = Product::findorfail($id)
+            $product = Product::where('id', '=', $id)
                 ->with('image_products')
-                ->first();
+                ->firstOrFail();
 
             $category = $product
                 ->category()

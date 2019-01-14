@@ -68,7 +68,7 @@ class ProductController extends Controller
 
     public function delImage($id)
     {
-        $image = ImageProduct::findorfail($id);
+        $image = ImageProduct::where('id', '=', $id)->firstOrFail();
         if (!empty($image)) {
             $img = $image->path;
             unlink(public_path($img));
@@ -81,7 +81,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $product = Product::findorfail($id);
+            $product = Product::where('id', '=', $id)->firstOrFail();
             $product->name = $request->name;
             $product->category_id = $request->parent_id;
             $product->price = $request->price;
@@ -173,7 +173,7 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
-            $product = Product::findorfail($id);
+            $product = Product::where('id', '=', $id)->firstOrFail();
             if ($product->picture) {
                 unlink(public_path($product->picture));
             }

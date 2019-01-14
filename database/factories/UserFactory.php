@@ -53,6 +53,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'category_id' => $category,
         'name' => $name,
         'description' => $faker->text,
+        'content' => $faker->text($maxNbChars = 200),
         'price' => $faker->numberBetween($min = 10, $max = 30),
         'picture' => $picture,
         'unit' => $faker->randomDigit(),

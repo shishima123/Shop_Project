@@ -39,7 +39,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         try {
-            $user = User::findorfail($id);
+            $user = User::where('id', '=', $id)->firstOrFail();
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->address = $request->address;
@@ -91,7 +91,7 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = User::findorfail($id);
+            $user = User::where('id', '=', $id)->firstOrFail();
             if ($user->picture) {
                 unlink(public_path($user->picture));
             }

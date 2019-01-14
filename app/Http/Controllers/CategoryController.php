@@ -42,7 +42,7 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::findorfail($id);
+        $category = Category::where('id', '=', $id)->firstOrFail();
         $categories = Category::where('parent_id', 0)
             ->get();
 
@@ -52,7 +52,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $category = Category::findorfail($id);
+            $category = Category::where('id', '=', $id)->firstOrFail();
             $category->name = $request->name;
             $category->parent_id = $request->parent_id;
             if (Input::hasFile('categoryImage')) {
@@ -92,7 +92,7 @@ class CategoryController extends Controller
                 $product->image_products()->delete();
                 $product->delete();
             }
-            $category = Category::findorfail($id);
+            $category = Category::where('id', '=', $id)->firstOrFail();
             if ($category->picture) {
                 unlink(public_path($category->picture));
             }

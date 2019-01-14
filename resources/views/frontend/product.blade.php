@@ -129,7 +129,7 @@
 						<div id="tab2" class="tab-pane fade in active">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<p>{{ $product->content }}</p>
+									<p>{!! $product->content !!}</p>
 								</div>
 							</div>
 						</div>

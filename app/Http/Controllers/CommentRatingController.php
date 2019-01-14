@@ -28,7 +28,7 @@ class CommentRatingController extends Controller
 
     public function update($id)
     {
-        $comment = CommentRating::findorfail($id);
+        $comment = CommentRating::where('id', '=', $id)->firstOrFail();
         if ($comment->rating) {
             $comment->content = '';
             $comment->save();
