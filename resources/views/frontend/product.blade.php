@@ -172,7 +172,9 @@
 												@endforeach
 												<div class="rating-progress">
 													{{-- Calculate % each star rating --}}
-													<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
+													@if ($comment_ratings->total() !=0 )
+														<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
+													@endif
 												</div>
 												<span class="sum">{{ $sum }}</span>
 												</li>
@@ -207,6 +209,7 @@
 											</li>
 											@endforeach
 										</ul>
+										@if ($comment_ratings->total())
 										<ul class="reviews-pagination">
 											<li><a href="{{ $comment_ratings->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
 												@for ($i=1;$i<=$comment_ratings->lastPage();$i++)
@@ -215,6 +218,12 @@
 												@endfor
 											<li><a href="{{ $comment_ratings->url($comment_ratings->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
 										</ul>
+										@else
+										<ul class="reviews text-center text-muted">
+											<p>There are currently no product reviews.</p>
+											<p>Let others know your opinion and become the first to comment on this product.</p>
+										</ul>
+										@endif
 									</div>
 								</div>
 								<!-- /Reviews -->
@@ -270,17 +279,19 @@
 				<!-- product -->
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
-							<div class="product-img">
-								<img src="{{ asset($related_product->picture) }}" alt="{{ $related_product->name }}">
-								<div class="product-label">
-									@if ($related_product->sale)
-									<span class="sale">-{{ $related_product->sale }}%</span>
-									@endif
-									@if ($related_product->sale)
-									<span class="new">NEW</span>
-									@endif
+							<a href="{{ route('product',$related_product->id) }}">
+								<div class="product-img">
+									<img src="{{ asset($related_product->picture) }}" alt="{{ $related_product->name }}">
+									<div class="product-label">
+										@if ($related_product->sale)
+										<span class="sale">-{{ $related_product->sale }}%</span>
+										@endif
+										@if ($related_product->sale)
+										<span class="new">NEW</span>
+										@endif
+									</div>
 								</div>
-							</div>
+							</a>
 							<div class="product-body">
 								<p class="product-category">{{ $related_product->category->name }}</p>
 								<h3 class="product-name"><a href="#">{{ $related_product->name }}</a></h3>

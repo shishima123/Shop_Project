@@ -139,17 +139,19 @@ All Products - Electro Website
 					<!-- product -->
 					<div class="col-md-4 col-xs-6">
 						<div class="product">
-							<div class="product-img">
-								<img src="{{ asset($product->picture) }}" alt="{{ $product->name }}">
-								<div class="product-label">
-									@if ($product->sale)
-									<span class="sale">-{{ $product->sale }}%</span>
-									@endif
-									@if ($product->sale)
-									<span class="new">NEW</span>
-									@endif
-								</div>
-							</div>
+								<a href="{{ route('product',$product->id) }}">
+									<div class="product-img">
+										<img src="{{ asset($product->picture) }}" alt="{{ $product->name }}">
+										<div class="product-label">
+											@if ($product->sale)
+											<span class="sale">-{{ $product->sale }}%</span>
+											@endif
+											@if ($product->sale)
+											<span class="new">NEW</span>
+											@endif
+										</div>
+									</div>
+								</a>	
 							<div class="product-body">
 								<p class="product-category">{{ $product->category->name }}</p>
 								<h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
