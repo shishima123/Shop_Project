@@ -63,17 +63,22 @@ class FrontendController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($addtocart, $addtocart->id);
         $request->session()->put('cart', $cart);
-        // dd($request->session()->get('cart'));
+        //dd($request->session()->get('cart'));
         return redirect()->route('index');
     }
 
     public function getCart()
     {
         if (!Session::has('cart')) {
-            return view('frontend.shopcart', ['all_products' => null]);
+            return view('frontend.shopcart', ['addtocart' => null]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('frontend.shopcart', ['all_products' => $cart->items, 'totaLPrice' => $cart->totaLPrice]);
+        //dd($cart);
+        return view('frontend.shopcart', ['addtocart' => $cart->items, 'totaLPrice' => $cart->totaLPrice]);
+    }
+    public function getCheckout()
+    {
+        return view('frontend.checkout');
     }
 }

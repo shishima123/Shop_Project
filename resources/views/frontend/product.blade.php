@@ -171,6 +171,7 @@
 													@endif
 												@endforeach
 												<div class="rating-progress">
+													
 													{{-- Calculate % each star rating --}}
 													<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
 												</div>
