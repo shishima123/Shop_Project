@@ -63,7 +63,7 @@ class FrontendController extends Controller
         if ($request->category === 'all-categories') {
             $products = Product::where('name', 'like', '%' . $request->search . '%')
                 ->paginate(9)
-                ->appends(request()->query());
+                ->appends(request()->query());//including other GET parameters
         } else {
             $category = Category::where('keyword', '=', $request->category)
                 ->first();
@@ -75,7 +75,7 @@ class FrontendController extends Controller
             $products = Product::whereIn('category_id', $getIdSubCategory)
                 ->where('name', 'like', '%' . $request->search . '%')
                 ->paginate(9)
-                ->appends(request()->query());
+                ->appends(request()->query());//including other GET parameters
         }
         return view('frontend.search', compact('products'));
     }
