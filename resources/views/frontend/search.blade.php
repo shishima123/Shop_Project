@@ -27,10 +27,11 @@
 										<img src="{{ asset($product->picture) }}" alt="{{ $product->name }}">
 										<div class="product-label">
 											@if ($product->sale)
-											<span class="sale">-{{ $product->sale }}%</span>
+												<span class="sale">-{{ $product->sale }}%</span>
 											@endif
+
 											@if ($product->sale)
-											<span class="new">NEW</span>
+												<span class="new">NEW</span>
 											@endif
 										</div>
 									</div>
@@ -41,14 +42,14 @@
 									<h4 class="product-price">{{
 										$product->price-$product->price*$product->sale/100 }} </h4>
 									@if ($product->sale)
-									<del class="product-old-price">{{ $product->price }}</del>
+										<del class="product-old-price">{{ $product->price }}</del>
 									@else
-									<br />
+										<br />
 									@endif
 									<div class="product-rating">
 										@for ($i = 0; $i < $product->rating; $i++)
 											<i class="fa fa-star"></i>
-											@endfor
+										@endfor
 									</div>
 									<div class="product-btns">
 										<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
@@ -68,7 +69,7 @@
 						@endforeach
 					</div>
 					<!-- /search products -->
-@if ($products->total())
+					@if ($products->total())
 					<!-- search bottom filter -->
 					<div class="store-filter clearfix">
 						<ul class="store-pagination">
@@ -76,16 +77,15 @@
 							@for ($i=1;$i<=$products->lastPage();$i++)
 								<li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif)">
 									<a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a></li>
-								@endfor
+							@endfor
 								<li><a href="{{ $products->url($products->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
 						</ul>
 					</div>
 					<!-- /search bottom filter -->
 					@else
 					<div class="text-center">
-<h1>No seach result.</h1>
+						<h1>No search result.</h1>
 					</div>
-					
 					@endif
 				</div>
 			</div>

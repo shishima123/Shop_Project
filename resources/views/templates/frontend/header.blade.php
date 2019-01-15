@@ -92,11 +92,11 @@
 							<form role="search" method="get" id="searchform" action="{{route('search')}}">
 								<select class="input-select" name="category">
 									<option value="all-categories">All Categories</option>
-									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
-										<option value="{!! $categories[$i]->keyword !!}">{!! $categories[$i]->name !!}</option>
+									@for ($i = 0; $i < count($categories); $i++) {{ $i }}
+										@if ($categories[$i]->parent_id===0)
+											<option value="{!! $categories[$i]->keyword !!}">{!! $categories[$i]->name !!}</option>
 										@endif
-										@endfor
-
+									@endfor
 								</select>
 								<input class="input" type="text" value="" name="search" id="txtSearch" placeholder="Search here">
 								<button class="search-btn" id="btnSearch">Search</button>
