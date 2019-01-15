@@ -12,6 +12,6 @@ class CommentRatingsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(CommentRating::class, 5)->create();
+        factory(CommentRating::class, 100)->create();
     }
 }

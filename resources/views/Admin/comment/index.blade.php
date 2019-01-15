@@ -19,7 +19,7 @@
         @foreach ($comments as $key=>$comment)
         <tr class="text-center">
             <th scope="row">{{ $comments->firstItem()+$key }}</th>
-            <td class="text-truncate">{{ $comment->content }}</td>
+            <td class="text-truncate" style="max-width: 150px;">{{ $comment->content }}</td>
             <td>{{ $comment->user->name }}</td>
             <td>{{ $comment->product->name }}</td>
             <td class="d-flex justify-content-center h-100">

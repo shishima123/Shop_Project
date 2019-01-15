@@ -142,41 +142,42 @@
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
-											<span>{{ $product->rating }}</span>
+											<span>{{ round($product->rating,1) }}</span>
 											<div class="rating-stars">
-												@for ($i=0;$i<$product->rating;$i++)
+												@for ($i=0;$i<round($product->rating,1);$i++)
 													<i class="fa fa-star"></i>
 													@endfor
 											</div>
 										</div>
 										<ul class="rating">
 											{{-- Star rating from 1->5 --}}
-											@for ($i=1;$i<6;$i++) <li>
-												<div class="rating-stars">
-													{{-- show star --}}
-													@for ($j=6;$j>1;$j--)
-														@if ($j<=$i) 
-															<i class="fa fa-star-o"></i>
-														@else 
-															<i class="fa fa-star"></i> 
-														@endif
-													@endfor
-												</div>
+											@for ($i=1;$i<6;$i++) 
+												<li>
+													<div class="rating-stars">
+														{{-- show star --}}
+														@for ($j=6;$j>1;$j--)
+															@if ($j<=$i) 
+																<i class="fa fa-star-o"></i>
+															@else 
+																<i class="fa fa-star"></i> 
+															@endif
+														@endfor
+													</div>
 
-												@php $sum=0; @endphp {{--Set $sum=0--}}
-												{{-- Calculate sum rating each star rating --}}
-												@foreach ($comment_ratings as $key=>$rating)
-													@if ($rating->pivot->rating == $i)
-														@php $sum++; @endphp
-													@endif
-												@endforeach
-												<div class="rating-progress">
-													{{-- Calculate % each star rating --}}
-													@if ($comment_ratings->total() !=0 )
-														<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
-													@endif
-												</div>
-												<span class="sum">{{ $sum }}</span>
+													@php $sum=0; @endphp {{--Set $sum=0--}}
+													{{-- Calculate sum rating each star rating --}}
+													@foreach ($comment_ratings as $key=>$rating)
+														@if ($rating->pivot->rating == 6-$i)
+															@php $sum++; @endphp
+														@endif
+													@endforeach
+													<div class="rating-progress">
+														{{-- Calculate % each star rating --}}
+														@if ($comment_ratings->total() !=0 )
+															<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
+														@endif
+													</div>
+													<span class="sum">{{ $sum }}</span>
 												</li>
 											@endfor
 										</ul>
@@ -265,7 +266,7 @@
 	</div>
 	<!-- /container -->
 </div>
-
+<hr width="90%">
 <div class="section">
 	<div class="container">
 		<div class="row">
