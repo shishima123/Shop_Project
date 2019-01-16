@@ -10,54 +10,64 @@ use Faker\Generator as Faker;
 //use Illuminate\Foundation\Auth\User;
 $factory->define(Product::class, function (Faker $faker) {
     $category = Category::where('id', '>', 3)->get()->random()->id;
+    global $nmPic;
+    global $name;
+    global $picture;
     switch ($category) {
         case "4":
             $name = $faker->numerify('Asus VIVOBOOK ###');
             $picture = '/upload/avatarProduct/laptop-asus.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/asus1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/asus2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'asus';
             break;
         case "5":
             $name = $faker->numerify('‎Dell Inspiron ###');
             $picture = '/upload/avatarProduct/laptop-dell.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/dell1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/dell2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'dell';
             break;
         case "6":
             $name = $faker->numerify('HP Probook ###');
             $picture = '/upload/avatarProduct/laptop-hp.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/hp1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/hp2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'hp';
             break;
         case "7":
             $name = $faker->numerify('Lenovo Thinkpad ###');
             $picture = '/upload/avatarProduct/laptop-lenovo.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/lenovo1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/lenovo2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
-
+            $nmPic = 'lenovo';
             break;
         case "8":
             $name = $faker->numerify('Iphone #');
             $picture = '/upload/avatarProduct/smartphone-iphone.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/iphone1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/iphone2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'iphone';
             break;
         case "9":
             $name = $faker->numerify('Galaxy #');
             $picture = '/upload/avatarProduct/smartphone-samsung.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/samsung1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/samsung2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'samsung';
             break;
         case "10":
             $name = $faker->numerify('Zenphone #');
             $picture = '/upload/avatarProduct/smartphone-asus.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/zenphone1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/zenphone2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'zenphone';
             break;
         case "11":
             $name = $faker->numerify('Nikon ###');
             $picture = '/upload/avatarProduct/camera.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/nikon1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/nikon2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'nikon';
             break;
         case "12":
             $name = $faker->numerify('Beats ###');
             $picture = '/upload/avatarProduct/headphone.jpg';
-            $content = $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/beat1.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500) . '<p><img alt="" src="http://localhost/shop_project/public/upload/imgDetailProduct/beat2.jpg" style="height:400px; width:400px" /></p>' . $faker->text($maxNbChars = 500);
+            $nmPic = 'beat';
             break;
     }
+    $base_url = env('APP_URL');
+    $content = '';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '1.jpg" style="height:400px; width:400px" /></p>';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '2.jpg" style="height:400px; width:400px" /></p>';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '3.jpg" style="height:400px; width:400px" /></p>';
     return [
         'category_id' => $category,
         'name' => $name,
