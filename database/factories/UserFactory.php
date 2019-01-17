@@ -10,64 +10,65 @@ use Faker\Generator as Faker;
 //use Illuminate\Foundation\Auth\User;
 $factory->define(Product::class, function (Faker $faker) {
     $category = Category::where('id', '>', 3)->get()->random()->id;
-    global $nmPic;
+    global $nmDetailPic;
     global $name;
     global $picture;
     switch ($category) {
         case "4":
             $name = $faker->numerify('Asus VIVOBOOK ###');
-            $picture = '/upload/avatarProduct/laptop-asus.jpg';
-            $nmPic = 'asus';
+            $nmAvatarPic = 'laptop-asus';
+            $nmDetailPic = 'asus';
             break;
         case "5":
             $name = $faker->numerify('‎Dell Inspiron ###');
-            $picture = '/upload/avatarProduct/laptop-dell.jpg';
-            $nmPic = 'dell';
+            $nmAvatarPic = 'laptop-dell';
+            $nmDetailPic = 'dell';
             break;
         case "6":
             $name = $faker->numerify('HP Probook ###');
-            $picture = '/upload/avatarProduct/laptop-hp.jpg';
-            $nmPic = 'hp';
+            $nmAvatarPic = 'laptop-hp';
+            $nmDetailPic = 'hp';
             break;
         case "7":
             $name = $faker->numerify('Lenovo Thinkpad ###');
-            $picture = '/upload/avatarProduct/laptop-lenovo.jpg';
-            $nmPic = 'lenovo';
+            $nmAvatarPic = 'laptop-lenovo';
+            $nmDetailPic = 'lenovo';
             break;
         case "8":
             $name = $faker->numerify('Iphone #');
-            $picture = '/upload/avatarProduct/smartphone-iphone.jpg';
-            $nmPic = 'iphone';
+            $nmAvatarPic = 'smartphone-iphone';
+            $nmDetailPic = 'iphone';
             break;
         case "9":
             $name = $faker->numerify('Galaxy #');
-            $picture = '/upload/avatarProduct/smartphone-samsung.jpg';
-            $nmPic = 'samsung';
+            $nmAvatarPic = 'smartphone-samsung';
+            $nmDetailPic = 'samsung';
             break;
         case "10":
             $name = $faker->numerify('Zenphone #');
-            $picture = '/upload/avatarProduct/smartphone-asus.jpg';
-            $nmPic = 'zenphone';
+            $nmAvatarPic = 'smartphone-asus';
+            $nmDetailPic = 'zenphone';
             break;
         case "11":
             $name = $faker->numerify('Nikon ###');
-            $picture = '/upload/avatarProduct/camera.jpg';
-            $nmPic = 'nikon';
+            $nmAvatarPic = 'camera';
+            $nmDetailPic = 'nikon';
             break;
         case "12":
             $name = $faker->numerify('Beats ###');
-            $picture = '/upload/avatarProduct/headphone.jpg';
-            $nmPic = 'beat';
+            $nmAvatarPic = 'headphone';
+            $nmDetailPic = 'beat';
             break;
     }
+    $picture = '/upload/avatarProduct/' . $nmAvatarPic . '.jpg';
     $base_url = env('APP_URL');
     $content = '';
     $content .= $faker->text($maxNbChars = 500);
-    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '1.jpg" style="height:400px; width:400px" /></p>';
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '1.jpg" style="height:400px; width:400px" /></p>';
     $content .= $faker->text($maxNbChars = 500);
-    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '2.jpg" style="height:400px; width:400px" /></p>';
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '2.jpg" style="height:400px; width:400px" /></p>';
     $content .= $faker->text($maxNbChars = 500);
-    $content .= '<p><img alt="" src="'.$base_url.'/shop_project/public/upload/imgDetailProduct/' . $nmPic . '3.jpg" style="height:400px; width:400px" /></p>';
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '3.jpg" style="height:400px; width:400px" /></p>';
     return [
         'category_id' => $category,
         'name' => $name,

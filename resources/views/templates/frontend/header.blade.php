@@ -48,10 +48,9 @@
 					@auth
 					<li><a href="{{ route('admin') }}"><i class="fa fa-user-o"></i>Admin Page</a></li>
 					<li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
-						<div class="dropdown-content bg-dark">
-							<a href="#" class="text-dark">Profile</a>
-							<a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+						<div class="dropdown-content">
+							<a href="#">Profile</a>
+							<a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 								Logout
 							</a>
 
@@ -178,7 +177,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active dropdown"><a href="{{ route('index') }}">Home</a>
+					<li class="dropdown" id='home'><a href="{{ route('index') }}">Home</a>
 					</li>
 					@for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id === 0)
 						<li class="dropdown"><a href="{{ asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>
