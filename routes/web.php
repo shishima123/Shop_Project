@@ -27,6 +27,8 @@ Route::get('search', 'FrontendController@getSearch')->name('search');
 Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
 Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
 Route::get('checkout', 'FrontendController@getCheckout')->name('checkout');
+Route::post('checkout', 'FrontendController@postCheckout')->name('checkout');
+
 
 
 Route::get('category/{cate?}', 'FrontendController@store')->name('store');
