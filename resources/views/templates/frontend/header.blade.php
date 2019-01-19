@@ -5,7 +5,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>@yield('title')</title>
 
@@ -33,7 +32,6 @@
 </head>
 
 <body>
-	{{-- {{ dd($categories) }} --}}
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -60,8 +58,8 @@
 						</div>
 					</li>
 					@else
-					<li><a href="{{ route('getLogin') }}"><i class="fa fa-user-o"></i> Login</a></li>
-					<li><a href="{{ route('getRegister') }}"><i class="fa fa-user-o"></i> Register</a></li>
+                        <li><a href="{{ route('getLogin') }}"><i class="fa fa-user-o"></i> Login</a></li>
+                        <li><a href="{{ route('getRegister') }}"><i class="fa fa-user-o"></i> Register</a></li>
 					@endauth
 
 				</ul>
@@ -108,7 +106,7 @@
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<!-- Cart -->
-							<div class="dropdown">
+							<div class="dropdown-cart">
 								<a href="{{route('shopcart')}}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
 									<span class="badge"> {{Session::has('cart') ? Session::get('cart')->totaLQty: ''}} Your Cart</span>
@@ -168,7 +166,7 @@
 		<!-- /MAIN HEADER -->
 	</header>
 	<!-- /HEADER -->
-	{{-- {{ dd($categories) }} --}}
+
 	<!-- NAVIGATION -->
 	<nav id="navigation">
 		<!-- container -->
@@ -185,11 +183,11 @@
 								@for ($j = 0; $j < count($categories); $j++) @if ($categories[$j]->parent_id===$categories[$i]->id)
 									<a href="{{ route('store',$categories[$j]->keyword) }}">{{ $categories[$j]->name }}</a>
 									@endif
-									@endfor
+                                @endfor
 							</div>
 						</li>
 						@endif
-						@endfor
+                    @endfor
 				</ul>
 				<!-- /NAV -->
 			</div>
