@@ -6,6 +6,7 @@ Route::get('/', 'FrontendController@index')->name('index');
 //     return view('frontend.checkout');
 // });
 Route::get('/product/{id}', 'FrontendController@show')->name('product');
+Route::put('/product/{id}', 'FrontendController@commentRating')->name('comment_rating');
 Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('search', 'FrontendController@getSearch')->name('search');

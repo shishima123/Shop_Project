@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Category;
+use App\CommentRating;
 use App\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class FrontendController extends Controller
@@ -169,5 +172,44 @@ class FrontendController extends Controller
         $total = $cart->totaLPrice;
         //dd($total);
         return view('frontend.checkout', ['total' => $total]);
+    }
+
+    public function commentRating(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $user_id = Auth::user()->id;
+            $product_id = $id;
+
+            $ratings = CommentRating::where('product_id', $id)->selectRaw('id, sum(rating) AS sumRating, count(rating) AS countRating')->groupBy('product_id')->first();
+
+            //insert commerating to table comment_ratings
+            $comment_rating = new CommentRating;
+            $comment_rating->user_id = $user_id;
+            $comment_rating->product_id = $product_id;
+            $comment_rating->content = $request->comment;
+            $comment_rating->rating = $request->rating;
+            $comment_rating->save();
+
+            //Update rating product in table product
+            if ($ratings) { //check product is rating
+                $new_rating = ($ratings->sumRating + $comment_rating->rating) / ($ratings->countRating + 1);
+            } else {
+                $new_rating = $comment_rating->rating;
+            }
+            $product = Product::where('id', $id)->firstOrFail();
+            $product->rating = $new_rating;
+            $product->save();
+            DB::commit();
+
+            return redirect()
+                ->route('product', $id)
+                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Comment and Rating Product.']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()
+                ->route('product', $id)
+                ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Somethings wrong when Comment and Rating Product. Please try again.']);
+        }
     }
 }

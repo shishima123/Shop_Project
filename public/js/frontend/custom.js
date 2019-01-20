@@ -7,6 +7,9 @@ $(document).ready(function () {
         }
     });
 
+    /* Hide flash message*/
+    $('#alertMessage').delay(5000).slideUp(1000);
+
     //add class active in navbar
     $(".dropdown a").each(function () {
         var link = $(this);
@@ -16,7 +19,15 @@ $(document).ready(function () {
             return false;
         } else {
             $('#home').addClass('active');
+        }
+    });
 
+    //check comment rating
+    $('#commentRating').click(function (e) {
+        console.log($("input[name='rating']").is(":checked"));
+        if ($('#txtComment').val() == '' || $("input[name='rating']").is(":checked") == false) {
+            e.preventDefault();
+            alert('Please enter your comment or select star rating');
         }
     });
 

@@ -3,7 +3,7 @@
 {!! $product->name !!} - Electro Website
 @endsection
 @section('content')
-
+@include('templates.Admin.flash_message')
 <div class="section">
 	<div class="container">
 		<div class="row">
@@ -232,10 +232,10 @@
 								<!-- Review Form -->
 								<div class="col-md-3">
 									<div id="review-form">
-										<form class="review-form">
-											<input class="input" type="text" placeholder="Your Name">
-											<input class="input" type="email" placeholder="Your Email">
-											<textarea class="input" placeholder="Your Review"></textarea>
+										<form class="review-form" method="POST" action="{{ route('comment_rating',$product->id) }}">
+											{{ csrf_field() }}
+											{{ method_field("PUT") }}
+											<textarea class="input" placeholder="Your Review" name="comment" id="txtComment"></textarea>
 											<div class="input-rating">
 												<span>Your Rating: </span>
 												<div class="stars">
@@ -246,7 +246,7 @@
 													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
 												</div>
 											</div>
-											<button class="primary-btn">Submit</button>
+											<button class="primary-btn" type="submit" id="commentRating">Submit</button>
 										</form>
 									</div>
 								</div>
