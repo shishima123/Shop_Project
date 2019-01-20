@@ -58,16 +58,16 @@ $(document).ready(function () {
 
     function renderProduct(data) {
         var product = data.data;
-        var baseUrl = window.location;
+        var baseUrl = window.location.origin;
 
         for (x in product) {
             var strHtml = '';
             strHtml += '<!-- product -->';
             strHtml += '<div class="col-md-4 col-xs-6">';
             strHtml += '<div class="product">'
-            strHtml += '<a href="#">'
+            strHtml += '<a href="' + baseUrl + '/shop_project/public/product/' + product[x].id + '">';
             strHtml += '<div class="product-img">'
-            strHtml += '<img src = "' + window.location.origin + '/shop_project/public' + product[x].picture + '" alt = "' + product[x].name + '">';
+            strHtml += '<img src = "' + baseUrl + '/shop_project/public' + product[x].picture + '" alt = "' + product[x].name + '">';
             strHtml += '<div class="product-label">'
             if (product[x].sale) {
                 strHtml += '<span class="sale">-' + product[x].sale + '%</span>'
@@ -80,7 +80,7 @@ $(document).ready(function () {
             strHtml += '</a>'
             strHtml += '<div class="product-body">'
             strHtml += '<p class="product-category">' + product[x].category.name + '</p>'
-            strHtml += '<h3 class="product-name"><a href="#">' + product[x].name + '</a></h3>'
+            strHtml += '<h3 class="product-name"><a href="' + baseUrl + '/shop_project/public/product/' + product[x].id + '">' + product[x].name + '</a></h3>'
             strHtml += '<h4 class="product-price">' + (product[x].price - product[x].price * product[x].sale / 100) + '$ </h4>'
             if (product[x].sale) {
                 strHtml += '<del class="product-old-price">' + product[x].price + '$</del>'
