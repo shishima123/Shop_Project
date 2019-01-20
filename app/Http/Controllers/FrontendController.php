@@ -26,12 +26,17 @@ class FrontendController extends Controller
         return view('frontend.index', compact('new_products', 'top_selling'));
     }
 
-    public function store($cate = 'all-products')
+    public function store($cate = 'all-products', Request $request)
     {
         if ($cate === 'all-products') {
             $category = '';
-            $products = Product::orderBy('created_at')
+            $products = Product::orderBy('created_at')->with('category')
                 ->paginate(9);
+
+            // check if request is ajax then return json
+            if ($request->ajax()) {
+                return $products;
+            }
             return view('frontend.store', compact('category', 'products'));
 
         } else {
@@ -45,12 +50,19 @@ class FrontendController extends Controller
                         ->subCategories()
                         ->pluck('id');
 
-                    $products = Product::whereIn('category_id', $getIdSubCategory)
+                    $products = Product::whereIn('category_id', $getIdSubCategory)->with('category')
                         ->paginate(9);
                 } else {
-                    $products = Product::where('category_id', '=', $category->id)
+                    $products = Product::where('category_id', '=', $category->id)->with('category')
                         ->paginate(9);
                 }
+
+                // check if request is ajax then return json
+                if ($request->ajax()) {
+                    return $products;
+                }
+                // return $products;
+
                 return view('frontend.store', compact('category', 'products'));
             } else {
                 return redirect()->route('notFound');
@@ -60,10 +72,11 @@ class FrontendController extends Controller
 
     public function getSearch(Request $request)
     {
+
         if ($request->category === 'all-categories') {
-            $products = Product::where('name', 'like', '%' . $request->search . '%')
+            $products = Product::where('name', 'like', '%' . $request->search . '%')->with('category')
                 ->paginate(9)
-                ->appends(request()->query());//including other GET parameters
+                ->appends(request()->query()); //including other GET parameters
         } else {
             $category = Category::where('keyword', '=', $request->category)
                 ->first();
@@ -73,11 +86,17 @@ class FrontendController extends Controller
                 ->pluck('id');
 
             $products = Product::whereIn('category_id', $getIdSubCategory)
-                ->where('name', 'like', '%' . $request->search . '%')
+                ->where('name', 'like', '%' . $request->search . '%')->with('category')
                 ->paginate(9)
-                ->appends(request()->query());//including other GET parameters
+                ->appends(request()->query()); //including other GET parameters
         }
-        return view('frontend.search', compact('products'));
+
+        // check if request is ajax then return json
+        if ($request->ajax()) {
+            return $products;
+        } else {
+            return view('frontend.search', compact('products'));
+        }
     }
 
     public function show($id)

@@ -79,9 +79,14 @@ a {
   transition: 0.2s color;
 }
 
-a:hover,
-a:focus {
+a:hover {
   color: #D10024;
+  text-decoration: none;
+  outline: none;
+}
+
+a:focus {
+  color: black;
   text-decoration: none;
   outline: none;
 }

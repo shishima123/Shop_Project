@@ -134,7 +134,7 @@ All Products - Electro Website
 				<!-- /store top filter -->
  
 				<!-- store products -->
-				<div class="row">
+				<div class="row" id="areaProduct">
 					@foreach ($products as $key=>$product)
 					<!-- product -->
 					<div class="col-md-4 col-xs-6">
@@ -146,7 +146,7 @@ All Products - Electro Website
 											@if ($product->sale)
 											<span class="sale">-{{ $product->sale }}%</span>
 											@endif
-											@if ($product->sale)
+											@if ($product->new)
 											<span class="new">NEW</span>
 											@endif
 										</div>
@@ -156,9 +156,9 @@ All Products - Electro Website
 								<p class="product-category">{{ $product->category->name }}</p>
 								<h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
 								<h4 class="product-price">{{
-									$product->price-$product->price*$product->sale/100 }} </h4>
+									$product->price-$product->price*$product->sale/100 }}$ </h4>
 								@if ($product->sale)
-								<del class="product-old-price">{{ $product->price }}</del>
+								<del class="product-old-price">{{ $product->price }}$</del>
 								@else
 								<br />
 								@endif
@@ -190,12 +190,12 @@ All Products - Electro Website
 				<div class="store-filter clearfix">
 					<span class="store-qty">Showing 20-100 products</span>
 					<ul class="store-pagination">
-						<li><a href="{{ $products->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
+						<li class="first"><a href="{{ $products->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
 						@for ($i=1;$i<=$products->lastPage();$i++)
-							<li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif)">
+							<li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif">
 								<a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a></li>
 							@endfor
-							<li><a href="{{ $products->url($products->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
+							<li class="last"><a href="{{ $products->url($products->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
 					</ul>
 				</div>
 				<!-- /store bottom filter -->
