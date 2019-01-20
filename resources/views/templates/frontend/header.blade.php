@@ -110,6 +110,7 @@
 								<a href="{{route('shopcart')}}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
 									<span class="badge"> {{Session::has('cart') ? Session::get('cart')->totaLQty: ''}} Your Cart</span>
+									</a>
 								</a>
 								{{--  <div class="cart-dropdown">
 									<div class="cart-list">

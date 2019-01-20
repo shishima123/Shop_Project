@@ -134,18 +134,19 @@ class FrontendController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($addtocart, $addtocart->id);
         $request->session()->put('cart', $cart);
-        // dd($request->session()->get('cart'));
+        //dd($request->session()->get('cart'));
         return redirect()->route('index');
     }
 
     public function getCart()
     {
         if (!Session::has('cart')) {
-            return view('frontend.shopcart', ['all_products' => null]);
+            return view('frontend.shopcart', ['addtocart' => null]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('frontend.shopcart', ['all_products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        //dd($cart);
+        return view('frontend.shopcart', ['addtocart' => $cart->items, 'totaLPrice' => $cart->totaLPrice]);
     }
 
     public function notFound()
@@ -156,5 +157,17 @@ class FrontendController extends Controller
     public function getError()
     {
         return view('frontend.error');
+    }
+    public function getCheckout()
+    {
+        if (!Session::has('cart')) {
+            return view('frontend.shopcart', ['addtocart' => null]);
+        }
+        $oldCart = Session::get('cart');
+        //dd($oldCart);
+        $cart = new cart($oldCart);
+        $total = $cart->totaLPrice;
+        //dd($total);
+        return view('frontend.checkout', ['total' => $total]);
     }
 }

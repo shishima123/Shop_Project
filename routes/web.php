@@ -12,6 +12,8 @@ Route::get('search', 'FrontendController@getSearch')->name('search');
 //Shopping cart
 Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
 Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
+Route::get('checkout', 'FrontendController@getCheckout')->name('checkout');
+Route::post('checkout', 'FrontendController@postCheckout')->name('checkout');
 
 Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
 Route::post('register', 'chkLoginController@postRegister')->name('postRegister');
