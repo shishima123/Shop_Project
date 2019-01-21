@@ -79,7 +79,7 @@
                 <form action="{{ route('order.destroy',$order->id) }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button type="button" class="btn btn-secondary text-uppercase mx-2" data-toggle="modal" data-target="#cancelConfirm{{ $order->id }}">
+                    <button type="button" class="btn btn-danger text-uppercase mx-2" data-toggle="modal" data-target="#cancelConfirm{{ $order->id }}">
                         Cancel
                     </button>
                     <!-- Button trigger modal -->
