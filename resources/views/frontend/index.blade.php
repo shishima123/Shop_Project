@@ -61,7 +61,7 @@
                                     </div>
 
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><a href="{{route('cart',[$new_product->id,$new_product->name])}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
+                                        <button class="add-to-cart-btn"><a href="{{route('addToCart',[$new_product->id,$new_product->name])}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><a href="{{route('cart',[$top_selling->id,$top_selling->name])}}"><i class="fa fa-shopping-cart"></i> add to cart </a></button>
+                                        <button class="add-to-cart-btn"><a href="{{route('addToCart',[$top_selling->id,$top_selling->name])}}"><i class="fa fa-shopping-cart"></i> add to cart </a></button>
                                     </div>
                                 </div>
                                 <!-- /product -->

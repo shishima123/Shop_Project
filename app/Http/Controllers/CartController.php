@@ -1,31 +1,66 @@
 <?php
-namespace App;
 
-class Cart
+namespace App\Http\Controllers;
+
+use App\Cart;
+use App\CartDetail;
+use App\Product;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class CartController extends Controller
 {
-    public $items = null;
-    public $totaLQty = 0;
-    public $totaLPrice = 0;
-    public function __construct($oldCart)
+    public function getAddToCart(Request $request, $id)
     {
-        if ($oldCart) {
-            $this->items = $oldCart->items;
-            $this->totaLQty = $oldCart->totaLQty;
-            $this->totaLPrice = $oldCart->totaLPrice;
+        if (Auth::user()) {
+            $userId = Auth::id();
+            $chkCart = Cart::where('user_id', $userId)->first();
+            $product_buy = Product::where('id', $id)->firstOrFail();
+            // return $chkCart;
+            if (!$chkCart) {
+                //create new cart for this user
+                $new_cart = new Cart;
+                $new_cart->user_id = $userId;
+                $new_cart->save();
+
+                //add product to this cart
+                $cart_detail = new CartDetail;
+                $cart_detail->cart_id = $new_cart->id;
+                $cart_detail->product_id = $product_buy->id;
+                $cart_detail->qty = 1;
+                $cart_detail->save();
+            } else {
+                $cart_details = CartDetail::where('cart_id', $chkCart->id)->get();
+                $chkCartDetailProduct = false;
+                foreach ($cart_details as $cart_detail) {
+                    if ($cart_detail->product_id == $product_buy->id) {
+                        $chkCartDetailProduct = true;
+                        break;
+                    }
+                }
+                // return $checkExists;
+                if ($chkCartDetailProduct) {
+                    $qty = $cart_detail->qty + 1;
+                    CartDetail::where('id', $cart_detail->id)
+                        ->update(['qty' => $qty]);
+                } else {
+                    $cart_detail = new CartDetail;
+                    $cart_detail->cart_id = $chkCart->id;
+                    $cart_detail->product_id = $product_buy->id;
+                    $cart_detail->qty = 1;
+                    $cart_detail->save();
+                }
+            }
+            return redirect()->route('index');
+        } else {
+            return view('frontend.loginRequire');
         }
     }
-    public function add($item, $id)
+    public function getCartInfo()
     {
-        $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
-        if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
-                $storedItem = $this->items[$id];
-            }
-        }
-        $storedItem['qty']++;
-        $storedItem['price'] = $item->price * $storedItem['qty'];
-        $this->items[$id] = $storedItem;
-        $this->totaLQty++;
-        $this->totaLPrice += $item->price;
+        $user_id = Auth::id();
+        $cart_detail = Cart::where('user_id', $user_id)->with('products')->withCount('products')->firstOrFail();
+        return $cart_detail;
     }
 }

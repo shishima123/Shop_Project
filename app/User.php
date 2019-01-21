@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cart;
 use App\CommentRating;
 use App\Order;
 use App\Product;
@@ -28,5 +29,9 @@ class User extends Authenticatable
     public function comment_ratings()
     {
         return $this->hasMany(CommentRating::class);
+    }
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }

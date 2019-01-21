@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use App\Category;
 use App\CommentRating;
 use App\Product;
@@ -10,7 +9,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class FrontendController extends Controller
 {
@@ -130,50 +128,6 @@ class FrontendController extends Controller
         }
     }
 
-    public function getAddToCart(Request $request, $id)
-    {
-        $addtocart = Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($addtocart, $addtocart->id);
-        $request->session()->put('cart', $cart);
-        //dd($request->session()->get('cart'));
-        return redirect()->route('index');
-    }
-
-    public function getCart()
-    {
-        if (!Session::has('cart')) {
-            return view('frontend.shopcart', ['addtocart' => null]);
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        //dd($cart);
-        return view('frontend.shopcart', ['addtocart' => $cart->items, 'totaLPrice' => $cart->totaLPrice]);
-    }
-
-    public function notFound()
-    {
-        return redirect()->route('notFound');
-    }
-
-    public function getError()
-    {
-        return view('frontend.error');
-    }
-    public function getCheckout()
-    {
-        if (!Session::has('cart')) {
-            return view('frontend.shopcart', ['addtocart' => null]);
-        }
-        $oldCart = Session::get('cart');
-        //dd($oldCart);
-        $cart = new cart($oldCart);
-        $total = $cart->totaLPrice;
-        //dd($total);
-        return view('frontend.checkout', ['total' => $total]);
-    }
-
     public function commentRating(Request $request, $id)
     {
         DB::beginTransaction();
@@ -211,5 +165,15 @@ class FrontendController extends Controller
                 ->route('product', $id)
                 ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Somethings wrong when Comment and Rating Product. Please try again.']);
         }
+    }
+
+    public function notFound()
+    {
+        return redirect()->route('notFound');
+    }
+
+    public function getError()
+    {
+        return view('frontend.error');
     }
 }

@@ -2,16 +2,15 @@
 
 Route::get('/', 'FrontendController@index')->name('index');
 
-// Route::get('/checkout', function () {
-//     return view('frontend.checkout');
-// });
+Route::get('get-cart-info', 'CartController@getCartInfo')->name('getCartInfo');
+
 Route::get('/product/{id}', 'FrontendController@show')->name('product');
 Route::put('/product/{id}', 'FrontendController@commentRating')->name('comment_rating');
 Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('search', 'FrontendController@getSearch')->name('search');
 //Shopping cart
-Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
+Route::get('cart/{id}/{name}', 'CartController@getAddToCart')->name('addToCart');
 Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
 Route::get('checkout', 'FrontendController@getCheckout')->name('checkout');
 Route::post('checkout', 'FrontendController@postCheckout')->name('checkout');

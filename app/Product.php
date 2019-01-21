@@ -36,4 +36,9 @@ class Product extends Model
     {
         return $this->hasMany(CommentRating::class);
     }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'cart_details')->withPivot('qty');
+    }
 }

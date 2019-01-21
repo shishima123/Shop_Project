@@ -122,4 +122,39 @@ $(document).ready(function () {
             $(strHtml).appendTo('#areaProduct');
         }
     }
+
+    if ($('#cart').length) {
+        url = window.location.origin + '/shop_project/public/get-cart-info';
+        console.log(url);
+        $.ajax({
+                url: url,
+                type: 'GET',
+            })
+            .done(function (data) {
+                $('#totalProduct').text('Your Cart(' + data.products_count + ')')
+                console.log(data.products_count);
+                // var strHtml = '';
+                // strHtml += '<div class="cart-list">'
+                // for (x in data) {
+                //     strHtml += '<div class="product-widget">'
+                //     strHtml += '<div class="product-img">'
+                //     strHtml += '<img src="" alt="">'
+                //     strHtml += '</div>'
+                //     strHtml += '<div class="product-body">'
+                //     strHtml += '<h3 class="product-name"><a href="#">product name goes here</a></h3>'
+                //     strHtml += '<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>'
+                //     strHtml += '</div>'
+                //     strHtml += '<button class="delete"><i class="fa fa-close"></i></button>'
+                //     strHtml += '</div>'
+                // }
+                // strHtml += '</div>'
+                // strHtml += '<div class="cart-summary">'
+                // strHtml += '<small>3 Item(s) selected</small>'
+                // strHtml += '<h5>SUBTOTAL: $2940.00</h5>'
+                // strHtml += '</div>'
+                // $(strHtml).appendTo('#cartDetail');
+            }).fail(function () {
+                alert('Sorry. Some things wrong when load data. Please try again.');
+            });
+    }
 });

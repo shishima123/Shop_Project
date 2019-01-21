@@ -23,7 +23,6 @@ class CreateOrdersTable extends Migration
             $table->string('order_name');
             $table->string('order_address');
             $table->string('order_phone');
-
             $table->timestamps();
         });
     }
