@@ -6,5 +6,4 @@ namespace App\Http\Controllers;
 
 class CartDetailController extends Controller
 {
-    //
 }

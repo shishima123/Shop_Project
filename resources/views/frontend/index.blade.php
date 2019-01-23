@@ -61,7 +61,7 @@
                                     </div>
 
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><a href="{{route('addToCart',[$new_product->id,$new_product->name])}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
+                                        <a href="{{route('addToCart',$new_product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
                                     </div>
                                 </div>
                                 <!-- /product -->

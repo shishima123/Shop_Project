@@ -51,7 +51,9 @@ $(document).ready(function () {
 
     /* Event Delete sub-picture in admin.product.index*/
     $('.delImg').click(function () {
-        var url = "{{ asset('admin/product/delimg') }}" + "/" + this.id;
+        var baseUrl = window.location.origin;
+        var url = baseUrl + "/shop_project/public/admin/product/delimg/" + this.id;
+        console.log(url);
         var idDivImg = this.id;
         $.ajax({
             url: url,

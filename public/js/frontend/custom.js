@@ -24,13 +24,14 @@ $(document).ready(function () {
 
     //check comment rating
     $('#commentRating').click(function (e) {
-        console.log($("input[name='rating']").is(":checked"));
+        // console.log($("input[name='rating']").is(":checked"));
         if ($('#txtComment').val() == '' || $("input[name='rating']").is(":checked") == false) {
             e.preventDefault();
             alert('Please enter your comment or select star rating');
         }
     });
 
+    //Pagination
     $('.store-pagination li a').click(function (e) {
         e.preventDefault();
         var objClick = $(this);
@@ -67,6 +68,8 @@ $(document).ready(function () {
             })
     });
 
+
+    //set dataAjax for Pagination
     function renderProduct(data) {
         var product = data.data;
         var baseUrl = window.location.origin;
@@ -123,38 +126,102 @@ $(document).ready(function () {
         }
     }
 
+    //get info Cart
     if ($('#cart').length) {
-        url = window.location.origin + '/shop_project/public/get-cart-info';
-        console.log(url);
+        url = window.location.origin + '/shop_project/public/checkout';
         $.ajax({
                 url: url,
                 type: 'GET',
             })
             .done(function (data) {
                 $('#totalProduct').text('Your Cart(' + data.products_count + ')')
-                console.log(data.products_count);
-                // var strHtml = '';
-                // strHtml += '<div class="cart-list">'
-                // for (x in data) {
-                //     strHtml += '<div class="product-widget">'
-                //     strHtml += '<div class="product-img">'
-                //     strHtml += '<img src="" alt="">'
-                //     strHtml += '</div>'
-                //     strHtml += '<div class="product-body">'
-                //     strHtml += '<h3 class="product-name"><a href="#">product name goes here</a></h3>'
-                //     strHtml += '<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>'
-                //     strHtml += '</div>'
-                //     strHtml += '<button class="delete"><i class="fa fa-close"></i></button>'
-                //     strHtml += '</div>'
-                // }
-                // strHtml += '</div>'
-                // strHtml += '<div class="cart-summary">'
-                // strHtml += '<small>3 Item(s) selected</small>'
-                // strHtml += '<h5>SUBTOTAL: $2940.00</h5>'
-                // strHtml += '</div>'
-                // $(strHtml).appendTo('#cartDetail');
+                var strHtml = '';
+                var product = data.products;
+                var sum = '';
+                var count = 0;
+                var baseUrl = window.location.origin + '/shop_project/public/';
+                // console.log(product);
+                strHtml += '<div class="cart-list">'
+                for (x in product) {
+                    strHtml += '<div class="product-widget">'
+                    strHtml += '<a href="' + baseUrl + 'product/' + product[x].id + '">'
+                    strHtml += '<div class="product-img">'
+                    strHtml += '<img src = "' + window.location.origin + '/shop_project/public/' + product[x].picture + '"alt = "" >'
+                    strHtml += '</div>'
+                    strHtml += '</a>'
+                    strHtml += '<div class="product-body">'
+                    strHtml += '<h3 class="product-name"><a href="' + baseUrl + 'product/' + product[x].id + '">' + product[x].name + '</a></h3>'
+                    strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + product[x].price + '$</h4>'
+                    strHtml += '</div>'
+                    strHtml += '<button class="delete"><i class="fa fa-close"></i></button>'
+                    strHtml += '</div>'
+                    sum += (product[x].pivot.qty * product[x].price);
+                    count++;
+                }
+                strHtml += '</div>'
+                strHtml += '<div class="cart-summary">'
+                strHtml += '<small>' + count + ' Item(s) selected</small>'
+                strHtml += '<h5>SUBTOTAL: ' + sum + '$</h5>'
+                strHtml += '</div>'
+                strHtml += '<div class="cart-btns">'
+                strHtml += '<a href="' + baseUrl + 'checkout">View Cart</a>'
+                strHtml += '<a href="' + baseUrl + 'checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>'
+                strHtml += '</div>'
+                $(strHtml).appendTo('#cartDetail');
+                // console.log(strHtml)
+                // $('#cartDetail').after(strHtml);
+
             }).fail(function () {
-                alert('Sorry. Some things wrong when load data. Please try again.');
+                var strHtml = '';
+                strHtml += '<div class="product-widget">'
+                strHtml += '<div class="product-body">'
+                strHtml += '<p>YOUR CART IS EMPTY</p>'
+                strHtml += '</div>'
+                strHtml += '<div class="cart-btns">'
+                strHtml += '<a href="#"disable>View Cart</a>'
+                strHtml += '<a href="#">Checkout <i class="fa fa-arrow-circle-right" disable></i></a>'
+                strHtml += '</div>'
+                $(strHtml).appendTo('#cartDetail');
             });
     }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    /* Event Delete item in cart*/
+    $('.delItemCart').click(function () {
+        var baseUrl = window.location.origin;
+        var url = baseUrl + "/shop_project/public/checkout/del-item/" + this.id;
+        obj = this.id;
+        var idDivImg = this.id;
+        $.ajax({
+            url: url,
+            type: 'PUT',
+            data: {
+                "_token": $('#token').val()
+            },
+        }).done(function (data) {
+            $('#tr' + obj).remove();
+            full_url = window.location.href;
+            if (full_url.includes('checkout')) {
+                var old_total = $('.order-total').text();
+                var new_total = $('.order-total').text(Math.round(old_total - data));
+                if (new_total.text() == 0) {
+                    $('#theadItemCart').remove();
+                    var strHtml = '';
+                    strHtml += '<td colspan="3" style="text-align:center"><h1>No item in Cart</h1></td>'
+                    $(strHtml).appendTo('#tbodyItemCart')
+                }
+            } else {
+                console.log('a');
+            }
+
+
+        }).fail(function (data) {
+            alert('Server Error. Please try again');
+        });
+    });
 });
