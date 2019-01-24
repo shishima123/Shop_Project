@@ -24,7 +24,6 @@ $(document).ready(function () {
 
     //check comment rating
     $('#commentRating').click(function (e) {
-        // console.log($("input[name='rating']").is(":checked"));
         if ($('#txtComment').val() == '' || $("input[name='rating']").is(":checked") == false) {
             e.preventDefault();
             alert('Please enter your comment or select star rating');
@@ -134,54 +133,62 @@ $(document).ready(function () {
                 type: 'GET',
             })
             .done(function (data) {
-                $('#totalProduct').text('Your Cart(' + data.products_count + ')')
-                var strHtml = '';
-                var product = data.products;
-                var sum = '';
-                var count = 0;
-                var baseUrl = window.location.origin + '/shop_project/public/';
-                // console.log(product);
-                strHtml += '<div class="cart-list">'
-                for (x in product) {
-                    strHtml += '<div class="product-widget">'
-                    strHtml += '<a href="' + baseUrl + 'product/' + product[x].id + '">'
-                    strHtml += '<div class="product-img">'
-                    strHtml += '<img src = "' + window.location.origin + '/shop_project/public/' + product[x].picture + '"alt = "" >'
-                    strHtml += '</div>'
-                    strHtml += '</a>'
-                    strHtml += '<div class="product-body">'
-                    strHtml += '<h3 class="product-name"><a href="' + baseUrl + 'product/' + product[x].id + '">' + product[x].name + '</a></h3>'
-                    strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + product[x].price + '$</h4>'
-                    strHtml += '</div>'
-                    strHtml += '<button class="delete"><i class="fa fa-close"></i></button>'
-                    strHtml += '</div>'
-                    sum += (product[x].pivot.qty * product[x].price);
-                    count++;
-                }
-                strHtml += '</div>'
-                strHtml += '<div class="cart-summary">'
-                strHtml += '<small>' + count + ' Item(s) selected</small>'
-                strHtml += '<h5>SUBTOTAL: ' + sum + '$</h5>'
-                strHtml += '</div>'
-                strHtml += '<div class="cart-btns">'
-                strHtml += '<a href="' + baseUrl + 'checkout">View Cart</a>'
-                strHtml += '<a href="' + baseUrl + 'checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>'
-                strHtml += '</div>'
-                $(strHtml).appendTo('#cartDetail');
-                // console.log(strHtml)
-                // $('#cartDetail').after(strHtml);
+                if (data.products_count !== 0) {
+                    $('#totalProduct').text('Your Cart(' + data.products_count + ')')
+                    var strHtml = '';
+                    var product = data.products;
+                    var sum = 0;
+                    var count = 0;
+                    var baseUrl = window.location.origin + '/shop_project/public/';
+                    strHtml += '<div class="cart-list">'
+                    for (x in product) {
+                        strHtml += '<div class="product-widget" id="productWidget' + product[x].id + '">'
+                        strHtml += '<a href="' + baseUrl + 'product/' + product[x].id + '">'
+                        strHtml += '<div class="product-img">'
+                        strHtml += '<img src = "' + window.location.origin + '/shop_project/public/' + product[x].picture + '"alt = "" >'
+                        strHtml += '</div>'
+                        strHtml += '</a>'
+                        strHtml += '<div class="product-body">'
+                        strHtml += '<h3 class="product-name"><a href="' + baseUrl + 'product/' + product[x].id + '">' + product[x].name + '</a></h3>'
+                        if (product[x].sale) {
+                            strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + (product[x].price - product[x].price * product[x].sale / 100) + '$</h4>'
+                            strHtml += '</div>'
+                            strHtml += '<button class="delete"><i class="fa fa-close delItemHeader" id="' + product[x].id + '"></i></button>'
+                            strHtml += '</div>'
+                            sum += (product[x].pivot.qty * (product[x].price - product[x].price * product[x].sale / 100));
+                        } else {
+                            strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + product[x].price + '$</h4>'
+                            strHtml += '</div>'
+                            strHtml += '<button class="delete"><i class="fa fa-close delItemHeader" id="' + product[x].id + '"></i></button>'
+                            strHtml += '</div>'
+                            sum += (product[x].pivot.qty * product[x].price);
 
+                        }
+                        count++;
+                    }
+                    strHtml += '</div>'
+                    strHtml += '<div class="cart-summary">'
+                    strHtml += '<small id="itemSelected">' + count + ' Item(s) selected</small>'
+                    strHtml += '<h5>SUBTOTAL: <span id="olderTotal">' + sum + '</span>$</h5>'
+                    strHtml += '</div>'
+                    strHtml += '<div class="cart-btns">'
+                    strHtml += '<a href="' + baseUrl + 'checkout">View Cart</a>'
+                    strHtml += '<a href="' + baseUrl + 'checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>'
+                    strHtml += '</div>'
+                    $(strHtml).appendTo('#cartDetail');
+                } else {
+                    var strHtml = '';
+                    strHtml += '<br>'
+                    strHtml += '<h6 class="text-center">YOUR CART IS EMPTY</h6>'
+                    strHtml += '<br>'
+                    strHtml += '<div class="cart-btns">'
+                    strHtml += '<a href="#"disable>View Cart</a>'
+                    strHtml += '<a href="#">Checkout <i class="fa fa-arrow-circle-right" disable></i></a>'
+                    strHtml += '</div>'
+                    $(strHtml).appendTo('#cartDetail');
+                }
             }).fail(function () {
-                var strHtml = '';
-                strHtml += '<div class="product-widget">'
-                strHtml += '<div class="product-body">'
-                strHtml += '<p>YOUR CART IS EMPTY</p>'
-                strHtml += '</div>'
-                strHtml += '<div class="cart-btns">'
-                strHtml += '<a href="#"disable>View Cart</a>'
-                strHtml += '<a href="#">Checkout <i class="fa fa-arrow-circle-right" disable></i></a>'
-                strHtml += '</div>'
-                $(strHtml).appendTo('#cartDetail');
+
             });
     }
 
@@ -196,32 +203,165 @@ $(document).ready(function () {
         var baseUrl = window.location.origin;
         var url = baseUrl + "/shop_project/public/checkout/del-item/" + this.id;
         obj = this.id;
-        var idDivImg = this.id;
         $.ajax({
             url: url,
             type: 'PUT',
-            data: {
-                "_token": $('#token').val()
-            },
         }).done(function (data) {
             $('#tr' + obj).remove();
-            full_url = window.location.href;
-            if (full_url.includes('checkout')) {
-                var old_total = $('.order-total').text();
-                var new_total = $('.order-total').text(Math.round(old_total - data));
-                if (new_total.text() == 0) {
-                    $('#theadItemCart').remove();
-                    var strHtml = '';
-                    strHtml += '<td colspan="3" style="text-align:center"><h1>No item in Cart</h1></td>'
-                    $(strHtml).appendTo('#tbodyItemCart')
-                }
-            } else {
-                console.log('a');
+            var old_total = $('.order-total').text();
+            var new_total = $('.order-total').text(Math.round(old_total - data));
+            if (new_total.text() <= 0) {
+                $('#olderTotal').text(0);
+                $('#theadItemCart').remove();
+                var strHtml = '';
+                strHtml += '<td colspan="3" style="text-align:center"><h1>No item in Cart</h1></td>'
+                $(strHtml).appendTo('#tbodyItemCart')
             }
-
-
+            $.notify({
+                // options
+                title: "<strong>Complete:</strong> ",
+                message: 'The product has been removed from the cart',
+            }, {
+                type: 'success',
+                z_index: 2002,
+                delay: 5000,
+            });
         }).fail(function (data) {
-            alert('Server Error. Please try again');
+            $.notify({
+                // options
+                title: "<strong>Fail:</strong> ",
+                message: 'Server Error. Please try again.',
+            }, {
+                type: 'danger',
+                z_index: 2002,
+                delay: 5000,
+            });
         });
     });
+
+    /* Event Delete item in cart*/
+    $('#cartDetail').on("click", ".delItemHeader", function () {
+        var baseUrl = window.location.origin;
+        var obj = this.id;
+        var url = baseUrl + "/shop_project/public/checkout/del-item/" + obj;
+        $.ajax({
+            url: url,
+            type: 'PUT',
+        }).done(function (data) {
+            $('#productWidget' + obj).remove();
+            var old_sum_money = $('#olderTotal').text();
+            var new_sum_money = $('#olderTotal').text(Math.round(old_sum_money - data));
+            old_total = $('#totalProduct').text().replace(/[^\d.]/g, '');
+            new_total = parseInt(old_total) - 1;
+            $('#totalProduct').text('Your Cart(' + new_total + ')');
+            $('#itemSelected').text(new_total + ' Item(s) selected');
+            if (new_sum_money.text() <= 0) {
+                $('#olderTotal').text(0);
+                var strHtml = '';
+                $('#cartDetail').empty();
+                strHtml += '<br>'
+                strHtml += '<h6 class="text-center">YOUR CART IS EMPTY</h6>'
+                strHtml += '<br>'
+                strHtml += '<div class="cart-btns">'
+                strHtml += '<a href="#"disable>View Cart</a>'
+                strHtml += '<a href="#">Checkout <i class="fa fa-arrow-circle-right" disable></i></a>'
+                strHtml += '</div>'
+                $(strHtml).appendTo('#cartDetail');
+            }
+
+            $.notify({
+                // options
+                title: "<strong>Complete:</strong> ",
+                message: 'The product has been removed from the cart',
+            }, {
+                type: 'success',
+                z_index: 2002,
+                delay: 5000,
+            });
+        }).fail(function (data) {
+            $.notify({
+                // options
+                title: "<strong>Fail:</strong> ",
+                message: 'Server Error. Please try again.',
+            }, {
+                type: 'danger',
+                z_index: 2002,
+                delay: 5000,
+            });
+        });
+    });
+
+    $('.add-to-cart-btn').click(function (e) {
+        e.preventDefault();
+        var objClick = $(this);
+        objUrl = objClick.parent().attr('href');
+        $.ajax({
+                url: objUrl,
+                type: 'GET',
+            })
+            .done(function (data) {
+                $('#cartDetail').empty();
+                $('#totalProduct').text('Your Cart(' + data.products_count + ')')
+                var strHtml = '';
+                var product = data.products;
+                var sum = 0;
+                var count = 0;
+                var baseUrl = window.location.origin + '/shop_project/public/';
+                strHtml += '<div class="cart-list">'
+                for (x in product) {
+                    strHtml += '<div class="product-widget" id="productWidget' + product[x].id + '">'
+                    strHtml += '<a href="' + baseUrl + 'product/' + product[x].id + '">'
+                    strHtml += '<div class="product-img">'
+                    strHtml += '<img src = "' + window.location.origin + '/shop_project/public/' + product[x].picture + '"alt = "" >'
+                    strHtml += '</div>'
+                    strHtml += '</a>'
+                    strHtml += '<div class="product-body">'
+                    strHtml += '<h3 class="product-name"><a href="' + baseUrl + 'product/' + product[x].id + '">' + product[x].name + '</a></h3>'
+                    if (product[x].sale) {
+                        strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + (product[x].price - product[x].price * product[x].sale / 100) + '$</h4>'
+                        strHtml += '</div>'
+                        strHtml += '<button class="delete"><i class="fa fa-close delItemHeader" id="' + product[x].id + '"></i></button>'
+                        strHtml += '</div>'
+                        sum += (product[x].pivot.qty * (product[x].price - product[x].price * product[x].sale / 100));
+                    } else {
+                        strHtml += '<h4 class="product-price"><span class="qty">' + product[x].pivot.qty + 'x</span>' + product[x].price + '$</h4>'
+                        strHtml += '</div>'
+                        strHtml += '<button class="delete"><i class="fa fa-close delItemHeader" id="' + product[x].id + '"></i></button>'
+                        strHtml += '</div>'
+                        sum += (product[x].pivot.qty * product[x].price);
+
+                    }
+                    count++;
+                }
+                strHtml += '</div>'
+                strHtml += '<div class="cart-summary">'
+                strHtml += '<small id="itemSelected">' + count + ' Item(s) selected</small>'
+                strHtml += '<h5>SUBTOTAL: <span id="olderTotal">' + sum + '</span>$</h5>'
+                strHtml += '</div>'
+                strHtml += '<div class="cart-btns">'
+                strHtml += '<a href="' + baseUrl + 'checkout">View Cart</a>'
+                strHtml += '<a href="' + baseUrl + 'checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>'
+                strHtml += '</div>'
+                $(strHtml).appendTo('#cartDetail');
+                $.notify({
+                    // options
+                    title: "<strong>Complete:</strong> ",
+                    message: 'The product has been added to cart',
+                }, {
+                    type: 'success',
+                    z_index: 2002,
+                    delay: 5000,
+                });
+            }).fail(function () {
+                $.notify({
+                    // options
+                    title: "<strong>Fail:</strong> ",
+                    message: 'Server Error. Please try again.',
+                }, {
+                    type: 'danger',
+                    z_index: 2002,
+                    delay: 5000,
+                });
+            })
+    })
 });

@@ -139,6 +139,7 @@
 <script src="{{ asset('js/frontend/nouislider.min.js') }}"></script>
 <script src="{{ asset('js/frontend/jquery.zoom.min.js') }}"></script>
 <script src="{{ asset('js/frontend/main.js') }}"></script>
+<script src="{{ asset('js/bootstrap-notify/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('js/frontend/custom.js') }}"></script>
 </body>
 

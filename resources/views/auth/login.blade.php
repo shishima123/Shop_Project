@@ -3,7 +3,7 @@
 @section('title',"Login - Electro")
 @section('content')
 @if (session('flash_message_title'))
-<div id="alertMessage" class="alert alert-danger text-center" role="alert">
+<div id="alertMessage" class="{{ session('flash_message_type') }} alert-{{ session('flash_message_type') }} text-center" role="alert">
     <h3>{{ session('flash_message_title') }}</h3>
     <p>{{ session('flash_message_content') }}</p>
 </div>

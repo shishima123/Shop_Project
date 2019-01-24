@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRegisterRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +35,7 @@ class chkLoginController extends Controller
         return view('auth.register');
     }
 
-    public function postRegister(UserRegisterRequest $request)
+    public function postRegister(Request $request)
     {
         try {
             $user = new User;
@@ -45,9 +44,9 @@ class chkLoginController extends Controller
             $user->password = bcrypt($request->password);
             $user->role = 'user';
             $user->save();
-            return redirect()->route('getLogin')->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Register success. Please login to continue.']);
+            return redirect()->route('getLogin')->with(['flash_message_type' => 'success', 'flash_message_title' => 'Success', 'flash_message_content' => 'Success!!! Register success. Please login to continue.']);
         } catch (Exception $e) {
-            return redirect()->route('getRegister')->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Register fail. Please try again.']);
+            return redirect()->route('getRegister')->with(['flash_message_type' => 'danger', 'flash_message_title' => 'Fail', 'flash_message_content' => 'Fail!!! Register fail. Please try again.']);
         }
     }
 

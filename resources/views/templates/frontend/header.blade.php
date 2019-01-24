@@ -27,6 +27,8 @@
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" />
 
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/animate.css') }}" />
+
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
 </head>

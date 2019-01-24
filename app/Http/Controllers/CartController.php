@@ -56,6 +56,11 @@ class CartController extends Controller
                         $cart_detail->save();
                     }
                 }
+                if ($request->ajax()) {
+                    $user_id = Auth::id();
+                    $cart_detail = Cart::where('user_id', $user_id)->with('products')->withCount('products')->first();
+                    return $cart_detail;
+                }
                 return redirect()->route('index');
             } else {
                 return view('frontend.loginRequire');
@@ -68,7 +73,7 @@ class CartController extends Controller
     public function getCheckout(Request $request)
     {
         $user_id = Auth::id();
-        $cart_detail = Cart::where('user_id', $user_id)->with('products')->withCount('products')->first();
+        $cart_detail = Cart::where('user_id', $user_id)->with('products')->withCount('products')->firstOrFail();
         // return $cart_detail;
         if ($cart_detail) {
             if ($request->ajax()) {
@@ -113,10 +118,12 @@ class CartController extends Controller
             $add_order_total = Order::where('id', $new_order->id)->update(['total' => $order_total]);
             // return $add_order_total;
             // return $order_total;
+            $cart_detail->products()->detach();
+            $cart_detail->delete();
             DB::commit();
             return redirect()
                 ->route('index')
-                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Checkout.']);
+                ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Your Order have Been Complete.']);
         } catch (Exception $e) {
             DB::rollback();
             return redirect()
@@ -128,30 +135,13 @@ class CartController extends Controller
 
     public function delItemCart($id)
     {
-        // return 1;
         $del_item = CartDetail::where('product_id', $id)->with('product')->first();
-        // $del_item->delete();
-
         if ($del_item->product->sale) {
-            return $del_item->product->price - $del_item->product->price * $del_item->product->sale / 100;
+            $sum = ($del_item->product->price - $del_item->product->price * $del_item->product->sale / 100) * $del_item->qty;
         } else {
-            return $del_item->product->price;
+            $sum = $del_item->product->price * $del_item->qty;
         }
+        $del_item->delete();
+        return $sum;
     }
 }
-
-// DB::beginTransaction();
-// try {
-
-//     DB::commit();
-
-//     return redirect()
-//         ->route('category.index')
-//         ->with(['flash_type' => 'success', 'flash_message' => 'Success!!! Complete Delete Category.']);
-// } catch (Exception $e) {
-//     DB::rollback();
-
-//     return redirect()
-//         ->route('category.index')
-//         ->with(['flash_type' => 'danger', 'flash_message' => 'Fail!!! Fail To Delete Category.']);
-// }

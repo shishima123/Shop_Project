@@ -1,7 +1,7 @@
 @extends('templates.frontend.master')
 @section('title','Electro - Home Page')
 @section('content')
-
+@include('templates.Admin.flash_message')
 <!-- NEW PRODUCT -->
 <div class="section">
     <!-- container -->
@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><a href="{{route('addToCart',[$top_selling->id,$top_selling->name])}}"><i class="fa fa-shopping-cart"></i> add to cart </a></button>
+                                        <a href="{{route('addToCart',$top_selling->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
                                     </div>
                                 </div>
                                 <!-- /product -->

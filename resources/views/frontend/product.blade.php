@@ -62,7 +62,9 @@
 								<span class="qty-down">-</span>
 							</div>
 						</div>
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+						<div class="add-to-cart">
+                                        <a href="{{route('addToCart',$product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+                                    </div>
 					</div>
 
 					<ul class="product-btns">
@@ -143,8 +145,8 @@
 														@for ($j=6;$j>1;$j--)
 															@if ($j<=$i) 
 																<i class="fa fa-star-o"></i>
-															@else 
-																<i class="fa fa-star"></i> 
+															@else
+																<i class="fa fa-star"></i>
 															@endif
 														@endfor
 													</div>
@@ -302,9 +304,9 @@
 											view</span></button>
 								</div>
 							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
+                                    <div class="add-to-cart">
+                                        <a href="{{route('addToCart',$related_product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+                                    </div>
 						</div>
 					</div>
 					<!-- /product -->
