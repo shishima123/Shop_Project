@@ -188,7 +188,15 @@ $(document).ready(function () {
                     $(strHtml).appendTo('#cartDetail');
                 }
             }).fail(function () {
-
+                var strHtml = '';
+                strHtml += '<br>'
+                strHtml += '<h6 class="text-center">YOUR CART IS EMPTY</h6>'
+                strHtml += '<br>'
+                strHtml += '<div class="cart-btns">'
+                strHtml += '<a href="#"disable>View Cart</a>'
+                strHtml += '<a href="#">Checkout <i class="fa fa-arrow-circle-right" disable></i></a>'
+                strHtml += '</div>'
+                $(strHtml).appendTo('#cartDetail');
             });
     }
 

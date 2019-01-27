@@ -89,7 +89,7 @@ All Products - Electro Website
 					<div class="checkbox-filter">
 						@foreach ($categories as $category)
 						@if ($category->parent_id !== 0)
-							<div class="input-checkbox">
+						<div class="input-checkbox">
 							<input type="checkbox" id="brand-1">
 							<label for="brand-1">
 								<span></span>
@@ -132,26 +132,26 @@ All Products - Electro Website
 					</ul>
 				</div>
 				<!-- /store top filter -->
- 
+
 				<!-- store products -->
 				<div class="row" id="areaProduct">
 					@foreach ($products as $key=>$product)
 					<!-- product -->
 					<div class="col-md-4 col-xs-6">
 						<div class="product">
-								<a href="{{ route('product',$product->id) }}">
-									<div class="product-img">
-										<img src="{{ asset($product->picture) }}" alt="{{ $product->name }}">
-										<div class="product-label">
-											@if ($product->sale)
-											<span class="sale">-{{ $product->sale }}%</span>
-											@endif
-											@if ($product->new)
-											<span class="new">NEW</span>
-											@endif
-										</div>
+							<a href="{{ route('product',$product->id) }}">
+								<div class="product-img">
+									<img src="{{ asset($product->picture) }}" alt="{{ $product->name }}">
+									<div class="product-label">
+										@if ($product->sale)
+										<span class="sale">-{{ $product->sale }}%</span>
+										@endif
+										@if ($product->new)
+										<span class="new">NEW</span>
+										@endif
 									</div>
-								</a>	
+								</div>
+							</a>
 							<div class="product-body">
 								<p class="product-category">{{ $product->category->name }}</p>
 								<h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
@@ -177,34 +177,37 @@ All Products - Electro Website
 								</div>
 							</div>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<div class="add-to-cart">
+									<a href="{{route('addToCart',$product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+											add to cart</button></a>
+								</div>
 							</div>
 						</div>
+						</div>
+						<!-- /product -->
+						@endforeach
 					</div>
-					<!-- /product -->
-					@endforeach
-				</div>
-				<!-- /store products -->
+					<!-- /store products -->
 
-				<!-- store bottom filter -->
-				<div class="store-filter clearfix">
-					<span class="store-qty">Showing 20-100 products</span>
-					<ul class="store-pagination">
-						<li class="first"><a href="{{ $products->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
-						@for ($i=1;$i<=$products->lastPage();$i++)
-							<li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif">
-								<a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a></li>
-							@endfor
-							<li class="last"><a href="{{ $products->url($products->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
-					</ul>
+					<!-- store bottom filter -->
+					<div class="store-filter clearfix">
+						<span class="store-qty">Showing 20-100 products</span>
+						<ul class="store-pagination">
+							<li class="first"><a href="{{ $products->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
+							@for ($i=1;$i<=$products->lastPage();$i++)
+								<li class="page-item @if ($products->currentPage()===$i) {{ 'active' }} @endif">
+									<a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a></li>
+								@endfor
+								<li class="last"><a href="{{ $products->url($products->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
+						</ul>
+					</div>
+					<!-- /store bottom filter -->
 				</div>
-				<!-- /store bottom filter -->
+				<!-- /STORE -->
 			</div>
-			<!-- /STORE -->
+			<!-- /row -->
 		</div>
-		<!-- /row -->
+		<!-- /container -->
 	</div>
-	<!-- /container -->
-</div>
-<!-- /SECTION -->
-@endsection
+	<!-- /SECTION -->
+	@endsection

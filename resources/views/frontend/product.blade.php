@@ -63,32 +63,32 @@
 							</div>
 						</div>
 						<div class="add-to-cart">
-                                        <a href="{{route('addToCart',$product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
-                                    </div>
+							<a href="{{route('addToCart',$product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+									add to cart</button></a>
+						</div>
+
+						<ul class="product-btns">
+							<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+							<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+						</ul>
+
+						<ul class="product-links">
+							<li>Category:</li>
+							<li><a href="{{ route('store',$category->keyword) }}">{{ $category->name }}</a></li>
+						</ul>
+
+						<ul class="product-links">
+							<li>Share:</li>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+						</ul>
+
 					</div>
-
-					<ul class="product-btns">
-						<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-						<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-					</ul>
-
-					<ul class="product-links">
-						<li>Category:</li>
-						<li><a href="{{ route('store',$category->keyword) }}">{{ $category->name }}</a></li>
-					</ul>
-
-					<ul class="product-links">
-						<li>Share:</li>
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-					</ul>
-
 				</div>
+				<!-- /Product details -->
 			</div>
-			<!-- /Product details -->
-
 			<!-- Product tab -->
 			<div class="col-md-12">
 				<div id="product-tab">
@@ -138,35 +138,33 @@
 										</div>
 										<ul class="rating">
 											{{-- Star rating from 1->5 --}}
-											@for ($i=1;$i<6;$i++) 
-												<li>
-													<div class="rating-stars">
-														{{-- show star --}}
-														@for ($j=6;$j>1;$j--)
-															@if ($j<=$i) 
-																<i class="fa fa-star-o"></i>
-															@else
-																<i class="fa fa-star"></i>
-															@endif
+											@for ($i=1;$i<6;$i++) <li>
+												<div class="rating-stars">
+													{{-- show star --}}
+													@for ($j=6;$j>1;$j--)
+													@if ($j<=$i) <i class="fa fa-star-o"></i>
+														@else
+														<i class="fa fa-star"></i>
+														@endif
 														@endfor
-													</div>
+												</div>
 
-													@php $sum=0; @endphp {{--Set $sum=0--}}
-													{{-- Calculate sum rating each star rating --}}
-													@foreach ($comment_ratings as $key=>$rating)
-														@if ($rating->pivot->rating == 6-$i)
-															@php $sum++; @endphp
-														@endif
-													@endforeach
-													<div class="rating-progress">
-														{{-- Calculate % each star rating --}}
-														@if ($comment_ratings->total() !=0 )
-															<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
-														@endif
-													</div>
-													<span class="sum">{{ $sum }}</span>
+												@php $sum=0; @endphp {{--Set $sum=0--}}
+												{{-- Calculate sum rating each star rating --}}
+												@foreach ($comment_ratings as $key=>$rating)
+												@if ($rating->pivot->rating == 6-$i)
+												@php $sum++; @endphp
+												@endif
+												@endforeach
+												<div class="rating-progress">
+													{{-- Calculate % each star rating --}}
+													@if ($comment_ratings->total() !=0 )
+													<div style="width: {{ $sum/$comment_ratings->total()*100 }}%;"></div>
+													@endif
+												</div>
+												<span class="sum">{{ $sum }}</span>
 												</li>
-											@endfor
+												@endfor
 										</ul>
 									</div>
 								</div>
@@ -182,13 +180,12 @@
 													<h5 class="name">{{ $comment_rating->name }}</h5>
 													<p class="date">{{ $comment_rating->pivot->created_at->format('Y-m-d') }}</p>
 													<div class="review-rating">
-														@for ($i=0;$i<5;$i++)
-															@if ($i < $comment_rating->pivot->rating)
-																<i class="fa fa-star"></i>
+														@for ($i=0;$i<5;$i++) @if ($i < $comment_rating->pivot->rating)
+															<i class="fa fa-star"></i>
 															@else
-																<i class="fa fa-star-o empty"></i>
+															<i class="fa fa-star-o empty"></i>
 															@endif
-														@endfor
+															@endfor
 													</div>
 												</div>
 												<div class="review-body">
@@ -200,11 +197,11 @@
 										@if ($comment_ratings->total())
 										<ul class="reviews-pagination">
 											<li><a href="{{ $comment_ratings->url(1) }}"><i class="fa fa-angle-left"></i></a></li>
-												@for ($i=1;$i<=$comment_ratings->lastPage();$i++)
-													<li class="page-item @if ($comment_ratings->currentPage()===$i) {{ 'active' }} @endif)">
-														<a class="page-link" href="{{ $comment_ratings->url($i) }}">{{ $i }}</a></li>
+											@for ($i=1;$i<=$comment_ratings->lastPage();$i++)
+												<li class="page-item @if ($comment_ratings->currentPage()===$i) {{ 'active' }} @endif)">
+													<a class="page-link" href="{{ $comment_ratings->url($i) }}">{{ $i }}</a></li>
 												@endfor
-											<li><a href="{{ $comment_ratings->url($comment_ratings->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
+												<li><a href="{{ $comment_ratings->url($comment_ratings->lastPage()) }}"><i class="fa fa-angle-right"></i></a></li>
 										</ul>
 										@else
 										<ul class="reviews text-center text-muted">
@@ -215,7 +212,7 @@
 									</div>
 								</div>
 								<!-- /Reviews -->
-							@auth
+								@auth
 								<!-- Review Form -->
 								<div class="col-md-3">
 									<div id="review-form">
@@ -238,8 +235,7 @@
 									</div>
 								</div>
 								<!-- /Review Form -->
-							@endauth
-								
+								@endauth
 							</div>
 						</div>
 						<!-- /tab3  -->
@@ -264,52 +260,53 @@
 			</div>
 
 			@foreach ($related_products as $related_product)
-				<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<a href="{{ route('product',$related_product->id) }}">
-								<div class="product-img">
-									<img src="{{ asset($related_product->picture) }}" alt="{{ $related_product->name }}">
-									<div class="product-label">
-										@if ($related_product->sale)
-										<span class="sale">-{{ $related_product->sale }}%</span>
-										@endif
-										@if ($related_product->sale)
-										<span class="new">NEW</span>
-										@endif
-									</div>
-								</div>
-							</a>
-							<div class="product-body">
-								<p class="product-category">{{ $related_product->category->name }}</p>
-								<h3 class="product-name"><a href="#">{{ $related_product->name }}</a></h3>
-								<h4 class="product-price">{{
-									$related_product->price-$related_product->price*$related_product->sale/100 }} </h4>
+			<!-- product -->
+			<div class="col-md-3 col-xs-6">
+				<div class="product">
+					<a href="{{ route('product',$related_product->id) }}">
+						<div class="product-img">
+							<img src="{{ asset($related_product->picture) }}" alt="{{ $related_product->name }}">
+							<div class="product-label">
 								@if ($related_product->sale)
-								<del class="product-old-price">{{ $related_product->price }}</del>
-								@else
-								<br />
+								<span class="sale">-{{ $related_product->sale }}%</span>
 								@endif
-								<div class="product-rating">
-									@for ($i = 0; $i < $related_product->rating; $i++)
-										<i class="fa fa-star"></i>
-										@endfor
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
-											to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
-											to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
-											view</span></button>
-								</div>
+								@if ($related_product->sale)
+								<span class="new">NEW</span>
+								@endif
 							</div>
-                                    <div class="add-to-cart">
-                                        <a href="{{route('addToCart',$related_product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
-                                    </div>
+						</div>
+					</a>
+					<div class="product-body">
+						<p class="product-category">{{ $related_product->category->name }}</p>
+						<h3 class="product-name"><a href="#">{{ $related_product->name }}</a></h3>
+						<h4 class="product-price">{{
+							$related_product->price-$related_product->price*$related_product->sale/100 }} </h4>
+						@if ($related_product->sale)
+						<del class="product-old-price">{{ $related_product->price }}</del>
+						@else
+						<br />
+						@endif
+						<div class="product-rating">
+							@for ($i = 0; $i < $related_product->rating; $i++)
+								<i class="fa fa-star"></i>
+								@endfor
+						</div>
+						<div class="product-btns">
+							<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
+									to wishlist</span></button>
+							<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
+									to compare</span></button>
+							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+									view</span></button>
 						</div>
 					</div>
-					<!-- /product -->
+					<div class="add-to-cart">
+						<a href="{{route('addToCart',$related_product->id)}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+								add to cart</button></a>
+					</div>
+				</div>
+			</div>
+			<!-- /product -->
 			@endforeach
 
 		</div>
