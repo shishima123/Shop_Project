@@ -1,5 +1,5 @@
 @extends('auth.master')
-
+@section('title',"Register - Electro")
 @section('content')
 @if (session('flash_message'))
     <div id ="alertMessage" class="text-center alert alert-{{ session('flash_type') }}" role="alert">
@@ -13,9 +13,8 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('getRegister') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('postRegister') }}">
                         {{ csrf_field() }}
-
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 

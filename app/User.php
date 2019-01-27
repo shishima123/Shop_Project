@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cart;
 use App\CommentRating;
 use App\Order;
 use App\Product;
@@ -23,10 +24,14 @@ class User extends Authenticatable
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating']);
+        return $this->belongsToMany(Product::class, 'comment_ratings')->withPivot(['content', 'rating', 'created_at']);
     }
     public function comment_ratings()
     {
         return $this->hasMany(CommentRating::class);
+    }
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }

@@ -1,43 +1,18 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-// Route::get('/', function () {
-//     // return view('frontend.index');
-//     $user = App\User::with('products')->get();
-//     return $user;
-// });
-
 Route::get('/', 'FrontendController@index')->name('index');
 
-// Route::get('/blank', function () {
-//     return view('frontend.blank');
-// });
-
-// Route::get('/checkout', function () {
-//     return view('frontend.checkout');
-// });
-
-// Route::get('/product', function () {
-//     return view('frontend.product');
-// });
 Route::get('/product/{id}', 'FrontendController@show')->name('product');
+Route::put('/product/{id}', 'FrontendController@commentRating')->name('comment_rating');
+Route::get('category/{cate?}', 'FrontendController@store')->name('store');
 
 Route::get('search', 'FrontendController@getSearch')->name('search');
+
 //Shopping cart
-Route::get('cart/{id}/{name}', 'FrontendController@getAddToCart')->name('cart');
-Route::get('shopping-cart', 'FrontendController@getCart')->name('shopcart');
-
-
-Route::get('category/{cate?}', 'FrontendController@store')->name('store');
+Route::get('cart/{id}', 'CartController@getAddToCart')->name('addToCart');
+Route::get('checkout', 'CartController@getCheckout')->name('getCheckout');
+Route::post('checkout', 'CartController@postCheckout')->name('postCheckout');
+Route::put('checkout/del-item/{id}', 'CartController@delItemCart')->name('delItemCart');
 
 Route::get('register', 'chkLoginController@getRegister')->name('getRegister');
 Route::post('register', 'chkLoginController@postRegister')->name('postRegister');
@@ -83,3 +58,7 @@ Route::put('admin/product/delimg/{id}', 'ProductController@delImage')->name('pro
 Route::get('admin/comment', 'CommentRatingController@index')->name('comment.index')->middleware('checkAdminLogin');
 Route::get('admin/comment/{id}', 'CommentRatingController@show')->name('comment.show')->middleware('checkAdminLogin');
 Route::put('admin/comment/{id}', 'CommentRatingController@update')->name('comment.update')->middleware('checkAdminLogin');
+
+//If url do not exists then redirect to error template
+Route::fallback('FrontendController@notFound');
+Route::get('error', 'FrontendController@getError')->name('notFound');

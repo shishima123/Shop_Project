@@ -1,202 +1,103 @@
 @extends('templates.frontend.master')
 @section('title','Checkout')
 @section('content')
+
 <!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Checkout</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Checkout</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="breadcrumb-header">Checkout</h3>
+				<ul class="breadcrumb-tree">
+					<li><a href="{{ route('index') }}">Home</a></li>
+					<li class="active">Checkout</li>
+				</ul>
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /BREADCRUMB -->
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">Billing address</h3>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<label for="create-account">
-										<span></span>
-										Create Account?
-									</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /Billing Details -->
-
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
-								<label for="shiping-address">
-									<span></span>
-									Ship to a diffrent address?
-								</label>
-								<div class="caption">
-									<div class="form-group">
-										<input class="input" type="text" name="first-name" placeholder="First Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="last-name" placeholder="Last Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="address" placeholder="Address">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="city" placeholder="City">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="country" placeholder="Country">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-									</div>
-									<div class="form-group">
-										<input class="input" type="tel" name="tel" placeholder="Telephone">
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /Shiping Details -->
-
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-2"></div>
+			<!-- Order Details -->
+			<form action="{{ route('postCheckout') }}" method="POST">
+				{{ csrf_field() }}
+				<div class="col-md-8 order-details center-block">
+					<div class="section-title text-center">
+						<h3 class="title">Your Order</h3>
 					</div>
-
-					<!-- Order Details -->
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">Your Order</h3>
+					<table class="table table-hover">
+						<thead id="theadItemCart">
+							<tr>
+								<th><strong>PRODUCT</strong></th>
+								<th><strong style="margin-left: 25px;">IMAGE</strong></th>
+								<th></th>
+								<th><strong>TOTAL</strong></th>
+							</tr>
+						</thead>
+						<tbody id="tbodyItemCart">
+							<?php $sum=0?>
+							@foreach ($cart_detail->products as $item)
+							<tr id="tr{{ $item->id }}">
+								<td>{{ $item->pivot->qty }}x {{ $item->name }}</td>
+								<td style="width:110px"><img src="{{ asset($item->picture) }}" style="width:100px"></td>
+								<td>
+									<div class="qty-label">
+										Qty
+										<div class="input-number" style="width:60px;margin-bottom: 17px;">
+											<input type="number" id="qty" value="1" name="qty">
+											<span class="qty-up">+</span>
+											<span class="qty-down">-</span>
+										</div>
+										<button class="btn btn-danger delItemCart" id={{ $item->id }} type="button">Delete</button>
+									</div>
+								</td>
+								@if ($item->sale)
+								<td>
+									<div>{{ $item->price - $item->price*$item->sale/100 }} <span>$</span>
+									</div>
+								</td>
+								<?php $sum += (($item->price - $item->price*$item->sale/100)*$item->pivot->qty);?>
+								@else
+								<td>
+									<div>{{ $item->price }} <span>$</span>
+									</div>
+								</td>
+								<?php $sum += ($item->price*$item->pivot->qty);?>
+								@endif
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					<hr>
+					<div class="order-summary">
+						<div class="order-col">
+							<div>Shiping</div>
+							<div><strong>FREE</strong></div>
 						</div>
-						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
-								<div><strong>TOTAL</strong></div>
-							</div>
-							<div class="order-products">
-								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
-							</div>
-							<div class="order-col">
-								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
-							</div>
-							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
-							</div>
+						<div class="order-col">
+							<h3>TOTAL</h3>
+							<div><strong class="order-total" value="{{ $sum }}">{{ $sum }}</strong></div>
 						</div>
-						<div class="payment-method">
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-1">
-								<label for="payment-1">
-									<span></span>
-									Direct Bank Transfer
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
-								<label for="payment-2">
-									<span></span>
-									Cheque Payment
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-3">
-								<label for="payment-3">
-									<span></span>
-									Paypal System
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-						</div>
-						<div class="input-checkbox">
-							<input type="checkbox" id="terms">
-							<label for="terms">
-								<span></span>
-								I've read and accept the <a href="#">terms & conditions</a>
-							</label>
-						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
 					</div>
-					<!-- /Order Details -->
+					<button type="submit" class="primary-btn order-submit btn-block">Order Now</button>
 				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
+			</form>
+			<!-- /Order Details -->
 		</div>
-		<!-- /SECTION -->
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
 @endsection

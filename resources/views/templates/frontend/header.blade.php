@@ -5,8 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>@yield('title')</title>
 
 	<!-- Google font -->
@@ -27,28 +26,31 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" />
+
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/animate.css') }}" />
+
+	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
 </head>
 
 <body>
-	{{-- {{ dd($categories) }} --}}
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
 		<div id="top-header">
 			<div class="container">
 				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-					<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+					<li><a href="#"><i class="fa fa-phone"></i> 0236.3.779.779</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i> tuyensinh@softech.vn</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i>38 Yen Bai, Hai Chau District, Da Nang City</a></li>
 				</ul>
 				<ul class="header-links pull-right">
 					@auth
 					<li><a href="{{ route('admin') }}"><i class="fa fa-user-o"></i>Admin Page</a></li>
 					<li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
-						<div class="dropdown-content bg-dark">
-							<a href="#" class="text-dark">Profile</a>
-							<a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+						<div class="dropdown-content">
+							<a href="#">Profile</a>
+							<a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 								Logout
 							</a>
 
@@ -76,7 +78,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
+							<a href="{{ route('index') }}" class="logo">
 								<img src="{{ asset('upload/logo/logo.png') }}" alt="">
 							</a>
 						</div>
@@ -87,16 +89,15 @@
 					<div class="col-md-6">
 						<div class="header-search">
 							<form role="search" method="get" id="searchform" action="{{route('search')}}">
-								<select class="input-select">
-									<option value="0">All Categories</option>
+								<select class="input-select" name="category">
+									<option value="all-categories">All Categories</option>
 									@for ($i = 0; $i < count($categories); $i++) {{ $i }} @if ($categories[$i]->parent_id===0)
-										<option value="{!! $categories[$i]->id !!}">{!! $categories[$i]->name !!}</option>
+										<option value="{!! $categories[$i]->keyword !!}">{!! $categories[$i]->name !!}</option>
 										@endif
 										@endfor
-
 								</select>
-								<input class="input" type="text" value="" name="search" id="search" placeholder="Search here">
-								<button class="search-btn">Search</button>
+								<input class="input" type="text" value="" name="search" id="txtSearch" placeholder="Search here">
+								<button class="search-btn" id="btnSearch">Search</button>
 							</form>
 						</div>
 					</div>
@@ -105,47 +106,20 @@
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
+							@auth
 							<!-- Cart -->
-							<div class="dropdown">
-								<a href="{{route('shopcart')}}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+							<div class="dropdown cart_z-index" id="cart">
+								<a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
-									<span class="badge"> {{Session::has('cart') ? Session::get('cart')->totaLQty: ''}} Your Cart</span>
+									<span class="badge" id="totalProduct">Your Cart</span>
 								</a>
-								{{--  <div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="{{ asset('frontend/img/product01.png') }}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
+								<div class="cart-dropdown" id="cartDetail">
 
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="{{ asset('frontend/img/product02.png') }}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a>
-										<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>  --}}
+								</div>
 							</div>
 							<!-- /Cart -->
+							@endauth
+
 
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
@@ -166,7 +140,7 @@
 		<!-- /MAIN HEADER -->
 	</header>
 	<!-- /HEADER -->
-	{{-- {{ dd($categories) }} --}}
+
 	<!-- NAVIGATION -->
 	<nav id="navigation">
 		<!-- container -->
@@ -175,7 +149,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active dropdown"><a href="{{ route('index') }}">Home</a>
+					<li class="dropdown" id='home'><a href="{{ route('index') }}">Home</a>
 					</li>
 					@for ($i = 0; $i < count($categories); $i++) @if ($categories[$i]->parent_id === 0)
 						<li class="dropdown"><a href="{{ asset('category/'.$categories[$i]->keyword) }}">{{ $categories[$i]->name }}</a>

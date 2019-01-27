@@ -2,32 +2,19 @@
 
 namespace App;
 
+use App\Product;
+use App\User;
+use Illuminate\Database\Eloquent\Model;
 
-class Cart
+class Cart extends Model
 {
-    public $items = null;
-    public $totaLQty = 0;
-    public $totaLPrice = 0;
-    public function __construct($oldCart)
+    public function user()
     {
-        if ($oldCart) {
-            $this->items = $oldCart->items;
-            $this->totaLQty = $oldCart->totaLQty;
-            $this->totaLPrice = $oldCart->totaLPrice;
-        }
+        return $this->belongsTo(User::class);
     }
-    public function add($item, $id)
+
+    public function products()
     {
-        $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
-        if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
-                $storedItem = $this->items[$id];
-            }
-        }
-        $storedItem['qty']++;
-        $storedItem['price'] = $item->price * $storedItem['qty'];
-        $this->items[$id] = $storedItem;
-        $this->totaLQty++;
-        $this->totaLPrice += $item->price;
+        return $this->belongsToMany(Product::class, 'cart_details')->withPivot('qty');
     }
 }

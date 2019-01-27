@@ -1,37 +1,24 @@
-@extends('templates.frontend.master')
-@section('title','Blank')
-@section('content')
-<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Regular Page</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Error</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>404 Error</title>
+	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/frontend/style.css') }}">
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-Sorry! Website Url Not Exists.
-				</div>
-				<!-- /row -->
+</head>
+<body>
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>404</h1>
+				<h2>Page not found</h2>
 			</div>
-			<!-- /container -->
+			<a href="{{ route('index') }}">Homepage</a>
 		</div>
-		<!-- /SECTION -->
-@endsection
+	</div>
+</body>
+</html>

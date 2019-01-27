@@ -21,12 +21,24 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'order_items')->withPivot(['quantity', 'price', 'total']);
     }
+
     public function users()
     {
-        return $this->belongsToMany(User::class, 'comment_ratings')->withPivot(['content', 'parent_id', 'rating']);
+        return $this->belongsToMany(User::class, 'comment_ratings')->withPivot(['content', 'rating', 'created_at']);
     }
+
     public function image_products()
     {
         return $this->hasMany(ImageProduct::class);
+    }
+
+    public function comment_ratings()
+    {
+        return $this->hasMany(CommentRating::class);
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'cart_details')->withPivot('qty');
     }
 }
