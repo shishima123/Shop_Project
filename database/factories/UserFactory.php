@@ -8,37 +8,88 @@ use App\User;
 use Faker\Generator as Faker;
 
 //use Illuminate\Foundation\Auth\User;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
- */
-
-$factory->define(Category::class, function (Faker $faker) {
-    return [
-        'name' => $faker->city,
-        'parent_id' => 0,
-    ];
-});
 $factory->define(Product::class, function (Faker $faker) {
+    $category = Category::where('id', '>', 3)->get()->random()->id;
+    global $nmDetailPic;
+    global $name;
+    global $picture;
+    switch ($category) {
+        case "4":
+            $name = $faker->numerify('Asus VIVOBOOK ###');
+            $nmAvatarPic = 'laptop-asus';
+            $nmDetailPic = 'asus';
+            break;
+        case "5":
+            $name = $faker->numerify('‎Dell Inspiron ###');
+            $nmAvatarPic = 'laptop-dell';
+            $nmDetailPic = 'dell';
+            break;
+        case "6":
+            $name = $faker->numerify('HP Probook ###');
+            $nmAvatarPic = 'laptop-hp';
+            $nmDetailPic = 'hp';
+            break;
+        case "7":
+            $name = $faker->numerify('Lenovo Thinkpad ###');
+            $nmAvatarPic = 'laptop-lenovo';
+            $nmDetailPic = 'lenovo';
+            break;
+        case "8":
+            $name = $faker->numerify('Iphone #');
+            $nmAvatarPic = 'smartphone-iphone';
+            $nmDetailPic = 'iphone';
+            break;
+        case "9":
+            $name = $faker->numerify('Galaxy #');
+            $nmAvatarPic = 'smartphone-samsung';
+            $nmDetailPic = 'samsung';
+            break;
+        case "10":
+            $name = $faker->numerify('Zenphone #');
+            $nmAvatarPic = 'smartphone-asus';
+            $nmDetailPic = 'zenphone';
+            break;
+        case "11":
+            $name = $faker->numerify('Nikon ###');
+            $nmAvatarPic = 'camera';
+            $nmDetailPic = 'nikon';
+            break;
+        case "12":
+            $name = $faker->numerify('Beats ###');
+            $nmAvatarPic = 'headphone';
+            $nmDetailPic = 'beat';
+            break;
+    }
+    $picture = '/upload/avatarProduct/' . $nmAvatarPic . '.jpg';
+    $base_url = env('APP_URL');
+    $content = '';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '1.jpg" style="height:400px; width:400px" /></p>';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '2.jpg" style="height:400px; width:400px" /></p>';
+    $content .= $faker->text($maxNbChars = 500);
+    $content .= '<p><img alt="" src="' . $base_url . '/shop_project/public/upload/imgDetailProduct/' . $nmDetailPic . '3.jpg" style="height:400px; width:400px" /></p>';
     return [
-        'category_id' => Category::all()->random()->id,
-        'name' => $faker->name,
+        'category_id' => $category,
+        'name' => $name,
         'description' => $faker->text,
-        'price' => $faker->numberBetween($min = 10, $max = 30),
-        'picture' => $faker->image(),
+        'content' => $content,
+        'price' => $faker->numberBetween($min = 500, $max = 900),
+        'picture' => $picture,
         'unit' => $faker->randomDigit(),
-        'unit_in_stock' => $faker->numberBetween($min = 10, $max = 20),
-        'unit_on_order' => $faker->numberBetween($min = 30, $max = 50),
-
+        'sale' => $faker->randomElement($array = [
+            '0', '10', '20',
+        ]),
+        'new' => $faker->randomElement($array = [
+            '0', '1',
+        ]),
+        'rating' => 0,
+        'top_selling' => $faker->randomElement($array = [
+            '0', '1',
+        ]),
     ];
 });
+
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -47,21 +98,19 @@ $factory->define(User::class, function (Faker $faker) {
             'administrator',
             'user',
         ]),
-        'password' => $faker->password(),
+        'password' => bcrypt('12345'),
         'picture' => $faker->image(),
         'phone' => $faker->phoneNumber(),
         'address' => $faker->address(),
-
     ];
 });
+
 $factory->define(Order::class, function (Faker $faker) {
     return [
-        'token' => str_random(10),
         'user_id' => User::all()->random()->id,
+        'code_order' => $faker->creditCardNumber,
         'total' => $faker->numberBetween($min = 1000, $max = 2000),
-        'status' => $faker->randomElement($array = [
-            'stocking', 'out of stock',
-        ]),
+        'status' => $faker->randomElement($array = [0, 1]),
         'order_name' => $faker->name,
         'order_address' => $faker->secondaryAddress,
         'order_phone' => $faker->phoneNumber,
@@ -79,13 +128,12 @@ $factory->define(OrderItem::class, function (Faker $faker) {
 
     ];
 });
+
 $factory->define(CommentRating::class, function (Faker $faker) {
     return [
         'user_id' => User::all()->random()->id,
         'product_id' => Product::all()->random()->id,
-        'content' => $faker->catchPhrase,
-        'parent_id' => $faker->randomElement($array = [
-            '0', '1', '2']),
+        'content' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'rating' => $faker->randomElement($array = [
             '1', '2', '3', '4', '5',
         ]),
