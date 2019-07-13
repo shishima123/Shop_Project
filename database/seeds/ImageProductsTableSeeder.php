@@ -49,6 +49,7 @@ class ImageProductsTableSeeder extends Seeder
                 $data = [
                     'product_id' => $product->id,
                     'path' => '/upload/imgDetailProduct/' . $cate . $i . '.jpg',
+                    'del_flg' => '0'
                 ];
                 ImageProduct::insert($data);
             }

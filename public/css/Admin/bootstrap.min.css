@@ -10021,6 +10021,7 @@ a.text-dark:hover {
     font-style: italic;
     font-weight: bold;
     color: white !important;
+    font-size: 1.2rem;
 }
 
 .NoDisp {
@@ -10049,6 +10050,10 @@ a.text-pink:hover {
 
 .No--UdLine {
     text-decoration: none !important;
+}
+
+.SizebarList__item--height {
+    height: 2.5rem;
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
