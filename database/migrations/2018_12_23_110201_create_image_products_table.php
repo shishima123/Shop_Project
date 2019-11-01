@@ -18,7 +18,7 @@ class CreateImageProductsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->string('path');
-            $table->number('del_flg');
+            $table->unsignedInteger('del_flg');
             $table->timestamps();
         });
     }
